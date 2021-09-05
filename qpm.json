@@ -1,0 +1,44 @@
+{
+  "sharedDir": "shared",
+  "dependenciesDir": "extern",
+  "info": {
+    "name": "UnNamed",
+    "id": "UnNamed",
+    "version": "0.1.0",
+    "url": null,
+    "additionalData": {}
+  },
+  "dependencies": [
+    {
+      "id": "beatsaber-hook",
+      "versionRange": "*",
+      "additionalData": {}
+    },
+    {
+      "id": "questui",
+      "versionRange": "*",
+      "additionalData": {}
+    },
+    {
+      "id": "codegen",
+      "versionRange": "*",
+      "additionalData": {}
+    },
+    {
+      "id": "config-utils",
+      "versionRange": "*",
+      "additionalData": {}
+    },
+    {
+      "id": "modloader",
+      "versionRange": "*",
+      "additionalData": {}
+    },
+    {
+      "id": "custom-types",
+      "versionRange": "*",
+      "additionalData": {}
+    }
+  ],
+  "additionalData": {}
+}

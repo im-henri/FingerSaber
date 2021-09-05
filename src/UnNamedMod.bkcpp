@@ -1,0 +1,408 @@
+#include "UnNamedMod.hpp"
+
+#include "GlobalNamespace/OVRInput.hpp"
+#include "GlobalNamespace/OVRInput_Button.hpp"
+#include "GlobalNamespace/OVRManager.hpp"
+
+
+#include "UnityEngine/Transform.hpp"
+#include "UnityEngine/GameObject.hpp"
+#include "UnityEngine/Component.hpp"
+#include "UnityEngine/MeshRenderer.hpp"
+#include "UnityEngine/Material.hpp"
+#include "UnityEngine/Color.hpp"
+#include "UnityEngine/HideFlags.hpp"
+#include "UnityEngine/Resources.hpp"
+
+
+
+#include "beatsaber-hook/shared/utils/logging.hpp"
+#include "GlobalNamespace/ColorScheme.hpp"
+#include "GlobalNamespace/ColorManager.hpp"
+#include "GlobalNamespace/ColormanagerInstaller.hpp"
+#include "GlobalNamespace/ColorSchemeSO.hpp"
+#include "GlobalNamespace/PlayerData.hpp"
+
+#include "GlobalNamespace/SaberType.hpp"
+#include "GlobalNamespace/colorSchemesSettings.hpp"
+#include "codegen/include/System/Collections/Generic/Dictionary_2.hpp"
+
+
+#include <sstream>
+#include <string>
+
+UnNamedMod modManager;
+
+void UnNamedMod::InstallHooks() {
+    _Hook_SceneManager_SetActiveScene();
+    _Hook_ColorSchemesSettings_SetColorSchemeForId();
+    _Hook_ColorsOverrideSettingsPanelController_HandleOverrideColorsToggleValueChanged();
+    _Hook_ColorsOverrideSettingsPanelController_HandleDropDownDidSelectCellWithIdx();
+    _Hook_OculusVRHelper_VRControllersInputManager();
+
+    _Hook_SOME_HOOK_METHOD();
+}
+
+namespace ModUtils{
+    void LogAllFields(Il2CppObject* il2CppObj, std::string prependText = ""){
+        auto x = getLogger().WithContext(prependText);
+        il2cpp_utils::LogFields(x, il2cpp_utils::ExtractClass(il2CppObj));
+    }
+    void LogAllProperties(Il2CppObject* il2CppObj, std::string prependText = ""){
+        auto x = getLogger().WithContext(prependText);
+        il2cpp_utils::LogProperties(x, il2cpp_utils::ExtractClass(il2CppObj));
+    }
+    void LogAllMethods(Il2CppObject* il2CppObj, std::string prependText = ""){
+        auto x = getLogger().WithContext(prependText);
+        il2cpp_utils::LogMethods(x, il2cpp_utils::ExtractClass(il2CppObj));
+    }
+
+    template <typename T>
+    void Log_GetComponents(UnityEngine::GameObject* gameobj){
+        auto componentArr = gameobj->GetComponents<T>();
+        std::stringstream buff;
+        for (int i=0; i<componentArr->Length(); i++){
+            auto comp = (*componentArr)[i];
+            auto name = comp->get_name();
+            auto fullName = comp->GetType()->get_FullName();
+            buff << to_utf8(csstrtostr(fullName)).c_str() << " " << to_utf8(csstrtostr(name)).c_str() << "\n";
+        }
+        getLogger().info("%s",buff.str().c_str());
+    }
+    template <typename T>
+    void Log_GetComponentsInChildren(UnityEngine::GameObject* gameobj){
+        auto componentArr = gameobj->GetComponentsInChildren<T>();
+        std::stringstream buff;
+        for (int i=0; i<componentArr->Length(); i++){
+            auto comp = (*componentArr)[i];
+            auto name = comp->get_name();
+            auto fullName = comp->GetType()->get_FullName();
+            buff  << to_utf8(csstrtostr(fullName)).c_str() << " " << to_utf8(csstrtostr(name)).c_str() << "\n";
+        }
+        getLogger().info("%s",buff.str().c_str());
+    }
+
+    void WriteToLog(std::stringstream& logStream){
+        bool success = writefile("sdcard/Android/data/com.beatgames.beatsaber/files/logs/UnNamedMod.log", logStream.str());
+        if (success)   getLogger().info("Logging to \"UnNamedMod.log\" successful.");
+        else           getLogger().info("Creating log file failed.");
+    }
+    void WriteToLog_AllGameObjectsInScene(){
+        auto allObject = UnityEngine::Resources::FindObjectsOfTypeAll(csTypeOf(UnityEngine::GameObject*));
+        std::stringstream buff;
+        for(int i=0; i<allObject->Length(); i++){
+            auto go_asObj = (*allObject)[i];
+            //getLogger().info("Found items: %i", i);
+            if (
+                !(go_asObj->get_hideFlags() == UnityEngine::HideFlags::NotEditable || go_asObj->get_hideFlags() == UnityEngine::HideFlags::HideAndDontSave)
+                )
+            {
+                //getLogger().info("Go name: %s", to_utf8(csstrtostr(name)).c_str() );
+                // TRYING CASTING 
+                UnityEngine::GameObject* go = il2cpp_utils::cast<UnityEngine::GameObject, UnityEngine::Object>(go_asObj);
+                
+                Il2CppString* name = go->get_name(); // C# strings are pointers to UTF-16 strings
+                Il2CppString* rootName = go->get_transform()->GetRoot()->get_name();
+
+                UnityEngine::Transform* parentTf = go->get_transform();
+
+                while(name->CompareTo(rootName) != 0){
+                    std::stringstream namestream;
+                    namestream << to_utf8(csstrtostr(name)).c_str() << "(" << parentTf->GetInstanceID() << ")";
+                    buff << namestream.str() << " -> ";
+                    
+                    parentTf = parentTf->get_parent();
+                    name = parentTf->get_gameObject()->get_name();
+                }
+                //Name: SaberA, RootName: MenuCore
+                //buff << i << "\t" << "Name: " << to_utf8(csstrtostr(name)).c_str();
+                buff << to_utf8(csstrtostr(rootName)).c_str() << "(" << go->get_transform()->GetRoot()->GetInstanceID() << ")";
+                buff << '\n' << '\n';
+            }
+        }
+
+        WriteToLog(buff);
+    }
+}
+
+void UnNamedMod::UpdateColors(){
+    /*
+    auto PlayerDataModel_go = UnityEngine::GameObject::Find(il2cpp_utils::createcsstr("PlayerDataModel(Clone)"));
+    auto PlayerDataModel = PlayerDataModel_go->GetComponent(il2cpp_utils::createcsstr("PlayerDataModel"));
+    auto PlayerDataModel_il2cpp = il2cpp_utils::ToIl2CppObject(PlayerDataModel);
+
+    auto playerData = (GlobalNamespace::PlayerData*) CRASH_UNLESS(il2cpp_utils::GetPropertyValue(PlayerDataModel_il2cpp, "playerData"));
+    
+    UnityEngine::Color colA;
+    UnityEngine::Color colB;
+
+    // Get saber target colors
+    if( ! playerData->colorSchemesSettings->overrideDefaultColors){
+        colA = defaultLeftColor;
+        colB = defaultRightColor;
+    } else{
+        auto key = playerData->colorSchemesSettings->selectedColorSchemeId;
+        auto val = playerData->colorSchemesSettings->colorSchemesDict->get_Item(key);
+        colA = val->get_saberAColor();
+        colB = val->get_saberBColor();
+    }
+    
+    // Update Left Colors
+    auto Normal =UnityEngine::GameObject::Find(il2cpp_utils::createcsstr("ControllerLeft/MenuHandle/Normal"));
+    auto SetSaberGlowColor_component = Normal->GetComponent(il2cpp_utils::createcsstr("SetSaberGlowColor"));
+    auto SetSaberGlowColor = il2cpp_utils::ToIl2CppObject(SetSaberGlowColor_component);
+    auto _colorManager = CRASH_UNLESS(il2cpp_utils::GetFieldValue(SetSaberGlowColor, "_colorManager"));
+    auto colorScheme   = (GlobalNamespace::ColorScheme*) CRASH_UNLESS(il2cpp_utils::GetFieldValue(_colorManager, "_colorScheme"));
+    colorScheme->saberAColor = colA;
+    il2cpp_utils::RunMethod(SetSaberGlowColor,  "SetColors");
+
+    // Update Right Colors
+    Normal = UnityEngine::GameObject::Find(il2cpp_utils::createcsstr("ControllerRight/MenuHandle/Normal"));
+    SetSaberGlowColor_component = Normal->GetComponent(il2cpp_utils::createcsstr("SetSaberGlowColor"));
+    SetSaberGlowColor = il2cpp_utils::ToIl2CppObject(SetSaberGlowColor_component);
+    _colorManager = CRASH_UNLESS(il2cpp_utils::GetFieldValue(SetSaberGlowColor, "_colorManager"));
+    colorScheme   = (GlobalNamespace::ColorScheme*) CRASH_UNLESS(il2cpp_utils::GetFieldValue(_colorManager, "_colorScheme"));
+    colorScheme->saberBColor = colB;
+    il2cpp_utils::RunMethod(SetSaberGlowColor,  "SetColors");
+
+    */
+}
+
+#include "GlobalNamespace/OVRPlugin.hpp"
+#include "GlobalNamespace/OVRPlugin_HandFinger.hpp"
+#include "GlobalNamespace/OVRHand.hpp"
+
+#include "GlobalNamespace/FirstPersonFlyingController.hpp"
+#include "GlobalNamespace/VRController.hpp"
+#include "GlobalNamespace/OculusVRHelper.hpp"
+#include "GlobalNamespace/VRPlatformSDK.hpp"
+#include "GlobalNamespace/OVRCameraRig.hpp"
+
+#include "GlobalNamespace/OVRSkeleton.hpp"
+#include "GlobalNamespace/OVRSkeleton_SkeletonPoseData.hpp"
+#include "GlobalNamespace/OVRBone.hpp"
+#include "GlobalNamespace/OVRPlugin_Skeleton2.hpp"
+
+#include "UnityEngine/Camera.hpp"
+
+#include "System/Collections/Generic/List_1.hpp"
+#include "System/Collections/Generic/IList_1.hpp"
+#include "System/Collections/ObjectModel/ReadOnlyCollection_1.hpp"
+
+typedef unsigned int        uint;
+
+static bool rButton_prev = false;
+static bool rHandButton_prev = false;
+static int counter = 0;
+UnityEngine::GameObject* rightHandTrackingGo = nullptr;
+UnityEngine::GameObject* leftHandTrackingGo  = nullptr;
+GlobalNamespace::OVRHand* rightOVRHand = nullptr;
+GlobalNamespace::OVRHand* leftOVRHand  = nullptr;
+GlobalNamespace::OVRSkeleton* rightOVRSkeleton = nullptr;
+GlobalNamespace::OVRSkeleton* leftOVRSkeleton  = nullptr;
+
+UnityEngine::GameObject* rFinger0 = nullptr;
+
+void InitializeBones(GlobalNamespace::OVRSkeleton* skele){
+
+    bool flipX = (skele->skeletonType == GlobalNamespace::OVRSkeleton::SkeletonType::HandLeft 
+               || skele->skeletonType == GlobalNamespace::OVRSkeleton::SkeletonType::HandRight);
+    
+    
+    if (!skele->bonesGO) {
+        skele->bonesGO = UnityEngine::GameObject::New_ctor(il2cpp_utils::createcsstr("Bones"));
+        skele->bonesGO->get_transform()->SetParent(skele->get_transform(), false);
+        skele->bonesGO->get_transform()->set_localPosition(UnityEngine::Vector3::get_zero());
+        skele->bonesGO->get_transform()->set_localRotation(UnityEngine::Quaternion::get_identity());
+    }
+    
+    auto skeleton_NumBones = CRASH_UNLESS(il2cpp_utils::GetFieldValue<uint>(il2cpp_utils::ToIl2CppObject(skele->skeleton), "NumBones"));
+ 
+   
+    getLogger().info("1");
+    
+    auto skele_il2 = il2cpp_utils::ToIl2CppObject(skele);
+
+    ModUtils::LogAllFields(skele_il2);
+    ModUtils::LogAllMethods(skele_il2);
+    ModUtils::LogAllProperties(skele_il2);  
+    auto _bones = CRASH_UNLESS(il2cpp_utils::GetFieldValue<System::Collections::Generic::List_1<GlobalNamespace::OVRBone *>*>(il2cpp_utils::ToIl2CppObject(skele), "_bones"));
+ 
+    if (_bones == nullptr || _bones->get_Count() != skeleton_NumBones) {
+        getLogger().info("2");
+        
+        auto ovrbonelist = System::Collections::Generic::List_1<GlobalNamespace::OVRBone *>::New_ctor(skeleton_NumBones);
+        getLogger().info("3");
+
+        //skele->_set__bones(ovrbonelist);
+        il2cpp_utils::SetFieldValue(skele_il2, "_bones", ovrbonelist);
+        getLogger().info("4");
+        
+        skele->set_Bones( (System::Collections::Generic::IList_1<GlobalNamespace::OVRBone*>*)  ovrbonelist->AsReadOnly());
+        getLogger().info("5");
+    }
+
+    /*
+    // pre-populate bones list before attempting to apply bone hierarchy
+    for (int i = 0; i < _bones.Count; ++i) {
+        OVRBone bone = _bones[i] ?? (_bones[i] = new OVRBone());
+        bone.Id = (OVRSkeleton.BoneId)_skeleton.Bones[i].Id;
+        bone.ParentBoneIndex = _skeleton.Bones[i].ParentBoneIndex;
+
+        Transform trans = bone.Transform ??
+                            (bone.Transform = new GameObject(BoneLabelFromBoneId(_skeletonType, bone.Id)).transform);
+        trans.localPosition = flipX ? _skeleton.Bones[i].Pose.Position.FromFlippedXVector3f() : _skeleton.Bones[i].Pose.Position.FromFlippedZVector3f();
+        trans.localRotation = flipX ? _skeleton.Bones[i].Pose.Orientation.FromFlippedXQuatf() : _skeleton.Bones[i].Pose.Orientation.FromFlippedZQuatf();
+    }
+
+    for (int i = 0; i < _bones.Count; ++i) {
+        if ((BoneId)_bones[i].ParentBoneIndex == BoneId.Invalid)
+        {
+            _bones[i].Transform.SetParent(_bonesGO.transform, false);
+        }
+        else
+        {
+            _bones[i].Transform.SetParent(_bones[_bones[i].ParentBoneIndex].Transform, false);
+        }
+    }
+    */	
+}
+void UnNamedMod::FixedUpdate(GlobalNamespace::OculusVRHelper* self){
+    bool rButton = GlobalNamespace::OVRInput::Get(GlobalNamespace::OVRInput::Button::One, GlobalNamespace::OVRInput::Controller::RTouch) 
+                ? true : false;
+    bool rHandButton = GlobalNamespace::OVRInput::Get(GlobalNamespace::OVRInput::Button::One, GlobalNamespace::OVRInput::Controller::Hands) 
+                ? true : false;
+    
+    if((rButton == true) && (rButton_prev == false)){
+        getLogger().info("R_Button Pressed");        
+        
+        auto Origin = UnityEngine::GameObject::Find(il2cpp_utils::createcsstr("Origin"));
+        if(Origin){
+            getLogger().info("Ovr thing");
+            //ModUtils::Log_GetComponents<UnityEngine::Component*>(Origin);
+            if(GlobalNamespace::OVRPlugin::GetHandTrackingEnabled()) 
+                getLogger().info("HandTracking: 1");
+            else
+                getLogger().info("HandTracking: 0");
+        }  
+
+        auto ovrhelper_go = UnityEngine::GameObject::Find(il2cpp_utils::createcsstr("OculusVRHelper(Clone)"));
+        if(ovrhelper_go){
+            auto ovrhelper = ovrhelper_go->GetComponentInChildren<GlobalNamespace::OculusVRHelper*>();
+            int sdk = ovrhelper->get_vrPlatformSDK().value;
+            getLogger().info("vrPlatformSDK: %i",sdk);
+
+            auto ovrmanagerpresent = ovrhelper->get__isOVRManagerPresent();
+            getLogger().info("OVR manager present: %d", ovrmanagerpresent);
+        }
+
+
+        auto controllerRight = UnityEngine::GameObject::Find(il2cpp_utils::createcsstr("ControllerRight"));
+        auto controllerLeft  = UnityEngine::GameObject::Find(il2cpp_utils::createcsstr("ControllerLeft"));
+        if(controllerRight) {
+            rightHandTrackingGo = UnityEngine::GameObject::New_ctor(il2cpp_utils::createcsstr("rightHandTracking"));
+            rightHandTrackingGo->get_transform()->set_parent(controllerRight->get_transform()->get_parent());
+            
+            rightOVRHand = rightHandTrackingGo->AddComponent<GlobalNamespace::OVRHand*>();
+            rightOVRHand->HandType = GlobalNamespace::OVRHand::Hand::HandRight;
+            rightOVRHand->IsTracked = true;
+
+            rightOVRSkeleton = rightHandTrackingGo->AddComponent<GlobalNamespace::OVRSkeleton*>();
+            rightOVRSkeleton->Initialize();
+
+            rightOVRSkeleton->skeletonType = GlobalNamespace::OVRSkeleton::SkeletonType::HandRight;
+            
+            //rFinger0 = UnityEngine::GameObject::New_ctor(il2cpp_utils::createcsstr("rFinger0"));
+            //rFinger0->get_transform()->set_parent(rightHandTrackingGo->get_transform());
+            //auto rFingerBone0 = GlobalNamespace::OVRBone::New_ctor();
+            //rFingerBone0->set_Transform(rFinger0->get_transform());
+            //rFingerBone0->set_Id(GlobalNamespace::OVRSkeleton::BoneId::Hand_IndexTip);
+            //
+            //rightOVRSkeleton->bones->Add(rFingerBone0);
+
+            InitializeBones(rightOVRSkeleton);
+
+            getLogger().info("rightHandTrackingGo Created");
+            //controllerRight->set_active(false);
+            //UnityEngine::GameObject::Destroy(controllerRight);
+        }
+        if(controllerLeft) {
+            leftHandTrackingGo = UnityEngine::GameObject::New_ctor(il2cpp_utils::createcsstr("leftHandTracking"));
+            leftHandTrackingGo->get_transform()->set_parent(controllerLeft->get_transform()->get_parent());
+            
+            leftOVRHand = leftHandTrackingGo->AddComponent<GlobalNamespace::OVRHand*>();
+            leftOVRHand->HandType = GlobalNamespace::OVRHand::Hand::HandRight;
+            leftOVRHand->IsTracked = true;
+
+            leftOVRSkeleton = leftHandTrackingGo->AddComponent<GlobalNamespace::OVRSkeleton*>();
+            leftOVRSkeleton->skeletonType = GlobalNamespace::OVRSkeleton::SkeletonType::HandLeft;
+            //leftOVRSkeleton->bones->Add
+            getLogger().info("leftHandTrackingGo Created");
+            //controllerLeft->set_active(false);
+            //UnityEngine::GameObject::Destroy(controllerLeft);
+        }
+
+        
+        //ModUtils::WriteToLog_AllGameObjectsInScene();
+        
+        //auto ovrman = GlobalNamespace::OVRManager::get_instance();
+        //if(ovrman) getLogger().info("Wooooooooo");
+
+    }
+    rButton_prev = rButton;
+
+    if((rHandButton == true) && (rHandButton_prev == false)){
+        getLogger().info("RHand Pinch/Click");
+ 
+        auto ovrhand = rightHandTrackingGo->GetComponent<GlobalNamespace::OVRHand*>();
+        ////
+        getLogger().info("ovrhand->get_IsTracked:  %s", ovrhand->get_IsTracked() ? "true" : "false");
+        getLogger().info("ovrhand->get_HandScale:  %f", ovrhand->get_HandScale());
+        getLogger().info("ovrhand->HandType.value: %i", ovrhand->HandType.value);
+
+    }
+    rHandButton_prev = rHandButton;
+
+    bool rButton2 = GlobalNamespace::OVRInput::Get(GlobalNamespace::OVRInput::Button::Two, GlobalNamespace::OVRInput::Controller::RTouch) 
+                ? true : false;
+    
+    counter += 1;
+    if((rButton2 == true) || (counter > 100 && rightHandTrackingGo != nullptr)){
+        counter = 0;
+        getLogger().info("beepbep boopbop");
+        
+        //auto rhandPoseData = rightOVRHand->OVRSkeleton_IOVRSkeletonDataProvider_GetSkeletonPoseData();
+        //getLogger().info("Len: %i", rhandPoseData.BoneRotations->Length());
+        
+        auto xxx = rightOVRSkeleton->bones->get_Item(0);
+        if(xxx) getLogger().info("Bone [0] exitst, WHuuuauaaaat :O");
+        
+        auto strToPrint = xxx->get_Transform()->get_position().ToString();
+        getLogger().info("Bone [0] Transform: %s", to_utf8(csstrtostr(strToPrint)).c_str());
+        //getLogger().info("rhandPoseData.get_IsDataValid();:  %s", rhandPoseData.get ? "true" : "false");
+        
+        //for (int i=0; i<boneRotations->Length(); i++){
+        //    getLogger().info("Bone(%i)", i);
+        //    auto boneRot = (*boneRotations)[i];
+        //    getLogger().info("Bone rot var");
+        //    auto boneStr = boneRot._get_x();
+        //    getLogger().info("Bone(%i) quaternion: %f", i, boneStr);
+        //}
+        
+        //rightOVRHand->OVRSkeleton_IOVRSkeletonDataProvider_GetSkeletonType
+        //rightOVRHand->OVRSkeletonRenderer_IOVRSkeletonRendererDataProvider_GetSkeletonRendererData
+        
+        
+
+        getLogger().info("rightOVRHand->get_IsTracked:  %s", rightOVRHand->get_IsTracked() ? "true" : "false");
+        getLogger().info("rightOVRHand->get_HandScale:  %f", rightOVRHand->get_HandScale());
+        getLogger().info("rightOVRHand->HandType.value: %i", rightOVRHand->HandType.value);
+
+        getLogger().info("leftOVRHand->get_IsTracked:   %s", leftOVRHand->get_IsTracked() ? "true" : "false");
+        getLogger().info("leftOVRHand->get_HandScale:   %f", leftOVRHand->get_HandScale());
+        getLogger().info("leftOVRHand->HandType.value:  %i", leftOVRHand->HandType.value);
+        
+        
+    }
+
+}

@@ -1,0 +1,978 @@
+VRCursor(Clone)(-544) -> EventSystem(11712) -> UI(11666) -> MenuCore(11662)
+
+OnlyDepth(-536) -> VRLaserPointer(Clone)(-526) -> ControllerRight(11638) -> MenuControllers(11682) -> Origin(11674) -> MenuCore(11662)
+
+VRLaserPointer(Clone)(-526) -> ControllerRight(11638) -> MenuControllers(11682) -> Origin(11674) -> MenuCore(11662)
+
+Text(-510) -> HoverHintPanel(Clone)(-498) -> HoverHintController(11668) -> UI(11666) -> MenuCore(11662)
+
+HoverHintPanel(Clone)(-498) -> HoverHintController(11668) -> UI(11666) -> MenuCore(11662)
+
+HapticFeedbackController(Clone)(-484)
+
+Outline(-474) -> OutlineWrapper(-468) -> Button0(-412) -> ButtonsContainer(-308) -> Wrapper(-254) -> SimpleDialogPromptViewController(Clone)(-238)
+
+OutlineWrapper(-468) -> Button0(-412) -> ButtonsContainer(-308) -> Wrapper(-254) -> SimpleDialogPromptViewController(Clone)(-238)
+
+Border(-460) -> Button0(-412) -> ButtonsContainer(-308) -> Wrapper(-254) -> SimpleDialogPromptViewController(Clone)(-238)
+
+Text(-452) -> Content(-444) -> Button0(-412) -> ButtonsContainer(-308) -> Wrapper(-254) -> SimpleDialogPromptViewController(Clone)(-238)
+
+Content(-444) -> Button0(-412) -> ButtonsContainer(-308) -> Wrapper(-254) -> SimpleDialogPromptViewController(Clone)(-238)
+
+BGDisabled(-436) -> Button0(-412) -> ButtonsContainer(-308) -> Wrapper(-254) -> SimpleDialogPromptViewController(Clone)(-238)
+
+BG(-428) -> Button0(-412) -> ButtonsContainer(-308) -> Wrapper(-254) -> SimpleDialogPromptViewController(Clone)(-238)
+
+Button0(-412) -> ButtonsContainer(-308) -> Wrapper(-254) -> SimpleDialogPromptViewController(Clone)(-238)
+
+Text(-404) -> Content(-396) -> Button1(-364) -> ButtonsContainer(-308) -> Wrapper(-254) -> SimpleDialogPromptViewController(Clone)(-238)
+
+Content(-396) -> Button1(-364) -> ButtonsContainer(-308) -> Wrapper(-254) -> SimpleDialogPromptViewController(Clone)(-238)
+
+Underline(-388) -> Button1(-364) -> ButtonsContainer(-308) -> Wrapper(-254) -> SimpleDialogPromptViewController(Clone)(-238)
+
+BG(-380) -> Button1(-364) -> ButtonsContainer(-308) -> Wrapper(-254) -> SimpleDialogPromptViewController(Clone)(-238)
+
+Button1(-364) -> ButtonsContainer(-308) -> Wrapper(-254) -> SimpleDialogPromptViewController(Clone)(-238)
+
+Text(-356) -> Content(-348) -> Button2(-316) -> ButtonsContainer(-308) -> Wrapper(-254) -> SimpleDialogPromptViewController(Clone)(-238)
+
+Content(-348) -> Button2(-316) -> ButtonsContainer(-308) -> Wrapper(-254) -> SimpleDialogPromptViewController(Clone)(-238)
+
+Underline(-340) -> Button2(-316) -> ButtonsContainer(-308) -> Wrapper(-254) -> SimpleDialogPromptViewController(Clone)(-238)
+
+BG(-332) -> Button2(-316) -> ButtonsContainer(-308) -> Wrapper(-254) -> SimpleDialogPromptViewController(Clone)(-238)
+
+Button2(-316) -> ButtonsContainer(-308) -> Wrapper(-254) -> SimpleDialogPromptViewController(Clone)(-238)
+
+ButtonsContainer(-308) -> Wrapper(-254) -> SimpleDialogPromptViewController(Clone)(-238)
+
+StandardSpace(-302) -> Wrapper(-254) -> SimpleDialogPromptViewController(Clone)(-238)
+
+Message(-294) -> Wrapper(-254) -> SimpleDialogPromptViewController(Clone)(-238)
+
+StandardSpace(-288) -> Wrapper(-254) -> SimpleDialogPromptViewController(Clone)(-238)
+
+Text(-278) -> BG(-266) -> HeaderPanel(-260) -> Wrapper(-254) -> SimpleDialogPromptViewController(Clone)(-238)
+
+BG(-266) -> HeaderPanel(-260) -> Wrapper(-254) -> SimpleDialogPromptViewController(Clone)(-238)
+
+HeaderPanel(-260) -> Wrapper(-254) -> SimpleDialogPromptViewController(Clone)(-238)
+
+Wrapper(-254) -> SimpleDialogPromptViewController(Clone)(-238)
+
+SimpleDialogPromptViewController(Clone)(-238)
+
+Oculus.Platform.CallbackRunner(-216)
+
+PlayerDataModel(Clone)(-206)
+
+LocalNetworkPlayerModel(Clone)(-198)
+
+OculusNetworkPlayerModel(Clone)(-192)
+
+UnifiedNetworkPlayerModel(Clone)(-186)
+
+RichPresenceManager(Clone)(-180)
+
+BloomPrePassLightsUpdateSystem(Clone)(-174)
+
+NetworkPlayerEntitlementChecker(Clone)(-168)
+
+OculusVRHelper(Clone)(-162)
+
+OculusMRCManager(-156) -> ExternalCamerasManager(Clone)(-148)
+
+ExternalCamerasManager(Clone)(-148)
+
+TimeHelper(Clone)(-142)
+
+MultiplayerSessionManager(Clone)(-136)
+
+OculusPlatformAdditionalContentModel(Clone)(-128)
+
+BeatmapLevelsModel(Clone)(-122)
+
+ProjectContext(Clone)(-108)
+
+InternalIdentityTransform(-16)
+
+SteamNetworkPlayerModel(9020)
+
+TestPlatformAdditionalContentModel(9042)
+
+DevicelessVRHelper(9046)
+
+OpenVRHelper(9048)
+
+MRCBackgroundCamera(9004)
+
+PS4NetworkPlayerModel(9036)
+
+FixMRAlpha(8988) -> MRCForegroundCamera(9008)
+
+CachedMediaAsyncLoader(9012)
+
+BloomPrePassLightsUpdateSystem(8998)
+
+OculusVRHelper(9022)
+
+RichPresenceManager(8986)
+
+SteamPlatformAdditionalContentModel(8996)
+
+OculusPlatformAdditionalContentModel(9024)
+
+HapticFeedbackController(9014)
+
+PlayerDataModel(9028)
+
+AvatarDataModel(9030)
+
+OculusMRCManager(9044) -> ExternalCamerasManager(9032)
+
+OnlineServices.ServerManager(9018)
+
+MultiplayerSessionManager(8990)
+
+UnifiedNetworkPlayerModel(8992)
+
+LocalNetworkPlayerModel(8994)
+
+CampaignProgressModel(9038)
+
+ExternalCamerasManager(9032)
+
+MRCForegroundCamera(9008)
+
+TimeHelper(9026)
+
+CustomLevelLoader(9006)
+
+TweeningManager(8982)
+
+PS4PlatformAdditionalContentModel(8980)
+
+BeatmapLevelsModel(9000)
+
+PSVRHelper(9002)
+
+PlatformLeaderboardsModel(9016)
+
+LeaderboardScoreUploader(8984)
+
+NetworkPlayerEntitlementChecker(9040)
+
+MultiplayerNodePoseSyncStateManager(9034)
+
+OculusNetworkPlayerModel(9010)
+
+MainSystemInit(10312) -> Init(10316)
+
+OculusInit(10314) -> Init(10316)
+
+Init(10316)
+
+IPAPluginsDirDeleter(10318)
+
+AppInitCamera(10320) -> Init(10316)
+
+DefaultScenesTransitionsFromInit(10322) -> Init(10316)
+
+Noise3DTextureGenerator(10324) -> MainSystemInit(10312) -> Init(10316)
+
+AppCoreSceneContext(10328)
+
+SpatializerInit(10326) -> MainSystemInit(10312) -> Init(10316)
+
+VRLaserPointer(10416)
+
+VRCursor(10414)
+
+OnlyDepth(10412) -> VRLaserPointer(10416)
+
+HoverHintPanel(10516)
+
+Text(10518) -> HoverHintPanel(10516)
+
+ButtonsContainer(10716) -> Wrapper(10758) -> SimpleDialogPromptViewController(10720)
+
+SimpleDialogPromptViewController(10720)
+
+Message(10718) -> Wrapper(10758) -> SimpleDialogPromptViewController(10720)
+
+Border(10744) -> Button0(10730) -> ButtonsContainer(10716) -> Wrapper(10758) -> SimpleDialogPromptViewController(10720)
+
+Content(10734) -> Button1(10750) -> ButtonsContainer(10716) -> Wrapper(10758) -> SimpleDialogPromptViewController(10720)
+
+Underline(10724) -> Button2(10762) -> ButtonsContainer(10716) -> Wrapper(10758) -> SimpleDialogPromptViewController(10720)
+
+Text(10728) -> Content(10754) -> Button0(10730) -> ButtonsContainer(10716) -> Wrapper(10758) -> SimpleDialogPromptViewController(10720)
+
+Button0(10730) -> ButtonsContainer(10716) -> Wrapper(10758) -> SimpleDialogPromptViewController(10720)
+
+BG(10732) -> Button0(10730) -> ButtonsContainer(10716) -> Wrapper(10758) -> SimpleDialogPromptViewController(10720)
+
+BG(10742) -> HeaderPanel(10738) -> Wrapper(10758) -> SimpleDialogPromptViewController(10720)
+
+Underline(10740) -> Button1(10750) -> ButtonsContainer(10716) -> Wrapper(10758) -> SimpleDialogPromptViewController(10720)
+
+HeaderPanel(10738) -> Wrapper(10758) -> SimpleDialogPromptViewController(10720)
+
+Text(10736) -> BG(10742) -> HeaderPanel(10738) -> Wrapper(10758) -> SimpleDialogPromptViewController(10720)
+
+StandardSpace(10722) -> Wrapper(10758) -> SimpleDialogPromptViewController(10720)
+
+Content(10726) -> Button2(10762) -> ButtonsContainer(10716) -> Wrapper(10758) -> SimpleDialogPromptViewController(10720)
+
+Outline(10766) -> OutlineWrapper(10768) -> Button0(10730) -> ButtonsContainer(10716) -> Wrapper(10758) -> SimpleDialogPromptViewController(10720)
+
+StandardSpace(10756) -> Wrapper(10758) -> SimpleDialogPromptViewController(10720)
+
+Text(10748) -> Content(10734) -> Button1(10750) -> ButtonsContainer(10716) -> Wrapper(10758) -> SimpleDialogPromptViewController(10720)
+
+Button1(10750) -> ButtonsContainer(10716) -> Wrapper(10758) -> SimpleDialogPromptViewController(10720)
+
+BG(10746) -> Button1(10750) -> ButtonsContainer(10716) -> Wrapper(10758) -> SimpleDialogPromptViewController(10720)
+
+BGDisabled(10752) -> Button0(10730) -> ButtonsContainer(10716) -> Wrapper(10758) -> SimpleDialogPromptViewController(10720)
+
+OutlineWrapper(10768) -> Button0(10730) -> ButtonsContainer(10716) -> Wrapper(10758) -> SimpleDialogPromptViewController(10720)
+
+Text(10764) -> Content(10726) -> Button2(10762) -> ButtonsContainer(10716) -> Wrapper(10758) -> SimpleDialogPromptViewController(10720)
+
+Button2(10762) -> ButtonsContainer(10716) -> Wrapper(10758) -> SimpleDialogPromptViewController(10720)
+
+BG(10760) -> Button2(10762) -> ButtonsContainer(10716) -> Wrapper(10758) -> SimpleDialogPromptViewController(10720)
+
+Content(10754) -> Button0(10730) -> ButtonsContainer(10716) -> Wrapper(10758) -> SimpleDialogPromptViewController(10720)
+
+Wrapper(10758) -> SimpleDialogPromptViewController(10720)
+
+Buttons(12420) -> BottomPanel(12430) -> EulaViewController(12438) -> ViewControllers(12432)
+
+SceneContext(11602)
+
+SceneSetup(11604)
+
+HealthWarningText(12422) -> Texts(12670) -> HealthWarningViewController(12426) -> MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+HealthWarning(11606) -> FlowCoordinators(11614)
+
+AgreeText(12424) -> Texts(12670) -> HealthWarningViewController(12426) -> MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+HealthWarningViewController(12426) -> MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+====== ENVIRONMENT ======(11608)
+
+Buttons(12428) -> BottomPanel(12440) -> HealthWarningViewController(12426) -> MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BottomPanel(12430) -> EulaViewController(12438) -> ViewControllers(12432)
+
+ViewControllers(12432)
+
+PrivacyPolicyViewController(12434) -> ViewControllers(12432)
+
+NoTransition(11610)
+
+MenuFogRing(11612)
+
+SafeAreaConfirmationText(12436) -> BottomPanel(12440) -> HealthWarningViewController(12426) -> MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+EulaViewController(12438) -> ViewControllers(12432)
+
+FlowCoordinators(11614)
+
+====== UI ======(11616)
+
+SceneStart(11618)
+
+BottomPanel(12440) -> HealthWarningViewController(12426) -> MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(12458) -> 7(12456) -> Row(12462) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+7(12456) -> Row(12462) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12454) -> 7(12456) -> Row(12462) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12460) -> 7(12456) -> Row(12462) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Texts(12670) -> HealthWarningViewController(12426) -> MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BackgroundColor(11694) -> MenuEnvironmentCore(11626)
+
+Stroke(12446) -> 4(12452) -> Row(12762) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+4(12452) -> Row(12762) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12450) -> 4(12452) -> Row(12762) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12448) -> 4(12452) -> Row(12762) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(12476) -> V(12470) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12474) -> V(12470) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12472) -> V(12470) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+V(12470) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+PlayersPlace(11624) -> MenuEnvironmentCore(11626)
+
+BG(12464) -> DoNotAgree(12468) -> Buttons(12420) -> BottomPanel(12430) -> EulaViewController(12438) -> ViewControllers(12432)
+
+DoNotAgree(12468) -> Buttons(12420) -> BottomPanel(12430) -> EulaViewController(12438) -> ViewControllers(12432)
+
+Text(12466) -> Content(12988) -> DoNotAgree(12468) -> Buttons(12420) -> BottomPanel(12430) -> EulaViewController(12438) -> ViewControllers(12432)
+
+OutlineWrapper(12560) -> Continue(12788) -> Buttons(12428) -> BottomPanel(12440) -> HealthWarningViewController(12426) -> MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+ScrollBar(12820) -> DropdownTableView(12444) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Handle(12658) -> VerticalScrollIndicator(12690) -> ScrollBar(12820) -> DropdownTableView(12444) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+Icon(12486) -> DownButton(12490) -> ScrollBar(12484) -> TextPageScrollView(12918) -> EulaViewController(12438) -> ViewControllers(12432)
+
+Icon(12488) -> DownButton(12492) -> ScrollBar(12482) -> TextPageScrollView(12920) -> PrivacyPolicyViewController(12434) -> ViewControllers(12432)
+
+DownButton(12492) -> ScrollBar(12482) -> TextPageScrollView(12920) -> PrivacyPolicyViewController(12434) -> ViewControllers(12432)
+
+DownButton(12490) -> ScrollBar(12484) -> TextPageScrollView(12918) -> EulaViewController(12438) -> ViewControllers(12432)
+
+1(12520) -> Row(12590) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12518) -> 1(12520) -> Row(12590) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12524) -> 1(12520) -> Row(12590) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(12522) -> 1(12520) -> Row(12590) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(12526) -> Del(12530) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12532) -> Del(12530) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Del(12530) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12528) -> Del(12530) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+TitleViewController(12894) -> TopScreen(12860) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(12508) -> Y(12502) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12506) -> Y(12502) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12504) -> Y(12502) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Y(12502) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BGDisabled(12742) -> Continue(12788) -> Buttons(12428) -> BottomPanel(12440) -> HealthWarningViewController(12426) -> MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(12516) -> M(12510) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12514) -> M(12510) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12512) -> M(12510) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+M(12510) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12496) -> Continue(12498) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+Text(12500) -> Content(12944) -> Continue(12498) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+Continue(12498) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+Content(12740) -> Agree(12746) -> Buttons(12420) -> BottomPanel(12430) -> EulaViewController(12438) -> ViewControllers(12432)
+
+BG(12548) -> D(12546) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+D(12546) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12544) -> D(12546) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(12550) -> D(12546) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12536) -> S(12540) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12542) -> S(12540) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+S(12540) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(12538) -> S(12540) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+GrabPassTexture1(11620) -> Rendering(11664) -> MenuCore(11662)
+
+Outline(12890) -> OutlineWrapper(12852) -> Continue(12498) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+SafeAreaRectChecker(12494) -> HealthWarningViewController(12426) -> MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+VerticalScrollIndicator(13014) -> ScrollBar(12482) -> TextPageScrollView(12920) -> PrivacyPolicyViewController(12434) -> ViewControllers(12432)
+
+VerticalScrollIndicator(13012) -> ScrollBar(12484) -> TextPageScrollView(12918) -> EulaViewController(12438) -> ViewControllers(12432)
+
+Stroke(12564) -> F(12568) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12562) -> F(12568) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+F(12568) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12566) -> F(12568) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+U(12558) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12556) -> U(12558) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12554) -> U(12558) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(12552) -> U(12558) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12576) -> A(12582) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+A(12582) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12580) -> A(12582) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(12578) -> A(12582) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Row(12854) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Content(12694) -> Continue(12788) -> Buttons(12428) -> BottomPanel(12440) -> HealthWarningViewController(12426) -> MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+TextContainer(12970) -> OnlineServicesViewController(12616) -> ViewControllers(12432)
+
+Row(12762) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12604) -> 0(12600) -> Row(12854) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12602) -> 0(12600) -> Row(12854) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+0(12600) -> Row(12854) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(12606) -> 0(12600) -> Row(12854) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Content(12688) -> OpenDataPrivacyPage(12806) -> Buttons(12428) -> BottomPanel(12440) -> HealthWarningViewController(12426) -> MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BackButton(12584) -> TitleViewController(12894) -> TopScreen(12860) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Icon(12588) -> BackButton(12584) -> TitleViewController(12894) -> TopScreen(12860) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12586) -> BackButton(12584) -> TitleViewController(12894) -> TopScreen(12860) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12598) -> H(12596) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+H(12596) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12594) -> H(12596) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(12592) -> H(12596) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Content(12668) -> EnableButton(12824) -> Buttons(12620) -> BottomPanel(12618) -> OnlineServicesViewController(12616) -> ViewControllers(12432)
+
+Row(12462) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12610) -> SimpleTextTableCell (1)(12612) -> Content(12790) -> Viewport(12708) -> DropdownTableView(12444) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+SimpleTextTableCell (1)(12612) -> Content(12790) -> Viewport(12708) -> DropdownTableView(12444) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+Text(12614) -> SimpleTextTableCell (1)(12612) -> Content(12790) -> Viewport(12708) -> DropdownTableView(12444) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+OnlineServicesViewController(12616) -> ViewControllers(12432)
+
+BottomPanel(12618) -> OnlineServicesViewController(12616) -> ViewControllers(12432)
+
+Buttons(12620) -> BottomPanel(12618) -> OnlineServicesViewController(12616) -> ViewControllers(12432)
+
+BG(12624) -> 2(12628) -> Row(12590) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12630) -> 2(12628) -> Row(12590) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+2(12628) -> Row(12590) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(12626) -> 2(12628) -> Row(12590) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Underline(12622) -> Agree(12746) -> Buttons(12420) -> BottomPanel(12430) -> EulaViewController(12438) -> ViewControllers(12432)
+
+PrivacyPolicy(12638) -> Buttons(12428) -> BottomPanel(12440) -> HealthWarningViewController(12426) -> MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12636) -> Content(12870) -> PrivacyPolicy(12638) -> Buttons(12428) -> BottomPanel(12440) -> HealthWarningViewController(12426) -> MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12634) -> PrivacyPolicy(12638) -> Buttons(12428) -> BottomPanel(12440) -> HealthWarningViewController(12426) -> MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Underline(12648) -> EnableButton(12824) -> Buttons(12620) -> BottomPanel(12618) -> OnlineServicesViewController(12616) -> ViewControllers(12432)
+
+BG(12644) -> B(12642) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+B(12642) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12640) -> B(12642) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(12646) -> B(12642) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12692) -> TitleViewController(12894) -> TopScreen(12860) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+DirectionalLight2(11710) -> MenuCoreLighting(11630) -> MenuEnvironmentCore(11626)
+
+Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Underline(12656) -> OpenDataPrivacyPage(12806) -> Buttons(12428) -> BottomPanel(12440) -> HealthWarningViewController(12426) -> MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12650) -> DontEnableButton(12652) -> Buttons(12620) -> BottomPanel(12618) -> OnlineServicesViewController(12616) -> ViewControllers(12432)
+
+Text(12654) -> Content(12844) -> DontEnableButton(12652) -> Buttons(12620) -> BottomPanel(12618) -> OnlineServicesViewController(12616) -> ViewControllers(12432)
+
+DontEnableButton(12652) -> Buttons(12620) -> BottomPanel(12618) -> OnlineServicesViewController(12616) -> ViewControllers(12432)
+
+Border(12910) -> Continue(12498) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Icon(12684) -> UpButton(12680) -> ScrollBar(12482) -> TextPageScrollView(12920) -> PrivacyPolicyViewController(12434) -> ViewControllers(12432)
+
+Icon(12686) -> UpButton(12682) -> ScrollBar(12484) -> TextPageScrollView(12918) -> EulaViewController(12438) -> ViewControllers(12432)
+
+UpButton(12682) -> ScrollBar(12484) -> TextPageScrollView(12918) -> EulaViewController(12438) -> ViewControllers(12432)
+
+UpButton(12680) -> ScrollBar(12482) -> TextPageScrollView(12920) -> PrivacyPolicyViewController(12434) -> ViewControllers(12432)
+
+MenuEnvironmentCore(11626)
+
+Stroke(12678) -> P(12674) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12676) -> P(12674) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+P(12674) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12672) -> P(12674) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Arrow(12816) -> DropDownButton(12572) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+Stroke(12666) -> T(12662) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12664) -> T(12662) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+T(12662) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12660) -> T(12662) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(12710) -> G(12714) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12716) -> G(12714) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+G(12714) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12712) -> G(12714) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+LightManager(11628) -> MenuCoreLighting(11630) -> MenuEnvironmentCore(11626)
+
+MenuCoreLighting(11630) -> MenuEnvironmentCore(11626)
+
+Stroke(12698) -> 5(12702) -> Row(12762) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12696) -> 5(12702) -> Row(12762) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+5(12702) -> Row(12762) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12700) -> 5(12702) -> Row(12762) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(12720) -> W(12724) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12718) -> W(12724) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+W(12724) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12722) -> W(12724) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(12728) -> Ok(12730) -> Row(12442) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12726) -> Ok(12730) -> Row(12442) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12732) -> Ok(12730) -> Row(12442) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Ok(12730) -> Row(12442) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12734) -> SimpleTextTableCell (4)(12738) -> Content(12790) -> Viewport(12708) -> DropdownTableView(12444) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+BG(12736) -> SimpleTextTableCell (4)(12738) -> Content(12790) -> Viewport(12708) -> DropdownTableView(12444) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+SimpleTextTableCell (4)(12738) -> Content(12790) -> Viewport(12708) -> DropdownTableView(12444) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+Viewport(12708) -> DropdownTableView(12444) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+DropDownButton(12572) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+Row(12590) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Handle(12898) -> VerticalScrollIndicator(13014) -> ScrollBar(12482) -> TextPageScrollView(12920) -> PrivacyPolicyViewController(12434) -> ViewControllers(12432)
+
+Handle(12900) -> VerticalScrollIndicator(13012) -> ScrollBar(12484) -> TextPageScrollView(12918) -> EulaViewController(12438) -> ViewControllers(12432)
+
+Icon(12760) -> DownButton(12758) -> ScrollBar(12820) -> DropdownTableView(12444) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+DownButton(12758) -> ScrollBar(12820) -> DropdownTableView(12444) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+Stroke(12766) -> X(12768) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12764) -> X(12768) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12770) -> X(12768) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+X(12768) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+OutlineWrapper(12852) -> Continue(12498) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+Stroke(12752) -> K(12756) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12750) -> K(12756) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+K(12756) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12754) -> K(12756) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12744) -> Content(12740) -> Agree(12746) -> Buttons(12420) -> BottomPanel(12430) -> EulaViewController(12438) -> ViewControllers(12432)
+
+Agree(12746) -> Buttons(12420) -> BottomPanel(12430) -> EulaViewController(12438) -> ViewControllers(12432)
+
+BG(12748) -> Agree(12746) -> Buttons(12420) -> BottomPanel(12430) -> EulaViewController(12438) -> ViewControllers(12432)
+
+BG(12896) -> DropdownTableView(12444) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+BG(12784) -> Continue(12788) -> Buttons(12428) -> BottomPanel(12440) -> HealthWarningViewController(12426) -> MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12786) -> Content(12694) -> Continue(12788) -> Buttons(12428) -> BottomPanel(12440) -> HealthWarningViewController(12426) -> MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Continue(12788) -> Buttons(12428) -> BottomPanel(12440) -> HealthWarningViewController(12426) -> MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Underline(12812) -> DontEnableButton(12652) -> Buttons(12620) -> BottomPanel(12618) -> OnlineServicesViewController(12616) -> ViewControllers(12432)
+
+BG(12792) -> I(12798) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+I(12798) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12796) -> I(12798) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(12794) -> I(12798) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12800) -> SimpleTextTableCell (2)(12802) -> Content(12790) -> Viewport(12708) -> DropdownTableView(12444) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+SimpleTextTableCell (2)(12802) -> Content(12790) -> Viewport(12708) -> DropdownTableView(12444) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+Text(12804) -> SimpleTextTableCell (2)(12802) -> Content(12790) -> Viewport(12708) -> DropdownTableView(12444) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+GroundCollider(12814) -> MenuEnvironmentCore(11626)
+
+BG(12780) -> C(12776) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12778) -> C(12776) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+C(12776) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(12782) -> C(12776) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BGDisabled(12980) -> Continue(12498) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+BG(13032) -> DropDownButton(12572) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+FakeGlow1(11706) -> MenuHandle(11636) -> ControllerRight(11638) -> MenuControllers(11682) -> Origin(11674) -> MenuCore(11662)
+
+Underline(12774) -> PrivacyPolicy(12638) -> Buttons(12428) -> BottomPanel(12440) -> HealthWarningViewController(12426) -> MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12826) -> Content(12668) -> EnableButton(12824) -> Buttons(12620) -> BottomPanel(12618) -> OnlineServicesViewController(12616) -> ViewControllers(12432)
+
+EnableButton(12824) -> Buttons(12620) -> BottomPanel(12618) -> OnlineServicesViewController(12616) -> ViewControllers(12432)
+
+BG(12822) -> EnableButton(12824) -> Buttons(12620) -> BottomPanel(12618) -> OnlineServicesViewController(12616) -> ViewControllers(12432)
+
+ScrollBar(12482) -> TextPageScrollView(12920) -> PrivacyPolicyViewController(12434) -> ViewControllers(12432)
+
+ScrollBar(12484) -> TextPageScrollView(12918) -> EulaViewController(12438) -> ViewControllers(12432)
+
+FakeGlow1(11632) -> MenuHandle(11686) -> ControllerLeft(11640) -> MenuControllers(11682) -> Origin(11674) -> MenuCore(11662)
+
+SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+Text(12808) -> Content(12688) -> OpenDataPrivacyPage(12806) -> Buttons(12428) -> BottomPanel(12440) -> HealthWarningViewController(12426) -> MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+OpenDataPrivacyPage(12806) -> Buttons(12428) -> BottomPanel(12440) -> HealthWarningViewController(12426) -> MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12810) -> OpenDataPrivacyPage(12806) -> Buttons(12428) -> BottomPanel(12440) -> HealthWarningViewController(12426) -> MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+DropdownTableView(12444) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+SimpleTextTableCell (3)(12848) -> Content(12790) -> Viewport(12708) -> DropdownTableView(12444) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+BG(12846) -> SimpleTextTableCell (3)(12848) -> Content(12790) -> Viewport(12708) -> DropdownTableView(12444) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+Text(12850) -> SimpleTextTableCell (3)(12848) -> Content(12790) -> Viewport(12708) -> DropdownTableView(12444) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+Stroke(12838) -> Space(12840) -> Row(12442) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12836) -> Space(12840) -> Row(12442) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12842) -> Space(12840) -> Row(12442) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Space(12840) -> Row(12442) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+MenuLightsManager(11634) -> MenuEnvironmentCore(11626)
+
+Stroke(12832) -> E(12828) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12830) -> E(12828) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+E(12828) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12834) -> E(12828) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Content(12988) -> DoNotAgree(12468) -> Buttons(12420) -> BottomPanel(12430) -> EulaViewController(12438) -> ViewControllers(12432)
+
+ControllerLeft(11640) -> MenuControllers(11682) -> Origin(11674) -> MenuCore(11662)
+
+BlueNoiseHelper(11654) -> Rendering(11664) -> MenuCore(11662)
+
+ControllerRight(11638) -> MenuControllers(11682) -> Origin(11674) -> MenuCore(11662)
+
+SceneCameraBloomPrePass(11644) -> Rendering(11664) -> MenuCore(11662)
+
+BasicUIAudioManager(11678) -> UI(11666) -> MenuCore(11662)
+
+FadeInOnSceneTransitionFinished(11642) -> Fading(11658) -> MenuCore(11662)
+
+Normal(11692) -> MenuHandle(11636) -> ControllerRight(11638) -> MenuControllers(11682) -> Origin(11674) -> MenuCore(11662)
+
+FakeGlow0(11648) -> MenuHandle(11636) -> ControllerRight(11638) -> MenuControllers(11682) -> Origin(11674) -> MenuCore(11662)
+
+MenuHandle(11686) -> ControllerLeft(11640) -> MenuControllers(11682) -> Origin(11674) -> MenuCore(11662)
+
+Normal(11652) -> MenuHandle(11686) -> ControllerLeft(11640) -> MenuControllers(11682) -> Origin(11674) -> MenuCore(11662)
+
+MenuHandle(11636) -> ControllerRight(11638) -> MenuControllers(11682) -> Origin(11674) -> MenuCore(11662)
+
+Glowing(11680) -> MenuHandle(11636) -> ControllerRight(11638) -> MenuControllers(11682) -> Origin(11674) -> MenuCore(11662)
+
+FadeOutOnSceneTransition(11690) -> Fading(11658) -> MenuCore(11662)
+
+MenuControllers(11682) -> Origin(11674) -> MenuCore(11662)
+
+SmoothCamera(11646) -> Rendering(11664) -> MenuCore(11662)
+
+FakeGlow0(11684) -> MenuHandle(11686) -> ControllerLeft(11640) -> MenuControllers(11682) -> Origin(11674) -> MenuCore(11662)
+
+MenuMainCamera(11676) -> Origin(11674) -> MenuCore(11662)
+
+DustPS(11688) -> MenuMainCamera(11676) -> Origin(11674) -> MenuCore(11662)
+
+Glowing(11650) -> MenuHandle(11686) -> ControllerLeft(11640) -> MenuControllers(11682) -> Origin(11674) -> MenuCore(11662)
+
+ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Fading(11658) -> MenuCore(11662)
+
+BottomScreen(12858) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+VRRenderingParamsSetup(11660) -> Rendering(11664) -> MenuCore(11662)
+
+MenuCore(11662)
+
+Rendering(11664) -> MenuCore(11662)
+
+TopScreen(12860) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+LeftScreen(12862) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+UI(11666) -> MenuCore(11662)
+
+Title(12864) -> TitleViewController(12894) -> TopScreen(12860) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+HoverHintController(11668) -> UI(11666) -> MenuCore(11662)
+
+RightScreen(12866) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+MenuPlayerController(11670) -> Origin(11674) -> MenuCore(11662)
+
+MenuShockwave(11672) -> UI(11666) -> MenuCore(11662)
+
+Origin(11674) -> MenuCore(11662)
+
+ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Content(12790) -> Viewport(12708) -> DropdownTableView(12444) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+Outline(12574) -> OutlineWrapper(12560) -> Continue(12788) -> Buttons(12428) -> BottomPanel(12440) -> HealthWarningViewController(12426) -> MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12856) -> DropDownButton(12572) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+Arrow(12926) -> ShiftKey(12936) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12880) -> SimpleTextTableCell(12882) -> Content(12790) -> Viewport(12708) -> DropdownTableView(12444) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+SimpleTextTableCell(12882) -> Content(12790) -> Viewport(12708) -> DropdownTableView(12444) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+Text(12884) -> SimpleTextTableCell(12882) -> Content(12790) -> Viewport(12708) -> DropdownTableView(12444) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+J(12878) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12876) -> J(12878) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12874) -> J(12878) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(12872) -> J(12878) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BloomSkyboxQuad(11704) -> MenuEnvironmentCore(11626)
+
+DirectionalLight1(11700) -> MenuCoreLighting(11630) -> MenuEnvironmentCore(11626)
+
+ReflectionProbe(11702) -> MenuEnvironmentCore(11626)
+
+Feet(11698) -> PlayersPlace(11624) -> MenuEnvironmentCore(11626)
+
+BigSmokePS(11696) -> MenuEnvironmentCore(11626)
+
+Content(12944) -> Continue(12498) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+BGHighlight(12892) -> Ok(12730) -> Row(12442) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+VerticalScrollIndicator(12690) -> ScrollBar(12820) -> DropdownTableView(12444) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Underline(12912) -> DoNotAgree(12468) -> Buttons(12420) -> BottomPanel(12430) -> EulaViewController(12438) -> ViewControllers(12432)
+
+Stroke(12902) -> Z(12906) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12908) -> Z(12906) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Z(12906) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12904) -> Z(12906) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+SafeAreaRectChecker(12886) -> EulaViewController(12438) -> ViewControllers(12432)
+
+Border(12608) -> Continue(12788) -> Buttons(12428) -> BottomPanel(12440) -> HealthWarningViewController(12426) -> MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+EventSystem(11712) -> UI(11666) -> MenuCore(11662)
+
+Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Viewport(12914) -> TextPageScrollView(12918) -> EulaViewController(12438) -> ViewControllers(12432)
+
+Viewport(12916) -> TextPageScrollView(12920) -> PrivacyPolicyViewController(12434) -> ViewControllers(12432)
+
+TextPageScrollView(12918) -> EulaViewController(12438) -> ViewControllers(12432)
+
+TextPageScrollView(12920) -> PrivacyPolicyViewController(12434) -> ViewControllers(12432)
+
+Text(12922) -> Viewport(12916) -> TextPageScrollView(12920) -> PrivacyPolicyViewController(12434) -> ViewControllers(12432)
+
+Text(12924) -> Viewport(12914) -> TextPageScrollView(12918) -> EulaViewController(12438) -> ViewControllers(12432)
+
+Text(12570) -> TextContainer(12970) -> OnlineServicesViewController(12616) -> ViewControllers(12432)
+
+BG(12932) -> 3(12928) -> Row(12590) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12930) -> 3(12928) -> Row(12590) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+3(12928) -> Row(12590) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(12934) -> 3(12928) -> Row(12590) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12940) -> ShiftKey(12936) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12938) -> ShiftKey(12936) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+ShiftKey(12936) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(12942) -> ShiftKey(12936) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+SafeAreaConfirmationText(12888) -> BottomPanel(12430) -> EulaViewController(12438) -> ViewControllers(12432)
+
+Stroke(12948) -> Q(12950) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12946) -> Q(12950) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12952) -> Q(12950) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Q(12950) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(12966) -> R(12964) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+R(12964) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12962) -> R(12964) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12968) -> R(12964) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12954) -> O(12958) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(12960) -> O(12958) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+O(12958) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(12956) -> O(12958) -> Row(12632) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Version(12534) -> PlayersPlace(11624) -> MenuEnvironmentCore(11626)
+
+Row(12442) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BasicMenuGround(11622)
+
+Icon(12982) -> UpButton(12984) -> ScrollBar(12820) -> DropdownTableView(12444) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+UpButton(12984) -> ScrollBar(12820) -> DropdownTableView(12444) -> SimpleTextDropDown(12480) -> SelectLanguageViewController(12772) -> ViewControllers(12432)
+
+Text(12978) -> L(12976) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+L(12976) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12974) -> L(12976) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(12972) -> L(12976) -> Row(12990) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Content(12870) -> PrivacyPolicy(12638) -> Buttons(12428) -> BottomPanel(12440) -> HealthWarningViewController(12426) -> MainScreen(12818) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BSLightManager(11708) -> MenuEnvironmentCore(11626)
+
+8(13022) -> Row(12462) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(13020) -> 8(13022) -> Row(12462) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(13018) -> 8(13022) -> Row(12462) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(13016) -> 8(13022) -> Row(12462) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(13024) -> 6(13028) -> Row(12762) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(13030) -> 6(13028) -> Row(12762) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+6(13028) -> Row(12762) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(13026) -> 6(13028) -> Row(12762) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Stroke(13002) -> 9(13006) -> Row(12462) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(13008) -> 9(13006) -> Row(12462) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+9(13006) -> Row(12462) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(13004) -> 9(13006) -> Row(12462) -> Numpad(12706) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Content(12844) -> DontEnableButton(12652) -> Buttons(12620) -> BottomPanel(12618) -> OnlineServicesViewController(12616) -> ViewControllers(12432)
+
+Stroke(12994) -> N(12998) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+Text(13000) -> N(12998) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+N(12998) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
+BG(12996) -> N(12998) -> Row(12478) -> Letters(12704) -> Keyboard(12986) -> KeyboardWrapper(13010) -> KeyboardContainer(12992) -> ScreenContainer(12868) -> ScreenSystem(11656) -> UI(11666) -> MenuCore(11662)
+
