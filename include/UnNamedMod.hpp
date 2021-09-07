@@ -12,7 +12,7 @@
 #include "GlobalNamespace/Saber.hpp"
 
 #include "GlobalNamespace/PauseController.hpp"
-
+#include "UnityEngine/Color.hpp"
 
 class UnNamedMod{
     public:
@@ -24,7 +24,11 @@ class UnNamedMod{
         void FixedUpdate(GlobalNamespace::OculusVRHelper* self); 
         void _InitializeOculusHands();
         //void _InitializeOculusHandInGame(GlobalNamespace::Saber* saber);
+        void ChangeRightSkeletonRendererColor(UnityEngine::Color col);
+        void ChangeLeftSkeletonRendererColor(UnityEngine::Color col);
         
+        bool createNewSkeletonMaterials(); 
+
         bool getRHandClickRequested() { return _rHandClickRequested; }
         bool getLHandClickRequested() { return _lHandClickRequested; }
 
@@ -41,6 +45,9 @@ class UnNamedMod{
         GlobalNamespace::OVRSkeleton* rightOVRSkeleton = nullptr;
         GlobalNamespace::OVRSkeleton* leftOVRSkeleton  = nullptr;
 
+        UnityEngine::Material * rightHandSkeletonMat = nullptr;
+        UnityEngine::Material * leftHandSkeletonMat  = nullptr;
+        
         UnityEngine::Transform* r_saber_TF = nullptr;
         UnityEngine::Transform* l_saber_TF = nullptr;
 

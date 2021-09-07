@@ -14,7 +14,7 @@ MAKE_HOOK_MATCH(
     GlobalNamespace::Saber* self
 ) {
 
-    getLogger().info("Saber::ManualUpdate().");
+    //getLogger().info("Saber::ManualUpdate().");
     
     if(self->get_saberType() == GlobalNamespace::SaberType::SaberB){
         //Right saber

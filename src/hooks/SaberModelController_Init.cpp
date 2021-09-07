@@ -28,6 +28,10 @@ void Log_GetComponents(UnityEngine::GameObject* gameobj){
 #include "GlobalNamespace/PauseController.hpp"
 #include "System/Action.hpp"
 
+#include "UnityEngine/Color.hpp"
+#include "UnityEngine/Material.hpp"
+#include "GlobalNamespace/ColorManager.hpp"
+
 static int handInitCount = 0;
 MAKE_HOOK_MATCH(
     SaberModelController_Init, 
@@ -42,9 +46,16 @@ MAKE_HOOK_MATCH(
 
     SaberModelController_Init(self, parent, saber);
 
-
     if(modManager.is_scene_GameCore){
-        float sScale = 1.0f/6.0f;
+        if(saber->get_saberType() == GlobalNamespace::SaberType::SaberB){
+            modManager.ChangeRightSkeletonRendererColor(self->colorManager->ColorForSaberType(GlobalNamespace::SaberType::SaberB));
+        }
+        
+        if(saber->get_saberType() == GlobalNamespace::SaberType::SaberA){
+            modManager.ChangeLeftSkeletonRendererColor(self->colorManager->ColorForSaberType(GlobalNamespace::SaberType::SaberA));
+        }
+
+        float sScale = 1.0f/6.5f;
         saber->get_transform()->set_localScale(UnityEngine::Vector3{sScale,sScale,sScale});
         
         bool rightsaber_bool = true;
@@ -70,7 +81,6 @@ MAKE_HOOK_MATCH(
                 auto posHands = modManager.handTrackingObjectsParent->get_transform()->get_position();
                 posHands = posHands + UnityEngine::Vector3{0,-5.9,0};
                 modManager.handTrackingObjectsParent->get_transform()->set_position(posHands);
-
 
             }
         }

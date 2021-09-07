@@ -139,6 +139,9 @@ namespace ModUtils{
 #include "GlobalNamespace/OVRBone.hpp"
 #include "GlobalNamespace/OVRPlugin_Skeleton2.hpp"
 
+
+#include "GlobalNamespace/OVRSkeletonRenderer.hpp"
+
 #include "UnityEngine/Camera.hpp"
 
 #include "System/Collections/Generic/List_1.hpp"
@@ -147,9 +150,17 @@ namespace ModUtils{
 
 
 #include "UnityEngine/LineRenderer.hpp"
+#include "UnityEngine/Material.hpp"
+#include "UnityEngine/Color.hpp"
+#include "UnityEngine/LineRenderer.hpp"
+
+#include "UnityEngine/Resources.hpp"
 
 void UnNamedMod::_InitializeOculusHands(){
     getLogger().info("Oculus Hand MENU Initialization ..");
+
+    auto old_HandTracking_container = UnityEngine::GameObject::Find(il2cpp_utils::createcsstr("HandTracking_container"));
+    if(old_HandTracking_container) UnityEngine::GameObject::Destroy(old_HandTracking_container);
 
     handTrackingObjectsParent = UnityEngine::GameObject::New_ctor(il2cpp_utils::createcsstr("HandTracking_container"));
     UnityEngine::GameObject::DontDestroyOnLoad(handTrackingObjectsParent);
@@ -167,10 +178,14 @@ void UnNamedMod::_InitializeOculusHands(){
 
     rightOVRSkeleton = rightHandTrackingGo->AddComponent<GlobalNamespace::OVRSkeleton*>();
     rightOVRSkeleton->skeletonType = GlobalNamespace::OVRSkeleton::SkeletonType::HandRight;
-
     rightOVRSkeleton->updateRootPose = true;
-
     rightOVRSkeleton->Initialize();
+    
+    auto rightOVRSkeletonRenderer = rightHandTrackingGo->AddComponent<GlobalNamespace::OVRSkeletonRenderer*>();
+    rightHandSkeletonMat->SetColor(il2cpp_utils::createcsstr("_Color"), UnityEngine::Color{0.156863, 0.556863, 0.823529, 1.000000});
+    rightOVRSkeletonRenderer->skeletonMaterial=rightHandSkeletonMat;
+    rightOVRSkeletonRenderer->systemGestureMaterial=rightHandSkeletonMat;
+    rightOVRSkeletonRenderer->Initialize();
 
     getLogger().info("rightHandTracking MENU Stuff Created");
 
@@ -187,17 +202,36 @@ void UnNamedMod::_InitializeOculusHands(){
 
     leftOVRSkeleton = leftHandTrackingGo->AddComponent<GlobalNamespace::OVRSkeleton*>();
     leftOVRSkeleton->skeletonType = GlobalNamespace::OVRSkeleton::SkeletonType::HandLeft;
-
     leftOVRSkeleton->updateRootPose = true;
-
     leftOVRSkeleton->Initialize();
-
+    
+    auto leftOVRSkeletonRenderer = leftHandTrackingGo->AddComponent<GlobalNamespace::OVRSkeletonRenderer*>();
+    leftHandSkeletonMat->SetColor(il2cpp_utils::createcsstr("_Color"), UnityEngine::Color{0.784314, 0.078431, 0.078431, 1.000000});
+    leftOVRSkeletonRenderer->skeletonMaterial=leftHandSkeletonMat;
+    leftOVRSkeletonRenderer->systemGestureMaterial=leftHandSkeletonMat;
 
     getLogger().info("leftHandTracking MENU Stuff Created");
-
     
 }
 
+bool UnNamedMod::createNewSkeletonMaterials(){
+    bool success = false;
+    auto Normal = UnityEngine::GameObject::Find(il2cpp_utils::createcsstr("ControllerLeft/MenuHandle/Normal"));
+    if( Normal ){
+        auto meshRenderer = Normal->GetComponentInChildren<UnityEngine::MeshRenderer*>();
+        leftHandSkeletonMat  = UnityEngine::Material::New_ctor(meshRenderer->GetMaterial());
+        rightHandSkeletonMat = UnityEngine::Material::New_ctor(meshRenderer->GetMaterial());
+        success = true;
+    }
+    return success;
+}
+
+void UnNamedMod::ChangeRightSkeletonRendererColor(UnityEngine::Color col){
+    if(rightHandSkeletonMat) rightHandSkeletonMat->SetColor(il2cpp_utils::createcsstr("_Color"), col);
+}
+void UnNamedMod::ChangeLeftSkeletonRendererColor(UnityEngine::Color col){
+    if(leftHandSkeletonMat) leftHandSkeletonMat->SetColor(il2cpp_utils::createcsstr("_Color"), col);
+}
 
 #include "UnityEngine/EventSystems/PointerInputModule.hpp"
 #include "VRUIControls/VRInputModule.hpp"

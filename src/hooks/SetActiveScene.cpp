@@ -30,6 +30,7 @@
 #include <sstream>
 #include <string>
 
+
 MAKE_HOOK_MATCH(
     SceneManager_SetActiveScene, 
     &UnityEngine::SceneManagement::SceneManager::SetActiveScene, 
@@ -43,24 +44,46 @@ MAKE_HOOK_MATCH(
     auto sceneName = to_utf8(csstrtostr( sceneName_il2str ));
 
     bool is_MainMenu        = sceneName.compare("MainMenu") == 0;
-    //bool is_ShaderWarmup    = sceneName.compare("ShaderWarmup") == 0;
+    bool is_ShaderWarmup    = sceneName.compare("ShaderWarmup") == 0;
     bool is_HealthWarning   = sceneName.compare("HealthWarning") == 0;
     bool is_GameCore        = sceneName.compare("GameCore") == 0;
-    //bool is_EmptyTransition = sceneName.compare("EmptyTransition") == 0;
+    bool is_EmptyTransition = sceneName.compare("EmptyTransition") == 0;
 
     // Actual function call
     bool ret = SceneManager_SetActiveScene(scene);
     // Actual function call
+    if(ret == true){
+        getLogger().info("New scene name: %s", sceneName.c_str());
+        /*
+        if( (is_GameCore == true) || (is_MainMenu == true) || (is_HealthWarning == true) ){
+            if(modManager.oculusHandsExist == false){
+                modManager._InitializeOculusHands();
+                modManager.oculusHandsExist = true; 
+            }
+        }*/
 
-    getLogger().info("New scene name: %s", sceneName.c_str());
-    if( (is_GameCore == true) || (is_MainMenu == true) || (is_HealthWarning == true) ){
-        if(modManager.oculusHandsExist == false){
-            modManager._InitializeOculusHands();
-            modManager.oculusHandsExist = true; 
+        /*if(is_ShaderWarmup == false && is_EmptyTransition == false){
+            if(is_MainMenu == true){
+                if(menu_visited_once == false){
+                    modManager._InitializeOculusHands();
+                    menu_visited_once = true; 
+                }
+            }
+            else{
+                modManager._InitializeOculusHands();
+            }
+        }*/
+        if(is_MainMenu == true || is_HealthWarning == true){
+            if(modManager.leftHandSkeletonMat == nullptr){
+                modManager.createNewSkeletonMaterials();
+            }
         }
-    } 
-    
-    modManager.is_scene_GameCore = is_GameCore;
+        
+        if( (is_ShaderWarmup == false) && (is_EmptyTransition == false)){
+            modManager._InitializeOculusHands();
+        }
+        modManager.is_scene_GameCore = is_GameCore;
+    }
 
     //WriteToLog_AllGameObjectsInScene();
 

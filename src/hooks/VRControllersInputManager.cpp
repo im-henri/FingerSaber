@@ -15,7 +15,6 @@ MAKE_HOOK_MATCH(
     modManager.FixedUpdate(self);
 }
 
-
 void UnNamedMod::_Hook_OculusVRHelper_VRControllersInputManager(){
     INSTALL_HOOK(getLogger(), OculusVRHelper_FixedUpdate);
 }
