@@ -38,7 +38,9 @@ void UnNamedMod::InstallHooks() {
     _Hook_OculusVRHelper_VRControllersInputManager();
     _Hook_Saber_ManualUpdate();
     _Hook_SaberModelController_Init();
-
+    _Hook_GamePause_Pause();
+    _Hook_GamePause_WillResume();
+    
     _Hook_SOME_HOOK_METHOD();
 }
 

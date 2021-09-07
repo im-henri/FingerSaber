@@ -54,31 +54,13 @@ MAKE_HOOK_MATCH(
     // Actual function call
     if(ret == true){
         getLogger().info("New scene name: %s", sceneName.c_str());
-        /*
-        if( (is_GameCore == true) || (is_MainMenu == true) || (is_HealthWarning == true) ){
-            if(modManager.oculusHandsExist == false){
-                modManager._InitializeOculusHands();
-                modManager.oculusHandsExist = true; 
-            }
-        }*/
 
-        /*if(is_ShaderWarmup == false && is_EmptyTransition == false){
-            if(is_MainMenu == true){
-                if(menu_visited_once == false){
-                    modManager._InitializeOculusHands();
-                    menu_visited_once = true; 
-                }
-            }
-            else{
-                modManager._InitializeOculusHands();
-            }
-        }*/
         if(is_MainMenu == true || is_HealthWarning == true){
             if(modManager.leftHandSkeletonMat == nullptr){
                 modManager.createNewSkeletonMaterials();
             }
         }
-        
+
         if( (is_ShaderWarmup == false) && (is_EmptyTransition == false)){
             modManager._InitializeOculusHands();
         }

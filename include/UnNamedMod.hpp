@@ -34,9 +34,11 @@ class UnNamedMod{
 
         bool getEitherHandIsTracked() { return _oculusLHandIsTracked || _oculusRHandIsTracked; }
 
+
         // Public variables
         bool oculusHandsExist = false;
         bool is_scene_GameCore = false;
+        bool is_GamePaused = false;
 
         UnityEngine::GameObject* handTrackingObjectsParent  = nullptr; 
 
@@ -45,8 +47,8 @@ class UnNamedMod{
         GlobalNamespace::OVRSkeleton* rightOVRSkeleton = nullptr;
         GlobalNamespace::OVRSkeleton* leftOVRSkeleton  = nullptr;
 
-        UnityEngine::Material * rightHandSkeletonMat = nullptr;
-        UnityEngine::Material * leftHandSkeletonMat  = nullptr;
+        UnityEngine::Material * rightHandSkeletonMat = nullptr; // Createdd win new_ctor
+        UnityEngine::Material * leftHandSkeletonMat  = nullptr; // Createdd win new_ctor
         
         UnityEngine::Transform* r_saber_TF = nullptr;
         UnityEngine::Transform* l_saber_TF = nullptr;
@@ -61,10 +63,13 @@ class UnNamedMod{
         
 
         // Hook Install Calls
+        
         void _Hook_SceneManager_SetActiveScene();
         void _Hook_OculusVRHelper_VRControllersInputManager();
         void _Hook_Saber_ManualUpdate();
         void _Hook_SaberModelController_Init();
+        void _Hook_GamePause_Pause();
+        void _Hook_GamePause_WillResume();
 
         void _Hook_SOME_HOOK_METHOD();
 

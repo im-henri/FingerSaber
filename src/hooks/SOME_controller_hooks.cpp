@@ -58,13 +58,15 @@ MAKE_HOOK_MATCH(
     float ret = OVRInput_Get_Axis1D(virtualMask, controllerMask);
 
     // HERE IS WHERE WE WILL OVERRIDE THE INPUT WHEN NEEDED
-    if(controllerMask == GlobalNamespace::OVRInput::Controller::RTouch && modManager.getRHandClickRequested() == true){
-        return 1.0f;
+    if(modManager.is_scene_GameCore == false || modManager.is_GamePaused){
+        if(controllerMask == GlobalNamespace::OVRInput::Controller::RTouch && modManager.getRHandClickRequested() == true){
+            return 1.0f;
+        }
+        if(controllerMask == GlobalNamespace::OVRInput::Controller::LTouch && modManager.getLHandClickRequested() == true){
+            return 1.0f;
+        }
     }
-    if(controllerMask == GlobalNamespace::OVRInput::Controller::LTouch && modManager.getLHandClickRequested() == true){
-        return 1.0f;
-    }
-    
+
     return ret;
 }
 
