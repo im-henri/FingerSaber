@@ -64,6 +64,7 @@ MAKE_HOOK_MATCH(
     OVRInput_Update();
     
     // Polling the input after Update ensures that no input is lost
+    
     if(modManager.is_scene_GameCore){
         auto getButton = static_cast< bool(*)(GlobalNamespace::OVRInput::Button, GlobalNamespace::OVRInput::Controller)> (&GlobalNamespace::OVRInput::Get);
         if( getButton(GlobalNamespace::OVRInput::Button::Start, GlobalNamespace::OVRInput::Controller::Hands) ){
@@ -92,10 +93,10 @@ MAKE_HOOK_MATCH(
 
     // HERE IS WHERE WE WILL OVERRIDE THE INPUT WHEN NEEDED
     if(modManager.is_scene_GameCore == false || modManager.is_GamePaused){
-        if(controllerMask == GlobalNamespace::OVRInput::Controller::RTouch && modManager.getLHandClickRequested() == true){
+        if(controllerMask == GlobalNamespace::OVRInput::Controller::RTouch && modManager.getRHandClickRequested() == true){
             return 1.0f;
         }
-        if(controllerMask == GlobalNamespace::OVRInput::Controller::LTouch && modManager.getRHandClickRequested() == true){
+        if(controllerMask == GlobalNamespace::OVRInput::Controller::LTouch && modManager.getLHandClickRequested() == true){
             return 1.0f;
         }
     }

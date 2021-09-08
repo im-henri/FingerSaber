@@ -66,6 +66,11 @@ MAKE_HOOK_MATCH(
         if (rightsaber_bool) modManager.r_saber_TF = saber->get_transform();
         else                 modManager.l_saber_TF = saber->get_transform();
 
+
+        float pScale = 7.5f;
+        float platformHeightOffsetMeters   = -0.34;
+        float platformDistanceOffsetMeters = -0.25;
+
         handInitCount += 1;
         // Figured this is safer way to know when both sabers exist, as opposed to assuming which saber is last to get initialized.
         // (I assume its not always left or right saber that gets initialized last.)
@@ -79,11 +84,11 @@ MAKE_HOOK_MATCH(
                 if(PauseController_go) modManager.pauseController = PauseController_go->GetComponent<GlobalNamespace::PauseController*>();
                 // -- do smthn with this
                 
-                UnityEngine::Vector3 scaler{7.5,7.5,7.5};
+                UnityEngine::Vector3 scaler{pScale,pScale,pScale};
 
                 VRGameCore->get_transform()->set_localScale(scaler);
                 modManager.handTrackingObjectsParent->get_transform()->set_localScale(scaler);
-
+                /*
                 auto posBody = VRGameCore->get_transform()->get_position();
                 posBody = posBody + UnityEngine::Vector3{0,-5.9,0};
                 VRGameCore->get_transform()->set_position(posBody);
@@ -91,7 +96,19 @@ MAKE_HOOK_MATCH(
                 auto posHands = modManager.handTrackingObjectsParent->get_transform()->get_position();
                 posHands = posHands + UnityEngine::Vector3{0,-5.9,0};
                 modManager.handTrackingObjectsParent->get_transform()->set_position(posHands);
+                */
+                auto mainCamera = VRGameCore->Find(il2cpp_utils::createcsstr("MainCamera"));
+                float headLevel = mainCamera->get_transform()->get_position().y;
+                float platformLevel = headLevel + pScale*platformHeightOffsetMeters;
+        
+                auto posBody = VRGameCore->get_transform()->get_position();
+                posBody = posBody + UnityEngine::Vector3{0,-platformLevel, pScale*platformDistanceOffsetMeters};
+                VRGameCore->get_transform()->set_position(posBody);
 
+                auto posHands = modManager.handTrackingObjectsParent->get_transform()->get_position();
+                posHands = posHands + UnityEngine::Vector3{0,-platformLevel, pScale*platformDistanceOffsetMeters};
+                modManager.handTrackingObjectsParent->get_transform()->set_position(posHands);
+                
             }
         }
     }
