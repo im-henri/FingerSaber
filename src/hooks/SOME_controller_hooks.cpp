@@ -71,10 +71,14 @@ MAKE_HOOK_MATCH(
                 if(modManager.is_GamePaused) 
                     modManager.pauseController->HandlePauseMenuManagerDidPressContinueButton();
                 else
-                    modManager.pauseController->Pause();
-                
+                    modManager.pauseController->Pause();     
             }    
         }
+    }
+
+    if(modManager.rightOVRHand){
+        modManager.update_LRHandIsTracked();
+        modManager.update_LRHandClickRequested();
     }
 }
 
@@ -88,10 +92,10 @@ MAKE_HOOK_MATCH(
 
     // HERE IS WHERE WE WILL OVERRIDE THE INPUT WHEN NEEDED
     if(modManager.is_scene_GameCore == false || modManager.is_GamePaused){
-        if(controllerMask == GlobalNamespace::OVRInput::Controller::RTouch && modManager.getRHandClickRequested() == true){
+        if(controllerMask == GlobalNamespace::OVRInput::Controller::RTouch && modManager.getLHandClickRequested() == true){
             return 1.0f;
         }
-        if(controllerMask == GlobalNamespace::OVRInput::Controller::LTouch && modManager.getLHandClickRequested() == true){
+        if(controllerMask == GlobalNamespace::OVRInput::Controller::LTouch && modManager.getRHandClickRequested() == true){
             return 1.0f;
         }
     }

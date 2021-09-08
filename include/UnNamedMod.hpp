@@ -21,7 +21,7 @@ class UnNamedMod{
         
         // --- Public Methods ---
 
-        void FixedUpdate(GlobalNamespace::OculusVRHelper* self); 
+        //void FixedUpdate(GlobalNamespace::OculusVRHelper* self); 
         void _InitializeOculusHands();
         //void _InitializeOculusHandInGame(GlobalNamespace::Saber* saber);
         void ChangeRightSkeletonRendererColor(UnityEngine::Color col);
@@ -33,6 +33,9 @@ class UnNamedMod{
         bool getLHandClickRequested() { return _lHandClickRequested; }
 
         bool getEitherHandIsTracked() { return _oculusLHandIsTracked || _oculusRHandIsTracked; }
+
+        void update_LRHandIsTracked();
+        void update_LRHandClickRequested();
 
 
         // Public variables
@@ -67,7 +70,7 @@ class UnNamedMod{
         // Hook Install Calls
         
         void _Hook_SceneManager_SetActiveScene();
-        void _Hook_OculusVRHelper_VRControllersInputManager();
+        //void _Hook_OculusVRHelper_VRControllersInputManager();
         void _Hook_Saber_ManualUpdate();
         void _Hook_SaberModelController_Init();
         void _Hook_GamePause_Pause();

@@ -35,7 +35,7 @@ UnNamedMod modManager;
 
 void UnNamedMod::InstallHooks() {
     _Hook_SceneManager_SetActiveScene();
-    _Hook_OculusVRHelper_VRControllersInputManager();
+    //_Hook_OculusVRHelper_VRControllersInputManager();
     _Hook_Saber_ManualUpdate();
     _Hook_SaberModelController_Init();
     _Hook_GamePause_Pause();
@@ -239,33 +239,32 @@ void UnNamedMod::ChangeLeftSkeletonRendererColor(UnityEngine::Color col){
 #include "VRUIControls/VRInputModule.hpp"
 #include "GlobalNamespace/TimeHelper.hpp"
 
-static bool rButton_prev = false;
-void UnNamedMod::FixedUpdate(GlobalNamespace::OculusVRHelper* self){
+//static bool rButton_prev = false;
 
-    /*bool rButton = GlobalNamespace::OVRInput::Get(GlobalNamespace::OVRInput::Button::One, GlobalNamespace::OVRInput::Controller::RTouch) 
-                    ? true : false;
-    if((rButton == true) && (rButton_prev == false)){
-        getLogger().info("R_Button Pressed");
-        //ModUtils::WriteToLog_AllGameObjectsInScene();
-    }
-    rButton_prev = rButton;*/
-
-    if(rightOVRHand){
-        _oculusRHandIsTracked = rightOVRHand->IsTracked; 
-        _oculusLHandIsTracked = leftOVRHand->IsTracked;
-        
-        // For some reason this button does not always get detected. 
-        // I assume its "on state" is changed after one update call.
-        if(is_scene_GameCore){
-            if( GlobalNamespace::OVRInput::Get(GlobalNamespace::OVRInput::Button::Start, GlobalNamespace::OVRInput::Controller::Hands) ){
-                if(pauseController) pauseController->Pause();
-            }
-        }
-
-        _rHandClickRequested = GlobalNamespace::OVRInput::Get(GlobalNamespace::OVRInput::Button::One, GlobalNamespace::OVRInput::Controller::RHand) 
-                    ? (_oculusRHandIsTracked) : false;
-        _lHandClickRequested = GlobalNamespace::OVRInput::Get(GlobalNamespace::OVRInput::Button::One, GlobalNamespace::OVRInput::Controller::LHand) 
-                    ? (_oculusLHandIsTracked) : false;
-        
-    }
+void UnNamedMod::update_LRHandIsTracked(){
+    _oculusRHandIsTracked = rightOVRHand->IsTracked; 
+    _oculusLHandIsTracked = leftOVRHand->IsTracked;
 }
+void UnNamedMod::update_LRHandClickRequested(){
+    _rHandClickRequested = GlobalNamespace::OVRInput::Get(GlobalNamespace::OVRInput::Button::One, GlobalNamespace::OVRInput::Controller::RHand) 
+                ? (_oculusRHandIsTracked) : false;
+    _lHandClickRequested = GlobalNamespace::OVRInput::Get(GlobalNamespace::OVRInput::Button::One, GlobalNamespace::OVRInput::Controller::LHand) 
+                ? (_oculusLHandIsTracked) : false;
+}
+
+
+//void UnNamedMod::FixedUpdate(GlobalNamespace::OculusVRHelper* self){
+//
+//    /*bool rButton = GlobalNamespace::OVRInput::Get(GlobalNamespace::OVRInput::Button::One, GlobalNamespace::OVRInput::Controller::RTouch) 
+//                    ? true : false;
+//    if((rButton == true) && (rButton_prev == false)){
+//        getLogger().info("R_Button Pressed");
+//        //ModUtils::WriteToLog_AllGameObjectsInScene();
+//    }
+//    rButton_prev = rButton;*/
+//
+//    /*if(rightOVRHand){
+//        update_LRHandIsTracked();
+//        update_LRHandClickRequested();
+//    }*/
+//}
