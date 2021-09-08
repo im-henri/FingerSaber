@@ -58,8 +58,10 @@ MAKE_HOOK_MATCH(
             modManager.ChangeLeftSkeletonRendererColor(self->colorManager->ColorForSaberType(GlobalNamespace::SaberType::SaberA));
         }
 
-        float sScale = 1.0f/6.5f;
-        saber->get_transform()->set_localScale(UnityEngine::Vector3{sScale,sScale,sScale});
+        if(modManager.dontScalePlayer == false){
+            float sScale = 1.0f/6.5f;
+            saber->get_transform()->set_localScale(UnityEngine::Vector3{sScale,sScale,sScale});
+        }
         
         bool rightsaber_bool = true;
         if (saber->get_saberType() == GlobalNamespace::SaberType::SaberA) rightsaber_bool = false;
@@ -84,31 +86,24 @@ MAKE_HOOK_MATCH(
                 if(PauseController_go) modManager.pauseController = PauseController_go->GetComponent<GlobalNamespace::PauseController*>();
                 // -- do smthn with this
                 
-                UnityEngine::Vector3 scaler{pScale,pScale,pScale};
+                if(modManager.dontScalePlayer == false){
+                    UnityEngine::Vector3 scaler{pScale,pScale,pScale};
 
-                VRGameCore->get_transform()->set_localScale(scaler);
-                modManager.handTrackingObjectsParent->get_transform()->set_localScale(scaler);
-                /*
-                auto posBody = VRGameCore->get_transform()->get_position();
-                posBody = posBody + UnityEngine::Vector3{0,-5.9,0};
-                VRGameCore->get_transform()->set_position(posBody);
+                    VRGameCore->get_transform()->set_localScale(scaler);
+                    modManager.handTrackingObjectsParent->get_transform()->set_localScale(scaler);
+            
+                    auto mainCamera = VRGameCore->Find(il2cpp_utils::createcsstr("MainCamera"));
+                    float headLevel = mainCamera->get_transform()->get_position().y;
+                    float platformLevel = headLevel + pScale*platformHeightOffsetMeters;
+            
+                    auto posBody = VRGameCore->get_transform()->get_position();
+                    posBody = posBody + UnityEngine::Vector3{0,-platformLevel, pScale*platformDistanceOffsetMeters};
+                    VRGameCore->get_transform()->set_position(posBody);
 
-                auto posHands = modManager.handTrackingObjectsParent->get_transform()->get_position();
-                posHands = posHands + UnityEngine::Vector3{0,-5.9,0};
-                modManager.handTrackingObjectsParent->get_transform()->set_position(posHands);
-                */
-                auto mainCamera = VRGameCore->Find(il2cpp_utils::createcsstr("MainCamera"));
-                float headLevel = mainCamera->get_transform()->get_position().y;
-                float platformLevel = headLevel + pScale*platformHeightOffsetMeters;
-        
-                auto posBody = VRGameCore->get_transform()->get_position();
-                posBody = posBody + UnityEngine::Vector3{0,-platformLevel, pScale*platformDistanceOffsetMeters};
-                VRGameCore->get_transform()->set_position(posBody);
-
-                auto posHands = modManager.handTrackingObjectsParent->get_transform()->get_position();
-                posHands = posHands + UnityEngine::Vector3{0,-platformLevel, pScale*platformDistanceOffsetMeters};
-                modManager.handTrackingObjectsParent->get_transform()->set_position(posHands);
-                
+                    auto posHands = modManager.handTrackingObjectsParent->get_transform()->get_position();
+                    posHands = posHands + UnityEngine::Vector3{0,-platformLevel, pScale*platformDistanceOffsetMeters};
+                    modManager.handTrackingObjectsParent->get_transform()->set_position(posHands);
+                }
             }
         }
     }

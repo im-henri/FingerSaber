@@ -18,10 +18,19 @@ MAKE_HOOK_MATCH(
     
     if(self->get_saberType() == GlobalNamespace::SaberType::SaberB){
         //Right saber
-        auto xxx = modManager.rightOVRSkeleton->bones->get_Item(GlobalNamespace::OVRSkeleton::BoneId::Hand_IndexTip);
-        
-        auto targetPos = xxx->get_Transform()->get_position() - modManager.r_saber_TF->get_forward()*0.35;
-        auto targetRot = xxx->get_Transform()->get_rotation();
+        GlobalNamespace::OVRBone* targBone;
+        UnityEngine::Vector3 targetPos;
+
+        if(modManager.dontScalePlayer == false) {
+            targBone = modManager.rightOVRSkeleton->bones->get_Item(GlobalNamespace::OVRSkeleton::BoneId::Hand_IndexTip);
+            targetPos = targBone->get_Transform()->get_position() - modManager.r_saber_TF->get_forward()*0.35;
+        }
+        else{
+            targBone = modManager.rightOVRSkeleton->bones->get_Item(GlobalNamespace::OVRSkeleton::BoneId::Hand_WristRoot);
+            targetPos = targBone->get_Transform()->get_position() + modManager.r_saber_TF->get_forward()*0.15;
+        }
+
+        auto targetRot = targBone->get_Transform()->get_rotation();
         targetRot = targetRot * UnityEngine::Quaternion::Euler(0, 90, 0); // this adds a 90 degrees Y rotation
 
         self->get_transform()->set_position(targetPos);
@@ -29,10 +38,18 @@ MAKE_HOOK_MATCH(
     }
     else{
         // Left saber
-        auto yyy = modManager.leftOVRSkeleton->bones->get_Item(GlobalNamespace::OVRSkeleton::BoneId::Hand_IndexTip);
+        GlobalNamespace::OVRBone* targBone; 
+        UnityEngine::Vector3    targetPos;
+        if(modManager.dontScalePlayer == false) {
+            targBone  = modManager.leftOVRSkeleton->bones->get_Item(GlobalNamespace::OVRSkeleton::BoneId::Hand_IndexTip);
+            targetPos = targBone->get_Transform()->get_position() - modManager.l_saber_TF->get_forward()*0.35;
+        }
+        else{
+            targBone  = modManager.leftOVRSkeleton->bones->get_Item(GlobalNamespace::OVRSkeleton::BoneId::Hand_WristRoot);
+            targetPos = targBone->get_Transform()->get_position() + modManager.l_saber_TF->get_forward()*0.15;
+        }
         
-        UnityEngine::Vector3    targetPos = yyy->get_Transform()->get_position() - modManager.l_saber_TF->get_forward()*0.35;
-        UnityEngine::Quaternion targetRot = yyy->get_Transform()->get_rotation();
+        UnityEngine::Quaternion targetRot = targBone->get_Transform()->get_rotation();
         targetRot = targetRot * UnityEngine::Quaternion::Euler(0, -90, 180);
         
         self->get_transform()->set_position(targetPos);
