@@ -4,6 +4,7 @@
 #include "GlobalNamespace/OVRinput.hpp"
 #include "GlobalNamespace/OVRInput_Button.hpp"
 #include "GlobalNamespace/OVRInput_Axis1D.hpp"
+#include "GlobalNamespace/OVRInput_RawButton.hpp"
 
 #include "GlobalNamespace/IVRPlatformHelper.hpp"
 
@@ -27,7 +28,9 @@ MAKE_HOOK_MATCH(
     VRController_Update(self);
     
     // Overriding VR Controller positions when not in game
-    if(modManager.is_scene_GameCore == false && modManager.getEitherHandIsTracked() == true){
+    if((modManager.is_scene_GameCore == false && modManager.getEitherHandIsTracked() == true) 
+            || (modManager.is_GamePaused == true && modManager.getEitherHandIsTracked() == true)
+    ){
         UnityEngine::Vector3 rotOffset = self->transformOffset->get_rotationOffset();
         UnityEngine::Transform* hand_bone_tranform;
         const float xRot = 60;
@@ -47,6 +50,32 @@ MAKE_HOOK_MATCH(
         self->get_transform()->set_position(hand_bone_tranform->get_position() + self->get_transform()->get_forward()*+0.175f);
     } 
 
+}    
+
+
+//GlobalNamespace::OVRInput::Get(GlobalNamespace::OVRInput::Button::Start, GlobalNamespace::OVRInput::Controller::Hands)
+#include "GlobalNamespace/IGamePause.hpp"
+
+MAKE_HOOK_MATCH(
+    OVRInput_Update,
+    &GlobalNamespace::OVRInput::Update,
+    void
+) {
+    OVRInput_Update();
+    
+    // Polling the input after Update ensures that no input is lost
+    if(modManager.is_scene_GameCore){
+        auto getButton = static_cast< bool(*)(GlobalNamespace::OVRInput::Button, GlobalNamespace::OVRInput::Controller)> (&GlobalNamespace::OVRInput::Get);
+        if( getButton(GlobalNamespace::OVRInput::Button::Start, GlobalNamespace::OVRInput::Controller::Hands) ){
+            if(modManager.pauseController){
+                if(modManager.is_GamePaused) 
+                    modManager.pauseController->HandlePauseMenuManagerDidPressContinueButton();
+                else
+                    modManager.pauseController->Pause();
+                
+            }    
+        }
+    }
 }
 
 MAKE_HOOK_MATCH(
@@ -71,9 +100,8 @@ MAKE_HOOK_MATCH(
 }
 
 void UnNamedMod::_Hook_SOME_HOOK_METHOD(){
-    
     INSTALL_HOOK(getLogger(), OVRInput_Get_Axis1D);
     INSTALL_HOOK(getLogger(), VRController_Update);
-    
+    INSTALL_HOOK(getLogger(), OVRInput_Update);
 }
 

@@ -32,7 +32,10 @@ void Log_GetComponents(UnityEngine::GameObject* gameobj){
 #include "UnityEngine/Material.hpp"
 #include "GlobalNamespace/ColorManager.hpp"
 
-static int handInitCount = 0;
+#include "GlobalNamespace/PauseController.hpp"
+
+
+static int handInitCount = 0; // Hands always initialized as pair i.e. twice(even when playing one handed mode)
 MAKE_HOOK_MATCH(
     SaberModelController_Init, 
     &GlobalNamespace::SaberModelController::Init,
@@ -64,11 +67,18 @@ MAKE_HOOK_MATCH(
         else                 modManager.l_saber_TF = saber->get_transform();
 
         handInitCount += 1;
+        // Figured this is safer way to know when both sabers exist, as opposed to assuming which saber is last to get initialized.
+        // (I assume its not always left or right saber that gets initialized last.)
         if (handInitCount%2 == 0){
             auto VRGameCore = UnityEngine::GameObject::Find(il2cpp_utils::createcsstr("Origin/VRGameCore"));
             if(VRGameCore){
                 modManager.handTrackingObjectsParent->get_transform()->set_position(VRGameCore->get_transform()->get_position());
 
+                // -- do smthn with this
+                auto PauseController_go = UnityEngine::GameObject::Find(il2cpp_utils::createcsstr("PauseController"));
+                if(PauseController_go) modManager.pauseController = PauseController_go->GetComponent<GlobalNamespace::PauseController*>();
+                // -- do smthn with this
+                
                 UnityEngine::Vector3 scaler{7.5,7.5,7.5};
 
                 VRGameCore->get_transform()->set_localScale(scaler);

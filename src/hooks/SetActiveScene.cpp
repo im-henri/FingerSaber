@@ -52,6 +52,10 @@ MAKE_HOOK_MATCH(
     // Actual function call
     bool ret = SceneManager_SetActiveScene(scene);
     // Actual function call
+
+    // Re-set at SabeModelController_Init (when game starts).
+    modManager.pauseController = nullptr;
+    
     if(ret == true){
         getLogger().info("New scene name: %s", sceneName.c_str());
 

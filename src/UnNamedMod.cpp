@@ -250,11 +250,18 @@ void UnNamedMod::FixedUpdate(GlobalNamespace::OculusVRHelper* self){
     }
     rButton_prev = rButton;*/
 
-
     if(rightOVRHand){
         _oculusRHandIsTracked = rightOVRHand->IsTracked; 
         _oculusLHandIsTracked = leftOVRHand->IsTracked;
         
+        // For some reason this button does not always get detected. 
+        // I assume its "on state" is changed after one update call.
+        if(is_scene_GameCore){
+            if( GlobalNamespace::OVRInput::Get(GlobalNamespace::OVRInput::Button::Start, GlobalNamespace::OVRInput::Controller::Hands) ){
+                if(pauseController) pauseController->Pause();
+            }
+        }
+
         _rHandClickRequested = GlobalNamespace::OVRInput::Get(GlobalNamespace::OVRInput::Button::One, GlobalNamespace::OVRInput::Controller::RHand) 
                     ? (_oculusRHandIsTracked) : false;
         _lHandClickRequested = GlobalNamespace::OVRInput::Get(GlobalNamespace::OVRInput::Button::One, GlobalNamespace::OVRInput::Controller::LHand) 

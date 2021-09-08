@@ -39,6 +39,8 @@ class UnNamedMod{
         bool oculusHandsExist = false;
         bool is_scene_GameCore = false;
         bool is_GamePaused = false;
+        
+        GlobalNamespace::PauseController* pauseController = nullptr;
 
         UnityEngine::GameObject* handTrackingObjectsParent  = nullptr; 
 
