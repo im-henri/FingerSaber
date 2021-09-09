@@ -3,6 +3,8 @@
 #include "UnNamedMod.hpp"
 #include "Config.hpp"
 
+#include "questui/shared/QuestUI.hpp"
+
 static ModInfo modInfo; // Stores the ID and version of our mod, and is sent to the modloader upon startup
 
 
@@ -22,11 +24,24 @@ extern "C" void setup(ModInfo& info) {
     getLogger().info("Completed setup!");
 }
 
+#include "ModSettingsViewController.hpp"
+
 // Called later on in the game loading - a good time to install function hooks
 extern "C" void load() {
+
+    //if (!LoadConfig())
+    //    SaveConfig();
+
     il2cpp_functions::Init();
-    
+    QuestUI::Init();
+
     getLogger().info("Installing hooks...");
     modManager.InstallHooks();
     getLogger().info("Installed all hooks!");
+
+    custom_types::Register::AutoRegister();
+
+    QuestUI::Register::RegisterModSettingsViewController<UnNamedModSettings::ModSettingsViewController*>(modInfo);
+
+
 }

@@ -1,6 +1,8 @@
 #include "UnNamedMod.hpp"
 #include "main.hpp"
 
+#include "Config.hpp"
+
 #include "GlobalNamespace/SaberModelController.hpp"
 #include "GlobalNamespace/Saber.hpp"
 #include "UnityEngine/Transform.hpp"
@@ -58,7 +60,7 @@ MAKE_HOOK_MATCH(
             modManager.ChangeLeftSkeletonRendererColor(self->colorManager->ColorForSaberType(GlobalNamespace::SaberType::SaberA));
         }
 
-        if(modManager.dontScalePlayer == false){
+        if(getModConfig().HandMode.GetValue() == false){
             float sScale = 1.0f/6.5f;
             saber->get_transform()->set_localScale(UnityEngine::Vector3{sScale,sScale,sScale});
         }
@@ -86,7 +88,7 @@ MAKE_HOOK_MATCH(
                 if(PauseController_go) modManager.pauseController = PauseController_go->GetComponent<GlobalNamespace::PauseController*>();
                 // -- do smthn with this
                 
-                if(modManager.dontScalePlayer == false){
+                if(getModConfig().HandMode.GetValue() == false){
                     UnityEngine::Vector3 scaler{pScale,pScale,pScale};
 
                     VRGameCore->get_transform()->set_localScale(scaler);

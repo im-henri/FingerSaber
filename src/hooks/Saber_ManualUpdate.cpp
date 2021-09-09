@@ -6,6 +6,7 @@
 #include "UnityEngine/Transform.hpp"
 #include "UnityEngine/Quaternion.hpp"
 
+#include "Config.hpp"
 
 MAKE_HOOK_MATCH(
     Saber_ManualUpdate, 
@@ -21,7 +22,7 @@ MAKE_HOOK_MATCH(
         GlobalNamespace::OVRBone* targBone;
         UnityEngine::Vector3 targetPos;
 
-        if(modManager.dontScalePlayer == false) {
+        if(getModConfig().HandMode.GetValue() == false) {
             targBone = modManager.rightOVRSkeleton->bones->get_Item(GlobalNamespace::OVRSkeleton::BoneId::Hand_IndexTip);
             targetPos = targBone->get_Transform()->get_position() - modManager.r_saber_TF->get_forward()*0.35;
         }
@@ -40,7 +41,7 @@ MAKE_HOOK_MATCH(
         // Left saber
         GlobalNamespace::OVRBone* targBone; 
         UnityEngine::Vector3    targetPos;
-        if(modManager.dontScalePlayer == false) {
+        if(getModConfig().HandMode.GetValue() == false) {
             targBone  = modManager.leftOVRSkeleton->bones->get_Item(GlobalNamespace::OVRSkeleton::BoneId::Hand_IndexTip);
             targetPos = targBone->get_Transform()->get_position() - modManager.l_saber_TF->get_forward()*0.35;
         }

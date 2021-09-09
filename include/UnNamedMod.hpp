@@ -42,7 +42,6 @@ class UnNamedMod{
         bool oculusHandsExist = false;
         bool is_scene_GameCore = false;
         bool is_GamePaused = false;
-        bool dontScalePlayer = true;
         
         GlobalNamespace::PauseController* pauseController = nullptr;
 
