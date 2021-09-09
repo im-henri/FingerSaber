@@ -1,4 +1,4 @@
-#include "UnNamedMod.hpp"
+#include "FingerSaber.hpp"
 #include "main.hpp"
 
 #include "Config.hpp"
@@ -112,7 +112,7 @@ MAKE_HOOK_MATCH(
 
 }
 
-void UnNamedMod::_Hook_SaberModelController_Init(){
+void FingerSaber::_Hook_SaberModelController_Init(){
     
     INSTALL_HOOK(getLogger(), SaberModelController_Init);
 }

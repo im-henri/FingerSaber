@@ -15,7 +15,7 @@
 
 //extern config_t config;
 
-DEFINE_TYPE(UnNamedModSettings, ModSettingsViewController);
+DEFINE_TYPE(FingerSaberSettings, ModSettingsViewController);
 
 std::vector<std::string> Left_Hand_Targets = {
     "Left_Thumb",
@@ -46,7 +46,7 @@ std::vector<std::string> Right_Hand_Targets = {
 };
 
 
-void UnNamedModSettings::ModSettingsViewController::DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling) 
+void FingerSaberSettings::ModSettingsViewController::DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling) 
 {
     if (firstActivation) 
     {
@@ -102,6 +102,6 @@ void UnNamedModSettings::ModSettingsViewController::DidActivate(bool firstActiva
     }
 }
 
-void UnNamedModSettings::ModSettingsViewController::DidDeactivate(bool removedFromHierarchy, bool screenSystemDisabling) {
+void FingerSaberSettings::ModSettingsViewController::DidDeactivate(bool removedFromHierarchy, bool screenSystemDisabling) {
 
 }

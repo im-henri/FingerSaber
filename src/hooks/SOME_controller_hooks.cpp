@@ -1,4 +1,4 @@
-#include "UnNamedMod.hpp"
+#include "FingerSaber.hpp"
 #include "main.hpp"
 
 #include "GlobalNamespace/OVRinput.hpp"
@@ -104,7 +104,7 @@ MAKE_HOOK_MATCH(
     return ret;
 }
 
-void UnNamedMod::_Hook_SOME_HOOK_METHOD(){
+void FingerSaber::_Hook_SOME_HOOK_METHOD(){
     INSTALL_HOOK(getLogger(), OVRInput_Get_Axis1D);
     INSTALL_HOOK(getLogger(), VRController_Update);
     INSTALL_HOOK(getLogger(), OVRInput_Update);

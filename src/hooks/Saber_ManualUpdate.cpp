@@ -1,4 +1,4 @@
-#include "UnNamedMod.hpp"
+#include "FingerSaber.hpp"
 #include "main.hpp"
 
 #include "GlobalNamespace/Saber.hpp"
@@ -61,7 +61,7 @@ MAKE_HOOK_MATCH(
 }
 
 
-void UnNamedMod::_Hook_Saber_ManualUpdate(){
+void FingerSaber::_Hook_Saber_ManualUpdate(){
     
     INSTALL_HOOK(getLogger(), Saber_ManualUpdate);
 }

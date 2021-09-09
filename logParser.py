@@ -1,5 +1,5 @@
-logPath  = "./UnNamedMod.log"
-savePath = "./UnNamedModParsed.log"
+logPath  = "./FingerSaber.log"
+savePath = "./FingerSaberParsed.log"
 
 class SceneObject:
     def __init__(self, name, depth) -> None:

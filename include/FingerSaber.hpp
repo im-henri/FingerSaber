@@ -14,7 +14,7 @@
 #include "GlobalNamespace/PauseController.hpp"
 #include "UnityEngine/Color.hpp"
 
-class UnNamedMod{
+class FingerSaber{
     public:
         
         void InstallHooks();
@@ -82,4 +82,4 @@ class UnNamedMod{
         
 };
 
-extern UnNamedMod modManager;
+extern FingerSaber modManager;

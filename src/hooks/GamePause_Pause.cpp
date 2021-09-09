@@ -1,4 +1,4 @@
-#include "UnNamedMod.hpp"
+#include "FingerSaber.hpp"
 #include "main.hpp"
 
 #include "GlobalNamespace/GamePause.hpp"
@@ -14,6 +14,6 @@ MAKE_HOOK_MATCH(
     modManager.is_GamePaused = true;
 }
 
-void UnNamedMod::_Hook_GamePause_Pause(){
+void FingerSaber::_Hook_GamePause_Pause(){
     INSTALL_HOOK(getLogger(), GamePause_Pause);
 }

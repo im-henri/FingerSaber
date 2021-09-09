@@ -1,6 +1,6 @@
 #include "main.hpp"
 
-#include "UnNamedMod.hpp"
+#include "FingerSaber.hpp"
 #include "Config.hpp"
 
 #include "questui/shared/QuestUI.hpp"
@@ -41,7 +41,7 @@ extern "C" void load() {
 
     custom_types::Register::AutoRegister();
 
-    QuestUI::Register::RegisterModSettingsViewController<UnNamedModSettings::ModSettingsViewController*>(modInfo);
+    QuestUI::Register::RegisterModSettingsViewController<FingerSaberSettings::ModSettingsViewController*>(modInfo);
 
 
 }

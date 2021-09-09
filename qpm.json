@@ -2,8 +2,8 @@
   "sharedDir": "shared",
   "dependenciesDir": "extern",
   "info": {
-    "name": "UnNamed",
-    "id": "UnNamed",
+    "name": "FingerSaber",
+    "id": "FingerSaber",
     "version": "0.1.0",
     "url": null,
     "additionalData": {}

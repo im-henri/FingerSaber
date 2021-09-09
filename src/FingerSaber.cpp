@@ -1,4 +1,4 @@
-#include "UnNamedMod.hpp"
+#include "FingerSaber.hpp"
 
 #include "GlobalNamespace/OVRInput.hpp"
 #include "GlobalNamespace/OVRInput_Button.hpp"
@@ -31,9 +31,9 @@
 #include <sstream>
 #include <string>
 
-UnNamedMod modManager;
+FingerSaber modManager;
 
-void UnNamedMod::InstallHooks() {
+void FingerSaber::InstallHooks() {
     _Hook_SceneManager_SetActiveScene();
     //_Hook_OculusVRHelper_VRControllersInputManager();
     _Hook_Saber_ManualUpdate();
@@ -84,8 +84,8 @@ namespace ModUtils{
     }
 
     void WriteToLog(std::stringstream& logStream){
-        bool success = writefile("sdcard/Android/data/com.beatgames.beatsaber/files/logs/UnNamedMod.log", logStream.str());
-        if (success)   getLogger().info("Logging to \"UnNamedMod.log\" successful.");
+        bool success = writefile("sdcard/Android/data/com.beatgames.beatsaber/files/logs/FingerSaber.log", logStream.str());
+        if (success)   getLogger().info("Logging to \"FingerSaber.log\" successful.");
         else           getLogger().info("Creating log file failed.");
     }
     void WriteToLog_AllGameObjectsInScene(){
@@ -158,7 +158,7 @@ namespace ModUtils{
 
 #include "UnityEngine/Resources.hpp"
 
-void UnNamedMod::_InitializeOculusHands(){
+void FingerSaber::_InitializeOculusHands(){
     getLogger().info("Oculus Hand MENU Initialization ..");
 
     auto old_HandTracking_container = UnityEngine::GameObject::Find(il2cpp_utils::createcsstr("HandTracking_container"));
@@ -216,7 +216,7 @@ void UnNamedMod::_InitializeOculusHands(){
     
 }
 
-bool UnNamedMod::createNewSkeletonMaterials(){
+bool FingerSaber::createNewSkeletonMaterials(){
     bool success = false;
     auto Normal = UnityEngine::GameObject::Find(il2cpp_utils::createcsstr("ControllerLeft/MenuHandle/Normal"));
     if( Normal ){
@@ -228,10 +228,10 @@ bool UnNamedMod::createNewSkeletonMaterials(){
     return success;
 }
 
-void UnNamedMod::ChangeRightSkeletonRendererColor(UnityEngine::Color col){
+void FingerSaber::ChangeRightSkeletonRendererColor(UnityEngine::Color col){
     if(rightHandSkeletonMat) rightHandSkeletonMat->SetColor(il2cpp_utils::createcsstr("_Color"), col);
 }
-void UnNamedMod::ChangeLeftSkeletonRendererColor(UnityEngine::Color col){
+void FingerSaber::ChangeLeftSkeletonRendererColor(UnityEngine::Color col){
     if(leftHandSkeletonMat) leftHandSkeletonMat->SetColor(il2cpp_utils::createcsstr("_Color"), col);
 }
 
@@ -241,11 +241,11 @@ void UnNamedMod::ChangeLeftSkeletonRendererColor(UnityEngine::Color col){
 
 //static bool rButton_prev = false;
 
-void UnNamedMod::update_LRHandIsTracked(){
+void FingerSaber::update_LRHandIsTracked(){
     _oculusRHandIsTracked = rightOVRHand->IsTracked; 
     _oculusLHandIsTracked = leftOVRHand->IsTracked;
 }
-void UnNamedMod::update_LRHandClickRequested(){
+void FingerSaber::update_LRHandClickRequested(){
     _rHandClickRequested = GlobalNamespace::OVRInput::Get(GlobalNamespace::OVRInput::Button::One, GlobalNamespace::OVRInput::Controller::RHand) 
                 ? (_oculusRHandIsTracked) : false;
     _lHandClickRequested = GlobalNamespace::OVRInput::Get(GlobalNamespace::OVRInput::Button::One, GlobalNamespace::OVRInput::Controller::LHand) 
@@ -253,7 +253,7 @@ void UnNamedMod::update_LRHandClickRequested(){
 }
 
 
-//void UnNamedMod::FixedUpdate(GlobalNamespace::OculusVRHelper* self){
+//void FingerSaber::FixedUpdate(GlobalNamespace::OculusVRHelper* self){
 //
 //    /*bool rButton = GlobalNamespace::OVRInput::Get(GlobalNamespace::OVRInput::Button::One, GlobalNamespace::OVRInput::Controller::RTouch) 
 //                    ? true : false;

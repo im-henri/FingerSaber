@@ -14,5 +14,5 @@ if ($args[0] -eq "--file") {
 }
 if ($args[0] -eq "--modLog") {
     echo "Start logging!"
-    adb logcat | Select-String -pattern "UnNamed"
+    adb logcat | Select-String -pattern "FingerSaber"
 }

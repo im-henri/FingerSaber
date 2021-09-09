@@ -1,1 +1,1 @@
-adb pull sdcard/Android/data/com.beatgames.beatsaber/files/logs/UnNamedMod.log ./
+adb pull sdcard/Android/data/com.beatgames.beatsaber/files/logs/FingerSaber.log ./

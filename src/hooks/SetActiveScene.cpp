@@ -1,5 +1,5 @@
 #include "main.hpp"
-#include "UnNamedMod.hpp"
+#include "FingerSaber.hpp"
 
 #include "UnityEngine/SceneManagement/SceneManager.hpp"
 #include "UnityEngine/SceneManagement/Scene.hpp"
@@ -76,7 +76,7 @@ MAKE_HOOK_MATCH(
     return ret;
 }
 
-void UnNamedMod::_Hook_SceneManager_SetActiveScene(){
+void FingerSaber::_Hook_SceneManager_SetActiveScene(){
     
     INSTALL_HOOK(getLogger(), SceneManager_SetActiveScene);
 }
