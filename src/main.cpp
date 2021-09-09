@@ -43,5 +43,6 @@ extern "C" void load() {
 
     QuestUI::Register::RegisterModSettingsViewController<FingerSaberSettings::ModSettingsViewController*>(modInfo);
 
+    modManager.update_LRTargetBone();
 
 }

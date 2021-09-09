@@ -23,7 +23,7 @@ class FingerSaber{
 
         //void FixedUpdate(GlobalNamespace::OculusVRHelper* self); 
         void _InitializeOculusHands();
-        //void _InitializeOculusHandInGame(GlobalNamespace::Saber* saber);
+
         void ChangeRightSkeletonRendererColor(UnityEngine::Color col);
         void ChangeLeftSkeletonRendererColor(UnityEngine::Color col);
         
@@ -37,12 +37,18 @@ class FingerSaber{
         void update_LRHandIsTracked();
         void update_LRHandClickRequested();
 
+        void update_LRTargetBone();
 
         // Public variables
         bool oculusHandsExist = false;
         bool is_scene_GameCore = false;
         bool is_GamePaused = false;
-        
+
+        GlobalNamespace::OVRSkeleton::BoneId rightTargetBone = 0;
+        GlobalNamespace::OVRSkeleton::BoneId  leftTargetBone = 0;
+        bool leftHand_isTargetHandRight = false;
+        bool rightHand_isTargetHandLeft = false;
+
         GlobalNamespace::PauseController* pauseController = nullptr;
 
         UnityEngine::GameObject* handTrackingObjectsParent  = nullptr; 
@@ -58,17 +64,14 @@ class FingerSaber{
         UnityEngine::Transform* r_saber_TF = nullptr;
         UnityEngine::Transform* l_saber_TF = nullptr;
 
-        
     private:
         bool _rHandClickRequested = false;
         bool _lHandClickRequested = false;
 
         bool _oculusRHandIsTracked = false;
         bool _oculusLHandIsTracked = false;
-        
 
         // Hook Install Calls
-        
         void _Hook_SceneManager_SetActiveScene();
         //void _Hook_OculusVRHelper_VRControllersInputManager();
         void _Hook_Saber_ManualUpdate();

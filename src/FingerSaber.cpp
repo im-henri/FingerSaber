@@ -1,5 +1,7 @@
 #include "FingerSaber.hpp"
 
+#include "Config.hpp"
+
 #include "GlobalNamespace/OVRInput.hpp"
 #include "GlobalNamespace/OVRInput_Button.hpp"
 #include "GlobalNamespace/OVRManager.hpp"
@@ -252,6 +254,28 @@ void FingerSaber::update_LRHandClickRequested(){
                 ? (_oculusLHandIsTracked) : false;
 }
 
+#include "GlobalNamespace/OVRSkeleton.hpp"
+
+void FingerSaber::update_LRTargetBone(){
+    /**
+     * Idea taken from https://developer.oculus.com/documentation/unity/unity-handtracking/
+     * 
+     * Hand_ThumbTip    = Hand_Start + Hand_MaxSkinnable + 0 // tip of the thumb
+     * Hand_IndexTip    = Hand_Start + Hand_MaxSkinnable + 1 // tip of the index finger
+     * Hand_MiddleTip   = Hand_Start + Hand_MaxSkinnable + 2 // tip of the middle finger
+     * Hand_RingTip     = Hand_Start + Hand_MaxSkinnable + 3 // tip of the ring finger
+     * Hand_PinkyTip    = Hand_Start + Hand_MaxSkinnable + 4 // tip of the pinky 
+     * */
+
+    int tipStart = GlobalNamespace::OVRSkeleton::BoneId::Hand_Start + GlobalNamespace::OVRSkeleton::BoneId::Hand_MaxSkinnable;
+
+    this->leftTargetBone  = tipStart + (getModConfig().LeftHandTargetIdx.GetValue()  % 5);
+    this->rightTargetBone = tipStart + (getModConfig().RightHandTargetIdx.GetValue() % 5);
+
+    leftHand_isTargetHandRight = getModConfig().LeftHandTargetIdx.GetValue()  >= 5;
+    rightHand_isTargetHandLeft = getModConfig().RightHandTargetIdx.GetValue() >= 5;
+    
+}
 
 //void FingerSaber::FixedUpdate(GlobalNamespace::OculusVRHelper* self){
 //

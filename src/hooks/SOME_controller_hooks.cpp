@@ -1,6 +1,8 @@
 #include "FingerSaber.hpp"
 #include "main.hpp"
 
+#include "Config.hpp"
+
 #include "GlobalNamespace/OVRinput.hpp"
 #include "GlobalNamespace/OVRInput_Button.hpp"
 #include "GlobalNamespace/OVRInput_Axis1D.hpp"
@@ -91,12 +93,15 @@ MAKE_HOOK_MATCH(
 ) {
     float ret = OVRInput_Get_Axis1D(virtualMask, controllerMask);
 
-    // HERE IS WHERE WE WILL OVERRIDE THE INPUT WHEN NEEDED
+    // Overriding controller trigger presses when hand-tracking requested.
     if(modManager.is_scene_GameCore == false || modManager.is_GamePaused){
-        if(controllerMask == GlobalNamespace::OVRInput::Controller::RTouch && modManager.getRHandClickRequested() == true){
+        if(controllerMask == GlobalNamespace::OVRInput::Controller::RTouch && 
+            (getModConfig().OtherHandClicks.GetValue() ? modManager.getLHandClickRequested() : modManager.getRHandClickRequested()) == true)
+        {
             return 1.0f;
         }
-        if(controllerMask == GlobalNamespace::OVRInput::Controller::LTouch && modManager.getLHandClickRequested() == true){
+        if(controllerMask == GlobalNamespace::OVRInput::Controller::LTouch && 
+            (getModConfig().OtherHandClicks.GetValue() ? modManager.getRHandClickRequested() : modManager.getLHandClickRequested()) == true){
             return 1.0f;
         }
     }
