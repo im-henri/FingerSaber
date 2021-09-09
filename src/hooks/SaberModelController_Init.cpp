@@ -10,23 +10,6 @@
 #include "UnityEngine/HideFlags.hpp"
 #include "UnityEngine/Resources.hpp"
 #include "GlobalNamespace/SaberType.hpp"
-
-#include <sstream>
-#include <string>
-
-template <typename T>
-void Log_GetComponents(UnityEngine::GameObject* gameobj){
-    auto componentArr = gameobj->GetComponents<T>();
-    std::stringstream buff;
-    for (int i=0; i<componentArr->Length(); i++){
-        auto comp = (*componentArr)[i];
-        auto name = comp->get_name();
-        auto fullName = comp->GetType()->get_FullName();
-        buff << to_utf8(csstrtostr(fullName)).c_str() << " " << to_utf8(csstrtostr(name)).c_str() << "\n";
-    }
-    getLogger().info("%s",buff.str().c_str());
-}
-
 #include "GlobalNamespace/PauseController.hpp"
 #include "System/Action.hpp"
 
@@ -36,8 +19,8 @@ void Log_GetComponents(UnityEngine::GameObject* gameobj){
 
 #include "GlobalNamespace/PauseController.hpp"
 
-
 static int handInitCount = 0; // Hands always initialized as pair i.e. twice(even when playing one handed mode)
+
 MAKE_HOOK_MATCH(
     SaberModelController_Init, 
     &GlobalNamespace::SaberModelController::Init,
@@ -51,7 +34,10 @@ MAKE_HOOK_MATCH(
 
     SaberModelController_Init(self, parent, saber);
 
+
     if(modManager.is_scene_GameCore){
+        modManager.is_GamePaused = false; // Game is never paused when saber is inited
+    
         if(saber->get_saberType() == GlobalNamespace::SaberType::SaberB){
             modManager.ChangeRightSkeletonRendererColor(self->colorManager->ColorForSaberType(GlobalNamespace::SaberType::SaberB));
         }
@@ -72,8 +58,8 @@ MAKE_HOOK_MATCH(
 
 
         float pScale = 7.5f;
-        float platformHeightOffsetMeters   = -0.34;
-        float platformDistanceOffsetMeters = -0.25;
+        //float platformHeightOffsetMeters   = -0.34;
+        //float platformDistanceOffsetMeters = -0.25;
 
         handInitCount += 1;
         // Figured this is safer way to know when both sabers exist, as opposed to assuming which saber is last to get initialized.
@@ -83,10 +69,8 @@ MAKE_HOOK_MATCH(
             if(VRGameCore){
                 modManager.handTrackingObjectsParent->get_transform()->set_position(VRGameCore->get_transform()->get_position());
 
-                // -- do smthn with this
                 auto PauseController_go = UnityEngine::GameObject::Find(il2cpp_utils::createcsstr("PauseController"));
                 if(PauseController_go) modManager.pauseController = PauseController_go->GetComponent<GlobalNamespace::PauseController*>();
-                // -- do smthn with this
                 
                 if(getModConfig().HandMode.GetValue() == false){
                     UnityEngine::Vector3 scaler{pScale,pScale,pScale};
@@ -96,14 +80,15 @@ MAKE_HOOK_MATCH(
             
                     auto mainCamera = VRGameCore->Find(il2cpp_utils::createcsstr("MainCamera"));
                     float headLevel = mainCamera->get_transform()->get_position().y;
-                    float platformLevel = headLevel + pScale*platformHeightOffsetMeters;
-            
+                    float platformLevel = headLevel + pScale * getModConfig().PlatformHeightOffsetMeters.GetValue();
+                    float platformZOffset = pScale * getModConfig().PlatformDistanceOffsetMeters.GetValue();
+
                     auto posBody = VRGameCore->get_transform()->get_position();
-                    posBody = posBody + UnityEngine::Vector3{0,-platformLevel, pScale*platformDistanceOffsetMeters};
+                    posBody = posBody + UnityEngine::Vector3{0,-platformLevel, platformZOffset};
                     VRGameCore->get_transform()->set_position(posBody);
 
                     auto posHands = modManager.handTrackingObjectsParent->get_transform()->get_position();
-                    posHands = posHands + UnityEngine::Vector3{0,-platformLevel, pScale*platformDistanceOffsetMeters};
+                    posHands = posHands + UnityEngine::Vector3{0,-platformLevel, platformZOffset};
                     modManager.handTrackingObjectsParent->get_transform()->set_position(posHands);
                 }
             }

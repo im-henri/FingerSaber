@@ -139,19 +139,20 @@ namespace ModUtils{
 #include "GlobalNamespace/OVRCameraRig.hpp"
 
 #include "GlobalNamespace/OVRSkeleton.hpp"
+#include "GlobalNamespace/OVRSkeletonRenderer.hpp"
 #include "GlobalNamespace/OVRSkeleton_SkeletonPoseData.hpp"
 #include "GlobalNamespace/OVRBone.hpp"
 #include "GlobalNamespace/OVRPlugin_Skeleton2.hpp"
 
-
-#include "GlobalNamespace/OVRSkeletonRenderer.hpp"
+#include "UnityEngine/EventSystems/PointerInputModule.hpp"
+#include "VRUIControls/VRInputModule.hpp"
+#include "GlobalNamespace/TimeHelper.hpp"
 
 #include "UnityEngine/Camera.hpp"
 
 #include "System/Collections/Generic/List_1.hpp"
 #include "System/Collections/Generic/IList_1.hpp"
 #include "System/Collections/ObjectModel/ReadOnlyCollection_1.hpp"
-
 
 #include "UnityEngine/LineRenderer.hpp"
 #include "UnityEngine/Material.hpp"
@@ -237,12 +238,6 @@ void FingerSaber::ChangeLeftSkeletonRendererColor(UnityEngine::Color col){
     if(leftHandSkeletonMat) leftHandSkeletonMat->SetColor(il2cpp_utils::createcsstr("_Color"), col);
 }
 
-#include "UnityEngine/EventSystems/PointerInputModule.hpp"
-#include "VRUIControls/VRInputModule.hpp"
-#include "GlobalNamespace/TimeHelper.hpp"
-
-//static bool rButton_prev = false;
-
 void FingerSaber::update_LRHandIsTracked(){
     _oculusRHandIsTracked = rightOVRHand->IsTracked; 
     _oculusLHandIsTracked = leftOVRHand->IsTracked;
@@ -254,8 +249,6 @@ void FingerSaber::update_LRHandClickRequested(){
                 ? (_oculusLHandIsTracked) : false;
 }
 
-#include "GlobalNamespace/OVRSkeleton.hpp"
-
 void FingerSaber::update_LRTargetBone(){
     /**
      * Idea taken from https://developer.oculus.com/documentation/unity/unity-handtracking/
@@ -266,7 +259,6 @@ void FingerSaber::update_LRTargetBone(){
      * Hand_RingTip     = Hand_Start + Hand_MaxSkinnable + 3 // tip of the ring finger
      * Hand_PinkyTip    = Hand_Start + Hand_MaxSkinnable + 4 // tip of the pinky 
      * */
-
     int tipStart = GlobalNamespace::OVRSkeleton::BoneId::Hand_Start + GlobalNamespace::OVRSkeleton::BoneId::Hand_MaxSkinnable;
 
     this->leftTargetBone  = tipStart + (getModConfig().LeftHandTargetIdx.GetValue()  % 5);
@@ -274,7 +266,6 @@ void FingerSaber::update_LRTargetBone(){
 
     leftHand_isTargetHandRight = getModConfig().LeftHandTargetIdx.GetValue()  >= 5;
     rightHand_isTargetHandLeft = getModConfig().RightHandTargetIdx.GetValue() >= 5;
-    
 }
 
 //void FingerSaber::FixedUpdate(GlobalNamespace::OculusVRHelper* self){

@@ -58,7 +58,7 @@ void FingerSaberSettings::ModSettingsViewController::DidActivate(bool firstActiv
 
         // ---------
         // Mod enabled Toggle
-        auto modEnabledToggle = QuestUI::BeatSaberUI::CreateToggle(container->get_transform(), "Mod enabled", getModConfig().ModEnabled.GetValue(), [](bool value) { 
+        auto modEnabledToggle = QuestUI::BeatSaberUI::CreateToggle(container->get_transform(), "Mod Enabled", getModConfig().ModEnabled.GetValue(), [](bool value) { 
             getModConfig().ModEnabled.SetValue(value, true);
         });
         QuestUI::BeatSaberUI::AddHoverHint(modEnabledToggle->get_gameObject(),  "Disables the mod. (Disable from BMBF to completely disable the mod)");
@@ -80,7 +80,7 @@ void FingerSaberSettings::ModSettingsViewController::DidActivate(bool firstActiv
                 if (Right_Hand_Targets[i] == value) break;
             }
             getModConfig().RightHandTargetIdx.SetValue(i, true);
-            
+
             modManager.update_LRTargetBone();
         });
         QuestUI::BeatSaberUI::AddHoverHint(RTarg_dropdown->get_gameObject(), "Right saber will follow this finger tip");
@@ -97,6 +97,18 @@ void FingerSaberSettings::ModSettingsViewController::DidActivate(bool firstActiv
         });
         QuestUI::BeatSaberUI::AddHoverHint(LTarg_dropdown->get_gameObject(), "Left saber will follow this finger tip");
 
+        // Platform Height offset
+        QuestUI::SliderSetting* heightOffsetIncrement = QuestUI::BeatSaberUI::CreateSliderSetting(container->get_transform(), "Platform Height Offset (m)", 0.01f, getModConfig().PlatformHeightOffsetMeters.GetValue(), -0.5f, 0.0f, [](float value) {
+             getModConfig().PlatformHeightOffsetMeters.SetValue(value, true);
+        });
+        QuestUI::BeatSaberUI::AddHoverHint(heightOffsetIncrement->get_gameObject(), "Platform height offset from head level.");
+        
+        // Platform Height offset
+        QuestUI::SliderSetting* distanceOffsetIncrement = QuestUI::BeatSaberUI::CreateSliderSetting(container->get_transform(), "Platform Distance Offset (m)", 0.01f, getModConfig().PlatformDistanceOffsetMeters.GetValue(), -0.5f, 0.0f, [](float value) {
+             getModConfig().PlatformDistanceOffsetMeters.SetValue(value, true);
+        });
+        QuestUI::BeatSaberUI::AddHoverHint(distanceOffsetIncrement->get_gameObject(), "Platform Z distance offset.");
+        
         // Spacing
         QuestUI::BeatSaberUI::CreateText(container->get_transform(), "");
 
@@ -105,14 +117,6 @@ void FingerSaberSettings::ModSettingsViewController::DidActivate(bool firstActiv
             getModConfig().HandMode.SetValue(value, true);
         });
         QuestUI::BeatSaberUI::AddHoverHint(handModeToggle->get_gameObject(),  "Normal BeatSaber with hand-tracking. Sabers follow \"wrists\" instead of fingers. And player is not Supersized");
-
-
-        /*QuestUI::IncrementSetting* zmax = QuestUI::BeatSaberUI::CreateIncrementSetting(container->get_transform(), "Title", 2, 0.2f, getModConfig().SomeKindOfFloat.GetValue(), 0.0, 1000, [](float value) {
-                
-        });
-        QuestUI::BeatSaberUI::AddHoverHint(zmax->get_gameObject(), "Hover info");
-        */
-        
         
     }
 }

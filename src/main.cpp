@@ -28,7 +28,7 @@ extern "C" void setup(ModInfo& info) {
 
 // Called later on in the game loading - a good time to install function hooks
 extern "C" void load() {
-
+    
     //if (!LoadConfig())
     //    SaveConfig();
 
@@ -40,7 +40,6 @@ extern "C" void load() {
     getLogger().info("Installed all hooks!");
 
     custom_types::Register::AutoRegister();
-
     QuestUI::Register::RegisterModSettingsViewController<FingerSaberSettings::ModSettingsViewController*>(modInfo);
 
     modManager.update_LRTargetBone();

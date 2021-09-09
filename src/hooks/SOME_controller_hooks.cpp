@@ -30,27 +30,27 @@ MAKE_HOOK_MATCH(
     VRController_Update(self);
     
     // Overriding VR Controller positions when not in game
-    if((modManager.is_scene_GameCore == false && modManager.getEitherHandIsTracked() == true) 
-            || (modManager.is_GamePaused == true && modManager.getEitherHandIsTracked() == true)
-    ){
-        UnityEngine::Vector3 rotOffset = self->transformOffset->get_rotationOffset();
-        UnityEngine::Transform* hand_bone_tranform;
-        const float xRot = 60;
-        const float yRot = 0;
-        const float zRot = 0;
-        if(self->node.value == UnityEngine::XR::XRNode::LeftHand){
-            rotOffset = rotOffset + UnityEngine::Vector3( {90+180+xRot, -90+yRot, 0+zRot} );
-            hand_bone_tranform = modManager.leftOVRSkeleton->bones->get_Item(GlobalNamespace::OVRSkeleton::BoneId::Hand_WristRoot)->get_Transform();
-        }
-        else{
-            rotOffset = rotOffset + UnityEngine::Vector3( {90+xRot,-90+yRot, 0+zRot} );
-            hand_bone_tranform = modManager.rightOVRSkeleton->bones->get_Item(GlobalNamespace::OVRSkeleton::BoneId::Hand_WristRoot)->get_Transform();
-        }
-        UnityEngine::Quaternion rotOffsetQuaternion = UnityEngine::Quaternion::Euler(rotOffset.x, rotOffset.y, rotOffset.z);
-        
-        self->get_transform()->set_rotation(hand_bone_tranform->get_rotation() * rotOffsetQuaternion);
-        self->get_transform()->set_position(hand_bone_tranform->get_position() + self->get_transform()->get_forward()*+0.175f);
-    } 
+    if( modManager.getEitherHandIsTracked() == true ) {
+        if( (modManager.is_scene_GameCore == false) || (modManager.is_GamePaused == true)) {
+            UnityEngine::Vector3 rotOffset = self->transformOffset->get_rotationOffset();
+            UnityEngine::Transform* hand_bone_tranform;
+            const float xRot = 60;
+            const float yRot = 0;
+            const float zRot = 0;
+            if(self->node.value == UnityEngine::XR::XRNode::LeftHand){
+                rotOffset = rotOffset + UnityEngine::Vector3( {90+180+xRot, -90+yRot, 0+zRot} );
+                hand_bone_tranform = modManager.leftOVRSkeleton->bones->get_Item(GlobalNamespace::OVRSkeleton::BoneId::Hand_WristRoot)->get_Transform();
+            }
+            else{
+                rotOffset = rotOffset + UnityEngine::Vector3( {90+xRot,-90+yRot, 0+zRot} );
+                hand_bone_tranform = modManager.rightOVRSkeleton->bones->get_Item(GlobalNamespace::OVRSkeleton::BoneId::Hand_WristRoot)->get_Transform();
+            }
+            UnityEngine::Quaternion rotOffsetQuaternion = UnityEngine::Quaternion::Euler(rotOffset.x, rotOffset.y, rotOffset.z);
+            
+            self->get_transform()->set_rotation(hand_bone_tranform->get_rotation() * rotOffsetQuaternion);
+            self->get_transform()->set_position(hand_bone_tranform->get_position() + self->get_transform()->get_forward()*+0.175f);
+        } 
+    }
 
 }    
 
@@ -82,6 +82,13 @@ MAKE_HOOK_MATCH(
     if(modManager.rightOVRHand){
         modManager.update_LRHandIsTracked();
         modManager.update_LRHandClickRequested();
+
+        if( (modManager.is_scene_GameCore == true) &&  (modManager.is_GamePaused == false) && 
+            (modManager.pauseController != nullptr) && (modManager.getEitherHandIsTracked() == false)
+        ){
+            modManager.pauseController->Pause();
+        }
+
     }
 }
 
