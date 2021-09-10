@@ -70,7 +70,7 @@ void FingerSaberSettings::ModSettingsViewController::DidActivate(bool firstActiv
 
         // Spacing + Simple text
         QuestUI::BeatSaberUI::CreateText(container->get_transform(), "");
-        QuestUI::BeatSaberUI::CreateText(container->get_transform(), "== Saber Target Finger Tips ==");
+        //QuestUI::BeatSaberUI::CreateText(container->get_transform(), "== Saber Target Finger Tips ==");
 
         // RHand Finger Target Bone - Dropdown
         HMUI::SimpleTextDropdown* RTarg_dropdown = QuestUI::BeatSaberUI::CreateDropdown(container->get_transform(), u"Right Saber Target", Right_Hand_Targets[getModConfig().RightHandTargetIdx.GetValue()], Right_Hand_Targets, [&](auto value) {
