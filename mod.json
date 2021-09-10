@@ -5,9 +5,10 @@
     "id": "FingerSaber",
     "author": "Henri",
     "version": "0.1.0",
+    "coverImage": "Cover.jpg",
     "packageId": "com.beatgames.beatsaber",
     "packageVersion": "1.17.0",
-    "description": "Unknown",
+    "description": "Beat Saber At Your Finger Tips. @drumtool#4435",
     "modFiles": [
         "libFingerSaber.so"
     ],
