@@ -161,8 +161,8 @@ namespace ModUtils{
 
 #include "UnityEngine/Resources.hpp"
 
-const UnityEngine::Color defaultRightColor{0.156863, 0.556863, 0.823529, 0.000000};
-const UnityEngine::Color  defaultLeftColor{0.784314, 0.078431, 0.078431, 0.000000};
+const UnityEngine::Color defaultRightColor{0.156863, 0.556863, 0.823529, 1.000000};
+const UnityEngine::Color  defaultLeftColor{0.784314, 0.078431, 0.078431, 1.000000};
 
 bool FingerSaber::_Destroy_OculusHands(){
     bool destroyCalled = false;
@@ -237,16 +237,12 @@ void FingerSaber::_InitializeOculusHands(){
     
 }
 
-bool FingerSaber::createNewSkeletonMaterials(){
-    bool success = false;
-    auto Normal = UnityEngine::GameObject::Find(il2cpp_utils::createcsstr("ControllerLeft/MenuHandle/Normal"));
-    if( Normal ){
-        auto meshRenderer = Normal->GetComponentInChildren<UnityEngine::MeshRenderer*>();
-        leftHandSkeletonMat  = UnityEngine::Material::New_ctor(meshRenderer->GetMaterial());
-        rightHandSkeletonMat = UnityEngine::Material::New_ctor(meshRenderer->GetMaterial());
-        success = true;
-    }
-    return success;
+#include "UnityEngine/RenderSettings.hpp"
+#include "UnityEngine/Shader.hpp"
+
+void FingerSaber::createNewSkeletonMaterials(){
+    leftHandSkeletonMat  = UnityEngine::Material::New_ctor(UnityEngine::Shader::Find(il2cpp_utils::createcsstr("Custom/SimpleLit")));
+    rightHandSkeletonMat = UnityEngine::Material::New_ctor(UnityEngine::Shader::Find(il2cpp_utils::createcsstr("Custom/SimpleLit")));
 }
 
 void FingerSaber::ChangeRightSkeletonRendererColor(UnityEngine::Color col){

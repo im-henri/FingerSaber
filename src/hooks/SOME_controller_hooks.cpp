@@ -19,6 +19,7 @@
 #include "GlobalNamespace/IVRPlatformHelper.hpp"
 #include "GlobalNamespace/VRControllerTransformOffset.hpp"
 
+#include "GlobalNamespace/IGamePause.hpp"
 
 MAKE_HOOK_MATCH(
     VRController_Update,
@@ -29,7 +30,6 @@ MAKE_HOOK_MATCH(
 
     VRController_Update(self);
     
-
     // Overriding VR Controller positions when not in game
     if( modManager.getEitherHandIsTracked() == true ) {
         if( (modManager.is_scene_GameCore == false) || (modManager.is_GamePaused == true)) {
@@ -52,20 +52,8 @@ MAKE_HOOK_MATCH(
             self->get_transform()->set_position(hand_bone_tranform->get_position() + self->get_transform()->get_forward()*+0.175f);
         } 
     } 
-    
-    /*else{
-        UnityEngine::Vector3 rotOffset = self->transformOffset->get_rotationOffset();
-        
-        UnityEngine::Quaternion rot =self->get_transform()->get_rotation() *  UnityEngine::Quaternion::Euler(rotOffset.x, rotOffset.y, rotOffset.z);
-            
-        self->get_transform()->set_rotation(rot);
-    }*/
 
 }    
-
-
-//GlobalNamespace::OVRInput::Get(GlobalNamespace::OVRInput::Button::Start, GlobalNamespace::OVRInput::Controller::Hands)
-#include "GlobalNamespace/IGamePause.hpp"
 
 MAKE_HOOK_MATCH(
     OVRInput_Update,

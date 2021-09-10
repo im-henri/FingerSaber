@@ -29,7 +29,7 @@ class FingerSaber{
         void ChangeRightSkeletonRendererColor(UnityEngine::Color col);
         void ChangeLeftSkeletonRendererColor(UnityEngine::Color col);
         
-        bool createNewSkeletonMaterials(); 
+        void createNewSkeletonMaterials(); 
 
         bool getRHandClickRequested() { return _rHandClickRequested; }
         bool getLHandClickRequested() { return _lHandClickRequested; }

@@ -14,7 +14,6 @@
 
 #include "Config.hpp"
 
-//extern config_t config;
 
 DEFINE_TYPE(FingerSaberSettings, ModSettingsViewController);
 

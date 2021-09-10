@@ -29,9 +29,6 @@ extern "C" void setup(ModInfo& info) {
 // Called later on in the game loading - a good time to install function hooks
 extern "C" void load() {
     
-    //if (!LoadConfig())
-    //    SaveConfig();
-
     il2cpp_functions::Init();
     QuestUI::Init();
 
