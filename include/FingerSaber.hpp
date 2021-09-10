@@ -21,8 +21,10 @@ class FingerSaber{
         
         // --- Public Methods ---
 
-        //void FixedUpdate(GlobalNamespace::OculusVRHelper* self); 
+        // Creates new oculus hand things
         void _InitializeOculusHands();
+        // Tries to destory oculus hand things if they are found. Returns true if destroy call was initiated
+        bool _Destroy_OculusHands();
 
         void ChangeRightSkeletonRendererColor(UnityEngine::Color col);
         void ChangeLeftSkeletonRendererColor(UnityEngine::Color col);

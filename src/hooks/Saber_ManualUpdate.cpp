@@ -15,69 +15,70 @@ MAKE_HOOK_MATCH(
     GlobalNamespace::Saber* self
 ) {
 
-    //getLogger().info("Saber::ManualUpdate().");
+    getLogger().info("Saber::ManualUpdate().");
     
-    if(self->get_saberType() == GlobalNamespace::SaberType::SaberB){
-        //Right saber
-        GlobalNamespace::OVRBone* targBone;
-        UnityEngine::Vector3 targetPos;
+    if(getModConfig().ModEnabled.GetValue() == true){
+        if(modManager.getEitherHandIsTracked() == true){
+            if(self->get_saberType() == GlobalNamespace::SaberType::SaberB){
+                //Right saber
+                GlobalNamespace::OVRBone* targBone;
+                UnityEngine::Vector3 targetPos;
 
-        UnityEngine::Quaternion rotOffset;
+                UnityEngine::Quaternion rotOffset;
 
-        if(getModConfig().HandMode.GetValue() == false) {
-            //targBone = modManager.rightOVRSkeleton->bones->get_Item(GlobalNamespace::OVRSkeleton::BoneId::Hand_IndexTip);
-            if(modManager.rightHand_isTargetHandLeft == false){
-                targBone = modManager.rightOVRSkeleton->bones->get_Item(modManager.rightTargetBone);
-                rotOffset = UnityEngine::Quaternion::Euler(0, 90, 0);
-            } else{
-                targBone = modManager.leftOVRSkeleton->bones->get_Item(modManager.rightTargetBone);
-                rotOffset = UnityEngine::Quaternion::Euler(0, -90, 180);
+                if( (getModConfig().HandMode.GetValue() == true) || (getModConfig().ModEnabled.GetValue() == false) ) {
+                    targBone = modManager.rightOVRSkeleton->bones->get_Item(GlobalNamespace::OVRSkeleton::BoneId::Hand_WristRoot);
+                    targetPos = targBone->get_Transform()->get_position() + modManager.r_saber_TF->get_forward()*0.15;
+                    rotOffset = UnityEngine::Quaternion::Euler(0, 90, 0);
+                }
+                else{
+                    if(modManager.rightHand_isTargetHandLeft == false){
+                        targBone = modManager.rightOVRSkeleton->bones->get_Item(modManager.rightTargetBone);
+                        rotOffset = UnityEngine::Quaternion::Euler(0, 90, 0);
+                    } else{
+                        targBone = modManager.leftOVRSkeleton->bones->get_Item(modManager.rightTargetBone);
+                        rotOffset = UnityEngine::Quaternion::Euler(0, -90, 180);
+                    }
+                    targetPos = targBone->get_Transform()->get_position() - modManager.r_saber_TF->get_forward()*0.35;
+                }
+                auto targetRot = targBone->get_Transform()->get_rotation();
+                targetRot = targetRot * rotOffset; 
+
+                self->get_transform()->set_position(targetPos);
+                self->get_transform()->set_rotation(targetRot); 
             }
-            targetPos = targBone->get_Transform()->get_position() - modManager.r_saber_TF->get_forward()*0.35;
-        }
-        else{
-            targBone = modManager.rightOVRSkeleton->bones->get_Item(GlobalNamespace::OVRSkeleton::BoneId::Hand_WristRoot);
-            targetPos = targBone->get_Transform()->get_position() + modManager.r_saber_TF->get_forward()*0.15;
-            rotOffset = UnityEngine::Quaternion::Euler(0, 90, 0);
-        }
+            else{
+                // Left saber
+                GlobalNamespace::OVRBone* targBone; 
+                UnityEngine::Vector3    targetPos;
 
-        auto targetRot = targBone->get_Transform()->get_rotation();
-        targetRot = targetRot * rotOffset; 
+                UnityEngine::Quaternion rotOffset;
 
-        self->get_transform()->set_position(targetPos);
-        self->get_transform()->set_rotation(targetRot); 
-    }
-    else{
-        // Left saber
-        GlobalNamespace::OVRBone* targBone; 
-        UnityEngine::Vector3    targetPos;
-
-        UnityEngine::Quaternion rotOffset;
-
-        if(getModConfig().HandMode.GetValue() == false) {
-            //targBone  = modManager.leftOVRSkeleton->bones->get_Item(GlobalNamespace::OVRSkeleton::BoneId::Hand_IndexTip);
-            if(modManager.leftHand_isTargetHandRight == false){
-                targBone = modManager.leftOVRSkeleton->bones->get_Item(modManager.leftTargetBone);
-                rotOffset = UnityEngine::Quaternion::Euler(0, -90, 180);
-            } else{
-                targBone = modManager.rightOVRSkeleton->bones->get_Item(modManager.leftTargetBone);
-                rotOffset = UnityEngine::Quaternion::Euler(0, 90, 0);
+                if( (getModConfig().HandMode.GetValue() == true) || (getModConfig().ModEnabled.GetValue() == false) ) {
+                    targBone  = modManager.leftOVRSkeleton->bones->get_Item(GlobalNamespace::OVRSkeleton::BoneId::Hand_WristRoot);
+                    targetPos = targBone->get_Transform()->get_position() + modManager.l_saber_TF->get_forward()*0.15;
+                    rotOffset = UnityEngine::Quaternion::Euler(0, -90, 180);
+                }
+                else{
+                    if(modManager.leftHand_isTargetHandRight == false){
+                        targBone = modManager.leftOVRSkeleton->bones->get_Item(modManager.leftTargetBone);
+                        rotOffset = UnityEngine::Quaternion::Euler(0, -90, 180);
+                    } else{
+                        targBone = modManager.rightOVRSkeleton->bones->get_Item(modManager.leftTargetBone);
+                        rotOffset = UnityEngine::Quaternion::Euler(0, 90, 0);
+                    }
+                    targetPos = targBone->get_Transform()->get_position() - modManager.l_saber_TF->get_forward()*0.35;
+                }
+                
+                UnityEngine::Quaternion targetRot = targBone->get_Transform()->get_rotation();
+                targetRot = targetRot * rotOffset;
+                
+                self->get_transform()->set_position(targetPos);
+                self->get_transform()->set_rotation(targetRot);
             }
-            targetPos = targBone->get_Transform()->get_position() - modManager.l_saber_TF->get_forward()*0.35;
         }
-        else{
-            targBone  = modManager.leftOVRSkeleton->bones->get_Item(GlobalNamespace::OVRSkeleton::BoneId::Hand_WristRoot);
-            targetPos = targBone->get_Transform()->get_position() + modManager.l_saber_TF->get_forward()*0.15;
-            rotOffset = UnityEngine::Quaternion::Euler(0, -90, 180);
-        }
-        
-        UnityEngine::Quaternion targetRot = targBone->get_Transform()->get_rotation();
-        targetRot = targetRot * rotOffset;
-        
-        self->get_transform()->set_position(targetPos);
-        self->get_transform()->set_rotation(targetRot);
     }
-
+    
     Saber_ManualUpdate(self);
 }
 

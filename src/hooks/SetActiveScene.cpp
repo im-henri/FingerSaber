@@ -13,8 +13,6 @@
 #include "UnityEngine/HideFlags.hpp"
 #include "UnityEngine/Resources.hpp"
 
-
-
 #include "beatsaber-hook/shared/utils/logging.hpp"
 #include "GlobalNamespace/ColorScheme.hpp"
 #include "GlobalNamespace/ColorManager.hpp"
@@ -26,10 +24,7 @@
 #include "GlobalNamespace/colorSchemesSettings.hpp"
 #include "codegen/include/System/Collections/Generic/Dictionary_2.hpp"
 
-
-#include <sstream>
 #include <string>
-
 
 MAKE_HOOK_MATCH(
     SceneManager_SetActiveScene, 
@@ -70,8 +65,6 @@ MAKE_HOOK_MATCH(
         }
         modManager.is_scene_GameCore = is_GameCore;
     }
-
-    //WriteToLog_AllGameObjectsInScene();
 
     return ret;
 }

@@ -98,12 +98,14 @@ void FingerSaberSettings::ModSettingsViewController::DidActivate(bool firstActiv
         QuestUI::BeatSaberUI::AddHoverHint(LTarg_dropdown->get_gameObject(), "Left saber will follow this finger tip");
 
         // Platform Height offset
+        //float platformHeightOffsetMeters   = -0.34;
         QuestUI::SliderSetting* heightOffsetIncrement = QuestUI::BeatSaberUI::CreateSliderSetting(container->get_transform(), "Platform Height Offset (m)", 0.01f, getModConfig().PlatformHeightOffsetMeters.GetValue(), -0.5f, 0.0f, [](float value) {
              getModConfig().PlatformHeightOffsetMeters.SetValue(value, true);
         });
         QuestUI::BeatSaberUI::AddHoverHint(heightOffsetIncrement->get_gameObject(), "Platform height offset from head level.");
         
         // Platform Height offset
+        //float platformDistanceOffsetMeters = -0.25;
         QuestUI::SliderSetting* distanceOffsetIncrement = QuestUI::BeatSaberUI::CreateSliderSetting(container->get_transform(), "Platform Distance Offset (m)", 0.01f, getModConfig().PlatformDistanceOffsetMeters.GetValue(), -0.5f, 0.0f, [](float value) {
              getModConfig().PlatformDistanceOffsetMeters.SetValue(value, true);
         });

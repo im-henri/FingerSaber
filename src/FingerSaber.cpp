@@ -161,11 +161,29 @@ namespace ModUtils{
 
 #include "UnityEngine/Resources.hpp"
 
+const UnityEngine::Color defaultRightColor{0.156863, 0.556863, 0.823529, 0.000000};
+const UnityEngine::Color  defaultLeftColor{0.784314, 0.078431, 0.078431, 0.000000};
+
+bool FingerSaber::_Destroy_OculusHands(){
+    bool destroyCalled = false;
+
+    auto old_HandTracking_container = UnityEngine::GameObject::Find(il2cpp_utils::createcsstr("HandTracking_container"));
+    if(old_HandTracking_container) {
+        UnityEngine::GameObject::Destroy(old_HandTracking_container);
+        destroyCalled = true;
+    }
+
+    // Regardless if destroy was initiated or not, we can assure that the handTrackingObject is nullptr,
+    // as HandTracking_container is created with DontDestroyOnLoad option -> If they exists they must either exists in scene.
+    handTrackingObjectsParent = nullptr;
+
+    return destroyCalled;
+}
+
 void FingerSaber::_InitializeOculusHands(){
     getLogger().info("Oculus Hand MENU Initialization ..");
 
-    auto old_HandTracking_container = UnityEngine::GameObject::Find(il2cpp_utils::createcsstr("HandTracking_container"));
-    if(old_HandTracking_container) UnityEngine::GameObject::Destroy(old_HandTracking_container);
+    this->_Destroy_OculusHands();
 
     handTrackingObjectsParent = UnityEngine::GameObject::New_ctor(il2cpp_utils::createcsstr("HandTracking_container"));
     UnityEngine::GameObject::DontDestroyOnLoad(handTrackingObjectsParent);
@@ -187,7 +205,7 @@ void FingerSaber::_InitializeOculusHands(){
     rightOVRSkeleton->Initialize();
     
     auto rightOVRSkeletonRenderer = rightHandTrackingGo->AddComponent<GlobalNamespace::OVRSkeletonRenderer*>();
-    rightHandSkeletonMat->SetColor(il2cpp_utils::createcsstr("_Color"), UnityEngine::Color{0.156863, 0.556863, 0.823529, 1.000000});
+    rightHandSkeletonMat->SetColor(il2cpp_utils::createcsstr("_Color"), defaultRightColor);
     rightOVRSkeletonRenderer->skeletonMaterial=rightHandSkeletonMat;
     rightOVRSkeletonRenderer->systemGestureMaterial=rightHandSkeletonMat;
     rightOVRSkeletonRenderer->Initialize();
@@ -211,7 +229,7 @@ void FingerSaber::_InitializeOculusHands(){
     leftOVRSkeleton->Initialize();
     
     auto leftOVRSkeletonRenderer = leftHandTrackingGo->AddComponent<GlobalNamespace::OVRSkeletonRenderer*>();
-    leftHandSkeletonMat->SetColor(il2cpp_utils::createcsstr("_Color"), UnityEngine::Color{0.784314, 0.078431, 0.078431, 1.000000});
+    leftHandSkeletonMat->SetColor(il2cpp_utils::createcsstr("_Color"), defaultLeftColor);
     leftOVRSkeletonRenderer->skeletonMaterial=leftHandSkeletonMat;
     leftOVRSkeletonRenderer->systemGestureMaterial=leftHandSkeletonMat;
 
@@ -250,9 +268,7 @@ void FingerSaber::update_LRHandClickRequested(){
 }
 
 void FingerSaber::update_LRTargetBone(){
-    /**
-     * Idea taken from https://developer.oculus.com/documentation/unity/unity-handtracking/
-     * 
+    /** -----  https://developer.oculus.com/documentation/unity/unity-handtracking/  -----
      * Hand_ThumbTip    = Hand_Start + Hand_MaxSkinnable + 0 // tip of the thumb
      * Hand_IndexTip    = Hand_Start + Hand_MaxSkinnable + 1 // tip of the index finger
      * Hand_MiddleTip   = Hand_Start + Hand_MaxSkinnable + 2 // tip of the middle finger
@@ -267,19 +283,3 @@ void FingerSaber::update_LRTargetBone(){
     leftHand_isTargetHandRight = getModConfig().LeftHandTargetIdx.GetValue()  >= 5;
     rightHand_isTargetHandLeft = getModConfig().RightHandTargetIdx.GetValue() >= 5;
 }
-
-//void FingerSaber::FixedUpdate(GlobalNamespace::OculusVRHelper* self){
-//
-//    /*bool rButton = GlobalNamespace::OVRInput::Get(GlobalNamespace::OVRInput::Button::One, GlobalNamespace::OVRInput::Controller::RTouch) 
-//                    ? true : false;
-//    if((rButton == true) && (rButton_prev == false)){
-//        getLogger().info("R_Button Pressed");
-//        //ModUtils::WriteToLog_AllGameObjectsInScene();
-//    }
-//    rButton_prev = rButton;*/
-//
-//    /*if(rightOVRHand){
-//        update_LRHandIsTracked();
-//        update_LRHandClickRequested();
-//    }*/
-//}

@@ -29,6 +29,7 @@ MAKE_HOOK_MATCH(
 
     VRController_Update(self);
     
+
     // Overriding VR Controller positions when not in game
     if( modManager.getEitherHandIsTracked() == true ) {
         if( (modManager.is_scene_GameCore == false) || (modManager.is_GamePaused == true)) {
@@ -50,7 +51,15 @@ MAKE_HOOK_MATCH(
             self->get_transform()->set_rotation(hand_bone_tranform->get_rotation() * rotOffsetQuaternion);
             self->get_transform()->set_position(hand_bone_tranform->get_position() + self->get_transform()->get_forward()*+0.175f);
         } 
-    }
+    } 
+    
+    /*else{
+        UnityEngine::Vector3 rotOffset = self->transformOffset->get_rotationOffset();
+        
+        UnityEngine::Quaternion rot =self->get_transform()->get_rotation() *  UnityEngine::Quaternion::Euler(rotOffset.x, rotOffset.y, rotOffset.z);
+            
+        self->get_transform()->set_rotation(rot);
+    }*/
 
 }    
 
@@ -66,30 +75,33 @@ MAKE_HOOK_MATCH(
     OVRInput_Update();
     
     // Polling the input after Update ensures that no input is lost
-    
-    if(modManager.is_scene_GameCore){
-        auto getButton = static_cast< bool(*)(GlobalNamespace::OVRInput::Button, GlobalNamespace::OVRInput::Controller)> (&GlobalNamespace::OVRInput::Get);
-        if( getButton(GlobalNamespace::OVRInput::Button::Start, GlobalNamespace::OVRInput::Controller::Hands) ){
-            if(modManager.pauseController){
-                if(modManager.is_GamePaused) 
-                    modManager.pauseController->HandlePauseMenuManagerDidPressContinueButton();
-                else
-                    modManager.pauseController->Pause();     
-            }    
-        }
-    }
-
     if(modManager.rightOVRHand){
         modManager.update_LRHandIsTracked();
         modManager.update_LRHandClickRequested();
-
-        if( (modManager.is_scene_GameCore == true) &&  (modManager.is_GamePaused == false) && 
-            (modManager.pauseController != nullptr) && (modManager.getEitherHandIsTracked() == false)
-        ){
-            modManager.pauseController->Pause();
-        }
-
     }
+
+    if(getModConfig().ModEnabled.GetValue() == true){
+        if(modManager.is_scene_GameCore){
+            auto getButton = static_cast< bool(*)(GlobalNamespace::OVRInput::Button, GlobalNamespace::OVRInput::Controller)> (&GlobalNamespace::OVRInput::Get);
+            if( getButton(GlobalNamespace::OVRInput::Button::Start, GlobalNamespace::OVRInput::Controller::Hands) ){
+                if(modManager.pauseController){
+                    if(modManager.is_GamePaused) 
+                        modManager.pauseController->HandlePauseMenuManagerDidPressContinueButton();
+                    else
+                        modManager.pauseController->Pause();     
+                }    
+            }
+        }
+        
+        if(modManager.rightOVRHand){
+            if( (modManager.is_scene_GameCore == true) &&  (modManager.is_GamePaused == false) && 
+                (modManager.pauseController != nullptr) && (modManager.getEitherHandIsTracked() == false)
+            ){
+                modManager.pauseController->Pause();
+            }
+        }
+    }
+
 }
 
 MAKE_HOOK_MATCH(
