@@ -1,3 +1,6 @@
+# Packed mod
+*.qmod
+
 # Prerequisites
 *.d
 

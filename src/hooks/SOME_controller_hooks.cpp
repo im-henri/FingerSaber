@@ -83,7 +83,8 @@ MAKE_HOOK_MATCH(
         
         if(modManager.rightOVRHand){
             if( (modManager.is_scene_GameCore == true) &&  (modManager.is_GamePaused == false) && 
-                (modManager.pauseController != nullptr) && (modManager.getEitherHandIsTracked() == false)
+                (modManager.pauseController != nullptr) && (modManager.getEitherHandIsTracked() == false) &&
+                (getModConfig().AutoPause.GetValue() == true)
             ){
                 modManager.pauseController->Pause();
             }

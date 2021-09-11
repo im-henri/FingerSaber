@@ -68,6 +68,18 @@ void FingerSaberSettings::ModSettingsViewController::DidActivate(bool firstActiv
         });
         QuestUI::BeatSaberUI::AddHoverHint(OtherHandClicksToggle->get_gameObject(), "Point with one hand and pinch-click with other hand. (To ease clicking in menus.)");
 
+        // Auto pause Toggle
+        auto AutoPauseToggle = QuestUI::BeatSaberUI::CreateToggle(container->get_transform(), "Auto Pause", getModConfig().AutoPause.GetValue(), [](bool value) { 
+            getModConfig().AutoPause.SetValue(value, true);
+        });
+        QuestUI::BeatSaberUI::AddHoverHint(AutoPauseToggle->get_gameObject(), "Pause automatically when hands are lost.");
+
+        // Hands only mode Toggle
+        auto handModeToggle = QuestUI::BeatSaberUI::CreateToggle(container->get_transform(), "Hands-Only mode", getModConfig().HandMode.GetValue(), [](bool value) { 
+            getModConfig().HandMode.SetValue(value, true);
+        });
+        QuestUI::BeatSaberUI::AddHoverHint(handModeToggle->get_gameObject(),  "Normal BeatSaber with hand-tracking. Sabers follow \"wrists\" instead of fingers. And player is not Supersized");
+        
         // Spacing + Simple text
         QuestUI::BeatSaberUI::CreateText(container->get_transform(), "");
         //QuestUI::BeatSaberUI::CreateText(container->get_transform(), "== Saber Target Finger Tips ==");
@@ -111,13 +123,8 @@ void FingerSaberSettings::ModSettingsViewController::DidActivate(bool firstActiv
         QuestUI::BeatSaberUI::AddHoverHint(distanceOffsetIncrement->get_gameObject(), "Platform Z distance offset.");
         
         // Spacing
-        QuestUI::BeatSaberUI::CreateText(container->get_transform(), "");
+        //QuestUI::BeatSaberUI::CreateText(container->get_transform(), "");
 
-        // Hands only mode Toggle
-        auto handModeToggle = QuestUI::BeatSaberUI::CreateToggle(container->get_transform(), "Hands-Only mode", getModConfig().HandMode.GetValue(), [](bool value) { 
-            getModConfig().HandMode.SetValue(value, true);
-        });
-        QuestUI::BeatSaberUI::AddHoverHint(handModeToggle->get_gameObject(),  "Normal BeatSaber with hand-tracking. Sabers follow \"wrists\" instead of fingers. And player is not Supersized");
         
     }
 }
