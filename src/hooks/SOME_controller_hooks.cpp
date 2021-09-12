@@ -37,7 +37,7 @@ MAKE_HOOK_MATCH(
             UnityEngine::Transform* hand_bone_tranform;
             const float xRot = 60;
             const float yRot = 0;
-            const float zRot = 0;
+            const float zRot = 180;
             if(self->node.value == UnityEngine::XR::XRNode::LeftHand){
                 rotOffset = rotOffset + UnityEngine::Vector3( {90+180+xRot, -90+yRot, 0+zRot} );
                 hand_bone_tranform = modManager.leftOVRSkeleton->bones->get_Item(GlobalNamespace::OVRSkeleton::BoneId::Hand_WristRoot)->get_Transform();

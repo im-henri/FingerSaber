@@ -16,8 +16,6 @@
 #include "UnityEngine/HideFlags.hpp"
 #include "UnityEngine/Resources.hpp"
 
-
-
 #include "beatsaber-hook/shared/utils/logging.hpp"
 #include "GlobalNamespace/ColorScheme.hpp"
 #include "GlobalNamespace/ColorManager.hpp"
@@ -29,22 +27,8 @@
 #include "GlobalNamespace/colorSchemesSettings.hpp"
 #include "codegen/include/System/Collections/Generic/Dictionary_2.hpp"
 
-
 #include <sstream>
 #include <string>
-
-FingerSaber modManager;
-
-void FingerSaber::InstallHooks() {
-    _Hook_SceneManager_SetActiveScene();
-    //_Hook_OculusVRHelper_VRControllersInputManager();
-    _Hook_Saber_ManualUpdate();
-    _Hook_SaberModelController_Init();
-    _Hook_GamePause_Pause();
-    _Hook_GamePause_WillResume();
-    
-    _Hook_SOME_HOOK_METHOD();
-}
 
 #include "GlobalNamespace/OVRPlugin.hpp"
 #include "GlobalNamespace/OVRPlugin_HandFinger.hpp"
@@ -78,6 +62,19 @@ void FingerSaber::InstallHooks() {
 #include "UnityEngine/LineRenderer.hpp"
 
 #include "UnityEngine/Resources.hpp"
+
+FingerSaber modManager;
+
+void FingerSaber::InstallHooks() {
+    _Hook_SceneManager_SetActiveScene();
+    //_Hook_OculusVRHelper_VRControllersInputManager();
+    _Hook_Saber_ManualUpdate();
+    _Hook_SaberModelController_Init();
+    _Hook_GamePause_Pause();
+    _Hook_GamePause_WillResume();
+    
+    _Hook_SOME_HOOK_METHOD();
+}
 
 const UnityEngine::Color defaultRightColor{0.156863, 0.556863, 0.823529, 1.000000};
 const UnityEngine::Color  defaultLeftColor{0.784314, 0.078431, 0.078431, 1.000000};

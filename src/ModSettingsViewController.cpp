@@ -45,7 +45,6 @@ std::vector<std::string> Right_Hand_Targets = {
     "Left_Pinky"
 };
 
-
 void FingerSaberSettings::ModSettingsViewController::DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling) 
 {
     if (firstActivation) 
@@ -57,10 +56,10 @@ void FingerSaberSettings::ModSettingsViewController::DidActivate(bool firstActiv
 
         // ---------
         // Mod enabled Toggle
-        auto modEnabledToggle = QuestUI::BeatSaberUI::CreateToggle(container->get_transform(), "Mod Enabled", getModConfig().ModEnabled.GetValue(), [](bool value) { 
+        this->modEnabledToggle = QuestUI::BeatSaberUI::CreateToggle(container->get_transform(), "Mod Enabled", getModConfig().ModEnabled.GetValue(), [](bool value) { 
             getModConfig().ModEnabled.SetValue(value, true);
         });
-        QuestUI::BeatSaberUI::AddHoverHint(modEnabledToggle->get_gameObject(),  "Disables the mod. (Disable from BMBF to completely disable the mod)");
+        QuestUI::BeatSaberUI::AddHoverHint(this->modEnabledToggle->get_gameObject(),  "Disables the mod. (Disable from BMBF to completely disable the mod)");
 
         // OtherHandClicks Toggle
         auto OtherHandClicksToggle = QuestUI::BeatSaberUI::CreateToggle(container->get_transform(), "Pinch-Click With Other Hand", getModConfig().OtherHandClicks.GetValue(), [](bool value) { 
@@ -124,8 +123,10 @@ void FingerSaberSettings::ModSettingsViewController::DidActivate(bool firstActiv
         
         // Spacing
         //QuestUI::BeatSaberUI::CreateText(container->get_transform(), "");
-
-        
+  
+    }
+    else{
+        this->modEnabledToggle->set_isOn(getModConfig().ModEnabled.GetValue());
     }
 }
 

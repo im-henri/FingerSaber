@@ -3,6 +3,9 @@
 #include "FingerSaber.hpp"
 #include "Config.hpp"
 
+#include "ModSettingsViewController.hpp"
+#include "ModGameplaySetupMenu.hpp"
+
 #include "questui/shared/QuestUI.hpp"
 
 static ModInfo modInfo; // Stores the ID and version of our mod, and is sent to the modloader upon startup
@@ -24,7 +27,6 @@ extern "C" void setup(ModInfo& info) {
     getLogger().info("Completed setup!");
 }
 
-#include "ModSettingsViewController.hpp"
 
 // Called later on in the game loading - a good time to install function hooks
 extern "C" void load() {
@@ -38,7 +40,8 @@ extern "C" void load() {
 
     custom_types::Register::AutoRegister();
     QuestUI::Register::RegisterModSettingsViewController<FingerSaberSettings::ModSettingsViewController*>(modInfo);
-
+    QuestUI::Register::RegisterGameplaySetupMenu<FingerSaberSettings::ModGameplaySetupMenu*>(modInfo);
+    
     modManager.update_LRTargetBone();
 
 }
