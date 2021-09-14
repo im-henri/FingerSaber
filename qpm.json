@@ -4,7 +4,7 @@
   "info": {
     "name": "FingerSaber",
     "id": "FingerSaber",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "url": null,
     "additionalData": {}
   },
@@ -12,7 +12,11 @@
     {
       "id": "beatsaber-hook",
       "versionRange": "*",
-      "additionalData": {}
+      "additionalData": {
+        "extraFiles": [
+          "src/inline-hook"
+        ]
+      }
     },
     {
       "id": "questui",
