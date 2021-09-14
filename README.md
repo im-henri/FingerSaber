@@ -1,6 +1,6 @@
 # FingerSaber
 
-Unknown
+A mod that enables Oculus Quest handtracking on Beat Saber. It transforms you into a giant and allows you to use your fingers as sabers! 
 
 ## Credits
 
