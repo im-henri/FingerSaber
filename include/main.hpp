@@ -12,6 +12,7 @@
 // Hooking
 #include "beatsaber-hook/shared/utils/hooking.hpp"
 
+#define USE_CODEGEN_FIELDS
 
 // Define these functions here so that we can easily read configuration and log information from other files
 Logger& getLogger();

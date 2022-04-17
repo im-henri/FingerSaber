@@ -114,6 +114,8 @@
         "xtree": "cpp",
         "xutility": "cpp",
         "resumable": "cpp",
-        "__memory": "cpp"
+        "__memory": "cpp",
+        "format": "cpp",
+        "stop_token": "cpp"
     }
 }

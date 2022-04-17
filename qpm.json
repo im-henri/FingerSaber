@@ -4,14 +4,16 @@
   "info": {
     "name": "FingerSaber",
     "id": "FingerSaber",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "url": null,
-    "additionalData": {}
+    "additionalData": {
+      "overrideSoName": "lib-fingersaber.so"
+    }
   },
   "dependencies": [
     {
       "id": "beatsaber-hook",
-      "versionRange": "*",
+      "versionRange": "^3.8.1",
       "additionalData": {
         "extraFiles": [
           "src/inline-hook"
@@ -25,7 +27,7 @@
     },
     {
       "id": "codegen",
-      "versionRange": "*",
+      "versionRange": "^0.22.0",
       "additionalData": {}
     },
     {

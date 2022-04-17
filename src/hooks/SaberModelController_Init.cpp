@@ -62,11 +62,13 @@ MAKE_HOOK_MATCH(
             // Figured this is safer way to know when both sabers exist, as opposed to assuming which saber is last to get initialized.
             // (I assume its not always left or right saber that gets initialized last.)
             if (handInitCount%2 == 0){
-                auto VRGameCore = UnityEngine::GameObject::Find(il2cpp_utils::createcsstr("Origin/VRGameCore"));
+                //auto VRGameCore = UnityEngine::GameObject::Find(il2cpp_utils::createcsstr("Origin/VRGameCore"));
+                auto VRGameCore = UnityEngine::GameObject::Find(StringW("Origin/VRGameCore"));
+                
                 if(VRGameCore){
                     modManager.handTrackingObjectsParent->get_transform()->set_position(VRGameCore->get_transform()->get_position());
 
-                    auto PauseController_go = UnityEngine::GameObject::Find(il2cpp_utils::createcsstr("PauseController"));
+                    auto PauseController_go = UnityEngine::GameObject::Find(StringW("PauseController"));
                     if(PauseController_go) modManager.pauseController = PauseController_go->GetComponent<GlobalNamespace::PauseController*>();
                     
                     if(getModConfig().HandMode.GetValue() == false){
@@ -75,7 +77,7 @@ MAKE_HOOK_MATCH(
                         VRGameCore->get_transform()->set_localScale(scaler);
                         modManager.handTrackingObjectsParent->get_transform()->set_localScale(scaler);
                 
-                        auto mainCamera = VRGameCore->Find(il2cpp_utils::createcsstr("MainCamera"));
+                        auto mainCamera = VRGameCore->Find(StringW("MainCamera"));
                         float headLevel = mainCamera->get_transform()->get_position().y;
                         float platformLevel = headLevel + pScale * getModConfig().PlatformHeightOffsetMeters.GetValue();
                         float platformZOffset = pScale * getModConfig().PlatformDistanceOffsetMeters.GetValue();

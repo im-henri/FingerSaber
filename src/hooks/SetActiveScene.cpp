@@ -16,12 +16,12 @@
 #include "beatsaber-hook/shared/utils/logging.hpp"
 #include "GlobalNamespace/ColorScheme.hpp"
 #include "GlobalNamespace/ColorManager.hpp"
-#include "GlobalNamespace/ColormanagerInstaller.hpp"
+#include "GlobalNamespace/ColorManagerInstaller.hpp"
 #include "GlobalNamespace/ColorSchemeSO.hpp"
 #include "GlobalNamespace/PlayerData.hpp"
 
 #include "GlobalNamespace/SaberType.hpp"
-#include "GlobalNamespace/colorSchemesSettings.hpp"
+#include "GlobalNamespace/ColorSchemesSettings.hpp"
 #include "codegen/include/System/Collections/Generic/Dictionary_2.hpp"
 
 #include <string>

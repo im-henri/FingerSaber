@@ -3,7 +3,7 @@
 
 #include "Config.hpp"
 
-#include "GlobalNamespace/OVRinput.hpp"
+#include "GlobalNamespace/OVRInput.hpp"
 #include "GlobalNamespace/OVRInput_Button.hpp"
 #include "GlobalNamespace/OVRInput_Axis1D.hpp"
 #include "GlobalNamespace/OVRInput_RawButton.hpp"

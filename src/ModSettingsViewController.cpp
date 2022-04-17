@@ -83,8 +83,15 @@ void FingerSaberSettings::ModSettingsViewController::DidActivate(bool firstActiv
         QuestUI::BeatSaberUI::CreateText(container->get_transform(), "");
         //QuestUI::BeatSaberUI::CreateText(container->get_transform(), "== Saber Target Finger Tips ==");
 
+
+    //#define BeatSaberUI::CreateDropdown(parent, enumConfigValue.GetName(), enumReverseMap.at(clamp(0, (int) enumMap.size() - 1, (int) enumConfigValue.GetValue())), getKeys(enumMap), [](const std::string& value) {enumConfigValue.SetValue((int) enumMap.at(value));} )
+
         // RHand Finger Target Bone - Dropdown
-        HMUI::SimpleTextDropdown* RTarg_dropdown = QuestUI::BeatSaberUI::CreateDropdown(container->get_transform(), u"Right Saber Target", Right_Hand_Targets[getModConfig().RightHandTargetIdx.GetValue()], Right_Hand_Targets, [&](auto value) {
+        auto RTarg_dropdown_stringw = std::vector<StringW>();
+        for (auto& target : Right_Hand_Targets){
+            RTarg_dropdown_stringw.push_back(StringW(target));
+        }
+        HMUI::SimpleTextDropdown* RTarg_dropdown = QuestUI::BeatSaberUI::CreateDropdown(container->get_transform(), "Right Saber Target", StringW(Right_Hand_Targets[getModConfig().RightHandTargetIdx.GetValue()]), RTarg_dropdown_stringw, [&](auto value) {
             int i = 0;
             for (i = 0; i < Right_Hand_Targets.size(); i++){
                 if (Right_Hand_Targets[i] == value) break;
@@ -96,7 +103,11 @@ void FingerSaberSettings::ModSettingsViewController::DidActivate(bool firstActiv
         QuestUI::BeatSaberUI::AddHoverHint(RTarg_dropdown->get_gameObject(), "Right saber will follow this finger tip");
 
         // LHand Finger Target Bone - Dropdown
-        HMUI::SimpleTextDropdown* LTarg_dropdown = QuestUI::BeatSaberUI::CreateDropdown(container->get_transform(), u"Left  Saber Target", Left_Hand_Targets[getModConfig().LeftHandTargetIdx.GetValue()], Left_Hand_Targets, [&](auto value) {
+        auto LTarg_dropdown_stringw = std::vector<StringW>();
+        for (auto& target : Left_Hand_Targets){
+            LTarg_dropdown_stringw.push_back(StringW(target));
+        }
+        HMUI::SimpleTextDropdown* LTarg_dropdown = QuestUI::BeatSaberUI::CreateDropdown(container->get_transform(), "Left  Saber Target", StringW(Left_Hand_Targets[getModConfig().LeftHandTargetIdx.GetValue()]), LTarg_dropdown_stringw, [&](auto value) {
                int i = 0;
                for (i = 0; i < Left_Hand_Targets.size(); i++){
                    if (Left_Hand_Targets[i] == value) break;
