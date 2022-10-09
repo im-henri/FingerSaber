@@ -153,16 +153,7 @@ void FingerSaber::_InitializeOculusHands(){
     leftOVRSkeletonRenderer->skeletonMaterial=leftHandSkeletonMat;
     leftOVRSkeletonRenderer->systemGestureMaterial=leftHandSkeletonMat;
     leftOVRSkeletonRenderer->Initialize();
-
-    /*
-    for(int i=0; i<leftOVRSkeletonRenderer->boneVisualizations->get_Count(); i++){
-        leftOVRSkeletonRenderer->boneVisualizations->get_Item(i)->Line->set_startWidth(25.0f);
-        leftOVRSkeletonRenderer->boneVisualizations->get_Item(i)->Line->set_endWidth(25.0f);
-
-        rightOVRSkeletonRenderer->boneVisualizations->get_Item(i)->Line->set_startWidth(25.0f);
-        rightOVRSkeletonRenderer->boneVisualizations->get_Item(i)->Line->set_endWidth(25.0f);
-    }
-    */
+ 
 
     getLogger().info("leftHandTracking MENU Stuff Created");
     

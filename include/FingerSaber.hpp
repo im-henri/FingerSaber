@@ -14,6 +14,9 @@
 #include "GlobalNamespace/PauseController.hpp"
 #include "UnityEngine/Color.hpp"
 
+#include "UnityEngine/Vector3.hpp"
+#include "UnityEngine/Quaternion.hpp"
+
 class FingerSaber{
     public:
         
@@ -65,6 +68,13 @@ class FingerSaber{
         
         UnityEngine::Transform* r_saber_TF = nullptr;
         UnityEngine::Transform* l_saber_TF = nullptr;
+
+
+        UnityEngine::Quaternion menu_l_quaternion = UnityEngine::Quaternion(0, 0, 0);
+        UnityEngine::Quaternion menu_r_quaternion = UnityEngine::Quaternion(0, 0, 0);
+        UnityEngine::Vector3 menu_l_vector3 = UnityEngine::Vector3(0, 0, 0);
+        UnityEngine::Vector3 menu_r_vector3 = UnityEngine::Vector3(0, 0, 0);
+        
 
     private:
         bool _rHandClickRequested = false;
