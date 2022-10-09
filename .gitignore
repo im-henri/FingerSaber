@@ -70,3 +70,4 @@ extern.cmake
 .vscode/settings.json
 FingerSaber.log
 FingerSaberParsed.log
+mod.json
