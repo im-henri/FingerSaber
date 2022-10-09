@@ -64,6 +64,7 @@ MAKE_HOOK_MATCH(
             modManager._InitializeOculusHands();
         }
         modManager.is_scene_GameCore = is_GameCore;
+
     }
 
     return ret;

@@ -42,6 +42,7 @@
 
 #include "GlobalNamespace/OVRSkeleton.hpp"
 #include "GlobalNamespace/OVRSkeletonRenderer.hpp"
+#include "GlobalNamespace/OVRSkeletonRenderer_BoneVisualization.hpp"
 #include "GlobalNamespace/OVRSkeleton_SkeletonPoseData.hpp"
 #include "GlobalNamespace/OVRBone.hpp"
 #include "GlobalNamespace/OVRPlugin_Skeleton2.hpp"
@@ -58,10 +59,13 @@
 
 #include "UnityEngine/LineRenderer.hpp"
 #include "UnityEngine/Material.hpp"
-#include "UnityEngine/Color.hpp"
-#include "UnityEngine/LineRenderer.hpp"
+#include "UnityEngine/Color.hpp" 
 
 #include "UnityEngine/Resources.hpp"
+
+#include "ModUtils.hpp"
+#include "UnityEngine/Resources.hpp"
+
 
 FingerSaber modManager;
 
@@ -72,6 +76,7 @@ void FingerSaber::InstallHooks() {
     _Hook_SaberModelController_Init();
     _Hook_GamePause_Pause();
     _Hook_GamePause_WillResume();
+    _Hook_BoneVisualization_Update();
     
     _Hook_SOME_HOOK_METHOD();
 }
@@ -82,7 +87,7 @@ const UnityEngine::Color  defaultLeftColor{0.784314, 0.078431, 0.078431, 1.00000
 bool FingerSaber::_Destroy_OculusHands(){
     bool destroyCalled = false;
 
-    auto old_HandTracking_container = UnityEngine::GameObject::Find(StringW("HandTracking_container"));
+    auto old_HandTracking_container = UnityEngine::GameObject::Find("HandTracking_container");
     if(old_HandTracking_container) {
         UnityEngine::GameObject::Destroy(old_HandTracking_container);
         destroyCalled = true;
@@ -100,15 +105,15 @@ void FingerSaber::_InitializeOculusHands(){
 
     this->_Destroy_OculusHands();
 
-    handTrackingObjectsParent = UnityEngine::GameObject::New_ctor(StringW("HandTracking_container"));
+    handTrackingObjectsParent = UnityEngine::GameObject::New_ctor(("HandTracking_container"));
     UnityEngine::GameObject::DontDestroyOnLoad(handTrackingObjectsParent);
 
     // ---
 
-    auto rightHandAnchor = UnityEngine::GameObject::New_ctor(StringW("rightHandAnchor"));
+    auto rightHandAnchor = UnityEngine::GameObject::New_ctor(("rightHandAnchor"));
     rightHandAnchor->get_transform()->set_parent(handTrackingObjectsParent->get_transform());
 
-    auto rightHandTrackingGo = UnityEngine::GameObject::New_ctor(StringW("rightHandTracking"));
+    auto rightHandTrackingGo = UnityEngine::GameObject::New_ctor(("rightHandTracking"));
     rightHandTrackingGo->get_transform()->set_parent(rightHandAnchor->get_transform());
     
     rightOVRHand = rightHandTrackingGo->AddComponent<GlobalNamespace::OVRHand*>();
@@ -119,20 +124,20 @@ void FingerSaber::_InitializeOculusHands(){
     rightOVRSkeleton->updateRootPose = true;
     rightOVRSkeleton->Initialize();
     
-    auto rightOVRSkeletonRenderer = rightHandTrackingGo->AddComponent<GlobalNamespace::OVRSkeletonRenderer*>();
-    rightHandSkeletonMat->SetColor(StringW("_Color"), defaultRightColor);
+    GlobalNamespace::OVRSkeletonRenderer* rightOVRSkeletonRenderer = rightHandTrackingGo->AddComponent<GlobalNamespace::OVRSkeletonRenderer*>();
+    rightHandSkeletonMat->SetColor("_Color", defaultRightColor);
     rightOVRSkeletonRenderer->skeletonMaterial=rightHandSkeletonMat;
     rightOVRSkeletonRenderer->systemGestureMaterial=rightHandSkeletonMat;
     rightOVRSkeletonRenderer->Initialize();
-
+ 
     getLogger().info("rightHandTracking MENU Stuff Created");
 
     // ---
    
-    auto leftHandAnchor = UnityEngine::GameObject::New_ctor(StringW("leftHandAnchor"));
+    UnityEngine::GameObject* leftHandAnchor = UnityEngine::GameObject::New_ctor(("leftHandAnchor"));
     leftHandAnchor->get_transform()->set_parent(handTrackingObjectsParent->get_transform());
     
-    auto leftHandTrackingGo = UnityEngine::GameObject::New_ctor(StringW("leftHandTracking"));
+    auto leftHandTrackingGo = UnityEngine::GameObject::New_ctor(("leftHandTracking"));
     leftHandTrackingGo->get_transform()->set_parent(leftHandAnchor->get_transform());
     
     leftOVRHand = leftHandTrackingGo->AddComponent<GlobalNamespace::OVRHand*>();
@@ -143,10 +148,21 @@ void FingerSaber::_InitializeOculusHands(){
     leftOVRSkeleton->updateRootPose = true;
     leftOVRSkeleton->Initialize();
     
-    auto leftOVRSkeletonRenderer = leftHandTrackingGo->AddComponent<GlobalNamespace::OVRSkeletonRenderer*>();
-    leftHandSkeletonMat->SetColor(StringW("_Color"), defaultLeftColor);
+    GlobalNamespace::OVRSkeletonRenderer* leftOVRSkeletonRenderer = leftHandTrackingGo->AddComponent<GlobalNamespace::OVRSkeletonRenderer*>();
+    leftHandSkeletonMat->SetColor(("_Color"), defaultLeftColor);
     leftOVRSkeletonRenderer->skeletonMaterial=leftHandSkeletonMat;
     leftOVRSkeletonRenderer->systemGestureMaterial=leftHandSkeletonMat;
+    leftOVRSkeletonRenderer->Initialize();
+
+    /*
+    for(int i=0; i<leftOVRSkeletonRenderer->boneVisualizations->get_Count(); i++){
+        leftOVRSkeletonRenderer->boneVisualizations->get_Item(i)->Line->set_startWidth(25.0f);
+        leftOVRSkeletonRenderer->boneVisualizations->get_Item(i)->Line->set_endWidth(25.0f);
+
+        rightOVRSkeletonRenderer->boneVisualizations->get_Item(i)->Line->set_startWidth(25.0f);
+        rightOVRSkeletonRenderer->boneVisualizations->get_Item(i)->Line->set_endWidth(25.0f);
+    }
+    */
 
     getLogger().info("leftHandTracking MENU Stuff Created");
     
@@ -156,15 +172,15 @@ void FingerSaber::_InitializeOculusHands(){
 #include "UnityEngine/Shader.hpp"
 
 void FingerSaber::createNewSkeletonMaterials(){
-    leftHandSkeletonMat  = UnityEngine::Material::New_ctor(UnityEngine::Shader::Find(StringW("Custom/SimpleLit")));
-    rightHandSkeletonMat = UnityEngine::Material::New_ctor(UnityEngine::Shader::Find(StringW("Custom/SimpleLit")));
+    leftHandSkeletonMat  = UnityEngine::Material::New_ctor(UnityEngine::Shader::Find(("Custom/SimpleLit")));
+    rightHandSkeletonMat = UnityEngine::Material::New_ctor(UnityEngine::Shader::Find(("Custom/SimpleLit")));
 }
 
 void FingerSaber::ChangeRightSkeletonRendererColor(UnityEngine::Color col){
-    if(rightHandSkeletonMat) rightHandSkeletonMat->SetColor(StringW("_Color"), col);
+    if(rightHandSkeletonMat) rightHandSkeletonMat->SetColor(("_Color"), col);
 }
 void FingerSaber::ChangeLeftSkeletonRendererColor(UnityEngine::Color col){
-    if(leftHandSkeletonMat) leftHandSkeletonMat->SetColor(StringW("_Color"), col);
+    if(leftHandSkeletonMat) leftHandSkeletonMat->SetColor(("_Color"), col);
 }
 
 void FingerSaber::update_LRHandIsTracked(){

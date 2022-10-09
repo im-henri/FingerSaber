@@ -15,7 +15,7 @@ void Log_GetComponents(UnityEngine::GameObject* gameobj, Logger& logger){
     auto componentArr = gameobj->GetComponents<T>();
     std::stringstream buff;
     for (int i=0; i<componentArr->Length(); i++){
-        auto comp = (*componentArr)[i];
+        auto comp = componentArr[i];
         auto name = comp->get_name();
         auto fullName = comp->GetType()->get_FullName();
         buff << to_utf8(csstrtostr(fullName)).c_str() << " " << to_utf8(csstrtostr(name)).c_str() << "\n";
@@ -28,7 +28,7 @@ void Log_GetComponentsInChildren(UnityEngine::GameObject* gameobj, Logger& logge
     auto componentArr = gameobj->GetComponentsInChildren<T>();
     std::stringstream buff;
     for (int i=0; i<componentArr->Length(); i++){
-        auto comp = (*componentArr)[i];
+        auto comp = componentArr[i];
         auto name = comp->get_name();
         auto fullName = comp->GetType()->get_FullName();
         buff  << to_utf8(csstrtostr(fullName)).c_str() << " " << to_utf8(csstrtostr(name)).c_str() << "\n";
@@ -48,7 +48,7 @@ void Write_To_Log_AllGameObjectsInScene(std::string logName, Logger& logger){
     std::stringstream buff;
 
     for(int i=0; i<allObject->Length(); i++){
-        auto go_asObj = (*allObject)[i];
+        auto go_asObj = allObject[i];
         //getLogger().info("Found items: %i", i);
         
         if (

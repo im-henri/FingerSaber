@@ -59,7 +59,7 @@ class FingerSaber{
         GlobalNamespace::OVRHand*     leftOVRHand  = nullptr;
         GlobalNamespace::OVRSkeleton* rightOVRSkeleton = nullptr;
         GlobalNamespace::OVRSkeleton* leftOVRSkeleton  = nullptr;
-
+         
         UnityEngine::Material * rightHandSkeletonMat = nullptr; // Createdd win new_ctor
         UnityEngine::Material * leftHandSkeletonMat  = nullptr; // Createdd win new_ctor
         
@@ -80,6 +80,8 @@ class FingerSaber{
         void _Hook_SaberModelController_Init();
         void _Hook_GamePause_Pause();
         void _Hook_GamePause_WillResume();
+
+        void _Hook_BoneVisualization_Update();
 
         void _Hook_SOME_HOOK_METHOD();
 
