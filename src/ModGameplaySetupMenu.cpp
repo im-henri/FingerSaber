@@ -1,6 +1,6 @@
 #include "ModGameplaySetupMenu.hpp"
 
-#include "Config.hpp"
+#include "ModConfig.hpp"
 
 
 DEFINE_TYPE(FingerSaberSettings, ModGameplaySetupMenu);
