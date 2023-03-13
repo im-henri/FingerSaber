@@ -3,7 +3,7 @@
 #include "main.hpp"
 
 #include "ModSettingsViewController.hpp"
-#include "Config.hpp"
+#include "MosConfig.hpp"
 
 #include "questui/shared/QuestUI.hpp"
 #include "questui/shared/BeatSaberUI.hpp"
@@ -12,37 +12,35 @@
 #include "UnityEngine/GameObject.hpp"
 #include "UnityEngine/Transform.hpp"
 
-#include "Config.hpp"
-
 
 DEFINE_TYPE(FingerSaberSettings, ModSettingsViewController);
 
 std::vector<std::string> Left_Hand_Targets = {
-    "Left_Thumb",
-    "Left_Index",
-    "Left_Middle",
-    "Left_Ring",
-    "Left_Pinky",
+    "Left Thumb",
+    "Left Index",
+    "Left Middle",
+    "Left Ring",
+    "Left Pinky",
 
-    "Right_Thumb",
-    "Right_Index",
-    "Right_Middle",
-    "Right_Ring",
-    "Right_Pinky"
+    "Right Thumb",
+    "Right Index",
+    "Right Middle",
+    "Right Ring",
+    "Right Pinky"
 };
 
 std::vector<std::string> Right_Hand_Targets = {
-    "Right_Thumb",
-    "Right_Index",
-    "Right_Middle",
-    "Right_Ring",
-    "Right_Pinky",
+    "Right Thumb",
+    "Right Index",
+    "Right Middle",
+    "Right Ring",
+    "Right Pinky",
 
-    "Left_Thumb",
-    "Left_Index",
-    "Left_Middle",
-    "Left_Ring",
-    "Left_Pinky"
+    "Left Thumb",
+    "Left Index",
+    "Left Middle",
+    "Left Ring",
+    "Left Pinky"
 };
 
 void FingerSaberSettings::ModSettingsViewController::DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling) 
