@@ -6,7 +6,7 @@
 #include "UnityEngine/Transform.hpp"
 #include "UnityEngine/Quaternion.hpp"
 
-#include "Config.hpp"
+#include "ModConfig.hpp"
 
 MAKE_HOOK_MATCH(
     Saber_ManualUpdate, 
