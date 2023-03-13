@@ -1,7 +1,7 @@
 #include "FingerSaber.hpp"
 #include "main.hpp"
 
-#include "Config.hpp"
+#include "ModConfig.hpp"
 
 #include "GlobalNamespace/OVRInput.hpp"
 #include "GlobalNamespace/OVRInput_Button.hpp"
