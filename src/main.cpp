@@ -1,7 +1,7 @@
 #include "main.hpp"
 
 #include "FingerSaber.hpp"
-#include "Config.hpp"
+#include "ModConfig.hpp"
 
 #include "ModSettingsViewController.hpp"
 #include "ModGameplaySetupMenu.hpp"

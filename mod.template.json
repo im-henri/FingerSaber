@@ -1,18 +1,16 @@
 {
-  "_QPVersion": "1.0.0",
-  "name": "FingerSaber",
-  "id": "FingerSaber",
-  "author": "Henri",
-  "version": "0.1.3",
-  "coverImage": "Cover.jpg",
+  "_QPVersion": "0.1.1",
+  "name": "${mod_name}",
+  "id": "${mod_id}",
+  "author": "Henri, piskndar",
+  "version": "0.1.4",
   "packageId": "com.beatgames.beatsaber",
-  "packageVersion": "1.24.0",
-  "description": "Beat Saber At Your Finger Tips. @drumtool#4435",
+  "packageVersion": "1.28.0_4124311467",
+  "description": "Beat Saber At Your Finger Tips. @drumtool#4435 @NoneThing#7502",
+  "coverImage": "cover.jpg",
   "dependencies": [],
   "modFiles": [],
   "libraryFiles": [],
   "fileCopies": [],
   "copyExtensions": []
 }
-
-
