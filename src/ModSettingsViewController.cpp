@@ -3,7 +3,7 @@
 #include "main.hpp"
 
 #include "ModSettingsViewController.hpp"
-#include "MosConfig.hpp"
+#include "ModConfig.hpp"
 
 #include "questui/shared/QuestUI.hpp"
 #include "questui/shared/BeatSaberUI.hpp"
