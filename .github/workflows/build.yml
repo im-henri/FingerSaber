@@ -2,7 +2,7 @@ name: NDK build
 
 env:
     module_id: FingerSaber
-    qmodName: FingerSaber
+    qmodName: fingersaber
 
 on:
   workflow_dispatch:
