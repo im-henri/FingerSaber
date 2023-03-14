@@ -1,8 +1,8 @@
 name: NDK build
 
 env:
-    module_id: FingerSaber
-    qmodName: fingersaber
+    module_id: fingersaber
+    qmodName: FingerSaber
 
 on:
   workflow_dispatch:
@@ -82,7 +82,7 @@ jobs:
       id: libname
       run: |
         cd ./build/
-        pattern="lib${module_id}.so"
+        pattern="lib${module_id}*.so"
         files=( $pattern )
         echo ::set-output name=NAME::"${files[0]}"
     
