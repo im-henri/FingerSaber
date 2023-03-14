@@ -4,21 +4,26 @@
   "info": {
     "name": "FingerSaber",
     "id": "fingersaber",
-    "version": "0.1.4",
+    "version": "0.2.0",
     "url": null,
     "additionalData": {
-      "overrideSoName": "lib-fingersaber.so"
+      "overrideSoName": "libfingersaber.so"
     }
   },
   "dependencies": [
     {
       "id": "beatsaber-hook",
-      "versionRange": "3.14.0",
+      "versionRange": "^3.14.0",
       "additionalData": {
         "extraFiles": [
           "src/inline-hook"
         ]
       }
+    },
+    {
+      "id": "modloader",
+      "versionRange": "^1.2.3",
+      "additionalData": {}
     },
     {
       "id": "questui",
@@ -33,11 +38,6 @@
     {
       "id": "config-utils",
       "versionRange": "^1.0.2",
-      "additionalData": {}
-    },
-    {
-      "id": "modloader",
-      "versionRange": "^1.2.3",
       "additionalData": {}
     },
     {

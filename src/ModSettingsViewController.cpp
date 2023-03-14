@@ -16,31 +16,31 @@
 DEFINE_TYPE(FingerSaberSettings, ModSettingsViewController);
 
 std::vector<std::string> Left_Hand_Targets = {
-    "Left Thumb",
-    "Left Index",
-    "Left Middle",
-    "Left Ring",
-    "Left Pinky",
+    "Left_Thumb",
+    "Left_Index",
+    "Left_Middle",
+    "Left_Ring",
+    "Left_Pinky",
 
-    "Right Thumb",
-    "Right Index",
-    "Right Middle",
-    "Right Ring",
-    "Right Pinky"
+    "Right_Thumb",
+    "Right_Index",
+    "Right_Middle",
+    "Right_Ring",
+    "Right_Pinky"
 };
 
 std::vector<std::string> Right_Hand_Targets = {
-    "Right Thumb",
-    "Right Index",
-    "Right Middle",
-    "Right Ring",
-    "Right Pinky",
+    "Right_Thumb",
+    "Right_Index",
+    "Right_Middle",
+    "Right_Ring",
+    "Right_Pinky",
 
-    "Left Thumb",
-    "Left Index",
-    "Left Middle",
-    "Left Ring",
-    "Left Pinky"
+    "Left_Thumb",
+    "Left_Index",
+    "Left_Middle",
+    "Left_Ring",
+    "Left_Pinky"
 };
 
 void FingerSaberSettings::ModSettingsViewController::DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling) 

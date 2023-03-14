@@ -1,18 +1,16 @@
 {
-  "_QPVersion": "1.0.0",
-  "name": "FingerSaber",
-  "id": "fingersaber",
-  "author": "Henri",
-  "version": "0.1.4",
-  "coverImage": "Cover.jpg",
+  "_QPVersion": "0.1.1",
+  "name": "${mod_name}",
+  "id": "${mod_id}",
+  "author": "piskndar, Henri",
+  "version": "0.2.0",
   "packageId": "com.beatgames.beatsaber",
   "packageVersion": "1.28.0_4124311467",
-  "description": "Beat Saber At Your Finger Tips. @drumtool#4435",
+  "description": "Allows you to play Beat Saber with your fingers!",
+  "coverImage": "cover.jpg",
   "dependencies": [],
   "modFiles": [],
   "libraryFiles": [],
   "fileCopies": [],
   "copyExtensions": []
 }
-
-
