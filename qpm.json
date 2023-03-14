@@ -3,7 +3,7 @@
   "dependenciesDir": "extern",
   "info": {
     "name": "FingerSaber",
-    "id": "FingerSaber",
+    "id": "fingersaber",
     "version": "0.1.4",
     "url": null,
     "additionalData": {
