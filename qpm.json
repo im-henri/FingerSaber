@@ -4,10 +4,11 @@
   "info": {
     "name": "FingerSaber",
     "id": "fingersaber",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "url": null,
     "additionalData": {
-      "overrideSoName": "libfingersaber.so"
+      "overrideSoName": "libfingersaber.so",
+      "cmake": true
     }
   },
   "dependencies": [
@@ -42,9 +43,34 @@
     },
     {
       "id": "custom-types",
-      "versionRange": "^0.15.23",
+      "versionRange": "^0.15.24",
       "additionalData": {}
     }
   ],
-  "additionalData": {}
+  "workspace": {
+    "scripts": {
+      "logcat": [
+        "pwsh ./scripts/start-logging.ps1"
+      ],
+      "build": [
+        "pwsh ./scripts/build.ps1"
+      ],
+      "copy": [
+        "pwsh ./scripts/copy.ps1"
+      ],
+      "stack": [
+        "pwsh ./scripts/ndk-stack.ps1"
+      ],
+      "qmod": [
+        "pwsh ./scripts/build.ps1",
+        "pwsh ./scripts/createqmod.ps1"
+      ],
+      "tomb": [
+        "pwsh ./scripts/pull-tombstone.ps1"
+      ],
+      "restart": [
+        "pwsh ./scripts/restart-game.ps1"
+      ]
+    }
+  },"additionalData": {}
 }

@@ -1,1 +1,1 @@
-D:\BSMTools\android-ndk-r25c
+C:\Users\henri\Desktop\QuestModding\Tools\android-ndk-r25c
