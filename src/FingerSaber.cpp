@@ -59,7 +59,7 @@
 
 #include "UnityEngine/LineRenderer.hpp"
 #include "UnityEngine/Material.hpp"
-#include "UnityEngine/Color.hpp" 
+#include "UnityEngine/Color.hpp"
 
 #include "UnityEngine/Resources.hpp"
 
@@ -71,14 +71,14 @@ FingerSaber modManager;
 
 void FingerSaber::InstallHooks() {
     _Hook_SceneManager_SetActiveScene();
-    //_Hook_OculusVRHelper_VRControllersInputManager();
-    _Hook_Saber_ManualUpdate();
+    _Hook_MultiplayerSpectatorController_SwitchToSpectatingSpot();
     _Hook_SaberModelController_Init();
     _Hook_GamePause_Pause();
     _Hook_GamePause_WillResume();
+    _Hook_MultiplayerLocalActivePlayerGameplayManager_PerformPlayerFail();
     _Hook_BoneVisualization_Update();
-    
-    _Hook_SOME_HOOK_METHOD();
+
+    _Hook_menu_saber_functionality();
 }
 
 const UnityEngine::Color defaultRightColor{0.156863, 0.556863, 0.823529, 1.000000};
@@ -115,7 +115,7 @@ void FingerSaber::_InitializeOculusHands(){
 
     auto rightHandTrackingGo = UnityEngine::GameObject::New_ctor(("rightHandTracking"));
     rightHandTrackingGo->get_transform()->set_parent(rightHandAnchor->get_transform());
-    
+
     rightOVRHand = rightHandTrackingGo->AddComponent<GlobalNamespace::OVRHand*>();
     rightOVRHand->HandType = GlobalNamespace::OVRHand::Hand::HandRight;
 
@@ -123,23 +123,23 @@ void FingerSaber::_InitializeOculusHands(){
     rightOVRSkeleton->skeletonType = GlobalNamespace::OVRSkeleton::SkeletonType::HandRight;
     rightOVRSkeleton->updateRootPose = true;
     rightOVRSkeleton->Initialize();
-    
+
     GlobalNamespace::OVRSkeletonRenderer* rightOVRSkeletonRenderer = rightHandTrackingGo->AddComponent<GlobalNamespace::OVRSkeletonRenderer*>();
     rightHandSkeletonMat->SetColor("_Color", defaultRightColor);
     rightOVRSkeletonRenderer->skeletonMaterial=rightHandSkeletonMat;
     rightOVRSkeletonRenderer->systemGestureMaterial=rightHandSkeletonMat;
     rightOVRSkeletonRenderer->Initialize();
- 
+
     getLogger().info("rightHandTracking MENU Stuff Created");
 
     // ---
-   
+
     UnityEngine::GameObject* leftHandAnchor = UnityEngine::GameObject::New_ctor(("leftHandAnchor"));
     leftHandAnchor->get_transform()->set_parent(handTrackingObjectsParent->get_transform());
-    
+
     auto leftHandTrackingGo = UnityEngine::GameObject::New_ctor(("leftHandTracking"));
     leftHandTrackingGo->get_transform()->set_parent(leftHandAnchor->get_transform());
-    
+
     leftOVRHand = leftHandTrackingGo->AddComponent<GlobalNamespace::OVRHand*>();
     leftOVRHand->HandType = GlobalNamespace::OVRHand::Hand::HandLeft;
 
@@ -147,16 +147,16 @@ void FingerSaber::_InitializeOculusHands(){
     leftOVRSkeleton->skeletonType = GlobalNamespace::OVRSkeleton::SkeletonType::HandLeft;
     leftOVRSkeleton->updateRootPose = true;
     leftOVRSkeleton->Initialize();
-    
+
     GlobalNamespace::OVRSkeletonRenderer* leftOVRSkeletonRenderer = leftHandTrackingGo->AddComponent<GlobalNamespace::OVRSkeletonRenderer*>();
     leftHandSkeletonMat->SetColor(("_Color"), defaultLeftColor);
     leftOVRSkeletonRenderer->skeletonMaterial=leftHandSkeletonMat;
     leftOVRSkeletonRenderer->systemGestureMaterial=leftHandSkeletonMat;
     leftOVRSkeletonRenderer->Initialize();
- 
+
 
     getLogger().info("leftHandTracking MENU Stuff Created");
-    
+
 }
 
 #include "UnityEngine/RenderSettings.hpp"
@@ -175,13 +175,13 @@ void FingerSaber::ChangeLeftSkeletonRendererColor(UnityEngine::Color col){
 }
 
 void FingerSaber::update_LRHandIsTracked(){
-    _oculusRHandIsTracked = rightOVRHand->IsTracked; 
+    _oculusRHandIsTracked = rightOVRHand->IsTracked;
     _oculusLHandIsTracked = leftOVRHand->IsTracked;
 }
 void FingerSaber::update_LRHandClickRequested(){
-    _rHandClickRequested = GlobalNamespace::OVRInput::Get(GlobalNamespace::OVRInput::Button::One, GlobalNamespace::OVRInput::Controller::RHand) 
+    _rHandClickRequested = GlobalNamespace::OVRInput::Get(GlobalNamespace::OVRInput::Button::One, GlobalNamespace::OVRInput::Controller::RHand)
                 ? (_oculusRHandIsTracked) : false;
-    _lHandClickRequested = GlobalNamespace::OVRInput::Get(GlobalNamespace::OVRInput::Button::One, GlobalNamespace::OVRInput::Controller::LHand) 
+    _lHandClickRequested = GlobalNamespace::OVRInput::Get(GlobalNamespace::OVRInput::Button::One, GlobalNamespace::OVRInput::Controller::LHand)
                 ? (_oculusLHandIsTracked) : false;
 }
 
@@ -191,7 +191,7 @@ void FingerSaber::update_LRTargetBone(){
      * Hand_IndexTip    = Hand_Start + Hand_MaxSkinnable + 1 // tip of the index finger
      * Hand_MiddleTip   = Hand_Start + Hand_MaxSkinnable + 2 // tip of the middle finger
      * Hand_RingTip     = Hand_Start + Hand_MaxSkinnable + 3 // tip of the ring finger
-     * Hand_PinkyTip    = Hand_Start + Hand_MaxSkinnable + 4 // tip of the pinky 
+     * Hand_PinkyTip    = Hand_Start + Hand_MaxSkinnable + 4 // tip of the pinky
      * */
     int tipStart = GlobalNamespace::OVRSkeleton::BoneId::Hand_Start + GlobalNamespace::OVRSkeleton::BoneId::Hand_MaxSkinnable;
 

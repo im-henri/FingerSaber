@@ -4,22 +4,22 @@
 #include "GlobalNamespace/OVRSkeleton.hpp"
 #include "GlobalNamespace/OVRSkeletonRenderer.hpp"
 #include "GlobalNamespace/OVRSkeletonRenderer_BoneVisualization.hpp"
- 
+
 MAKE_HOOK_MATCH(
-    BoneVisualization_Update, 
+    BoneVisualization_Update,
     &GlobalNamespace::OVRSkeletonRenderer::BoneVisualization::Update,
     void,
     GlobalNamespace::OVRSkeletonRenderer::BoneVisualization* self,
 
-    float scale, 
+    float scale,
     bool shouldRender,
-    bool shouldUseSystemGestureMaterial, 
-    GlobalNamespace::OVRSkeletonRenderer::ConfidenceBehavior confidenceBehavior, 
+    bool shouldUseSystemGestureMaterial,
+    GlobalNamespace::OVRSkeletonRenderer::ConfidenceBehavior confidenceBehavior,
     GlobalNamespace::OVRSkeletonRenderer::SystemGestureBehavior systemGestureBehavior
 ) {
-    
+
     float scale_in;
-    if( modManager.is_scene_GameCore == true ){
+    if( modManager.is_scene_GameCore == true && modManager.multiplayerGameFailed == false){
         scale_in = 7.5f;
     }
     else{
@@ -28,10 +28,10 @@ MAKE_HOOK_MATCH(
 
     BoneVisualization_Update(
         self,
-        scale_in, 
+        scale_in,
         shouldRender,
-        shouldUseSystemGestureMaterial, 
-        confidenceBehavior, 
+        shouldUseSystemGestureMaterial,
+        confidenceBehavior,
         systemGestureBehavior
     );
 

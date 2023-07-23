@@ -117,5 +117,6 @@
         "__memory": "cpp",
         "format": "cpp",
         "stop_token": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }
