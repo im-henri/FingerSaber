@@ -17,11 +17,14 @@
 #include "UnityEngine/Vector3.hpp"
 #include "UnityEngine/Quaternion.hpp"
 
+#include "GlobalNamespace/SaberManager.hpp"
+#include "GlobalNamespace/MultiplayerSpectatorController.hpp"
+
 class FingerSaber{
     public:
-        
+
         void InstallHooks();
-        
+
         // --- Public Methods ---
 
         // Creates new oculus hand things
@@ -31,8 +34,8 @@ class FingerSaber{
 
         void ChangeRightSkeletonRendererColor(UnityEngine::Color col);
         void ChangeLeftSkeletonRendererColor(UnityEngine::Color col);
-        
-        void createNewSkeletonMaterials(); 
+
+        void createNewSkeletonMaterials();
 
         bool getRHandClickRequested() { return _rHandClickRequested; }
         bool getLHandClickRequested() { return _lHandClickRequested; }
@@ -56,25 +59,33 @@ class FingerSaber{
 
         GlobalNamespace::PauseController* pauseController = nullptr;
 
-        UnityEngine::GameObject* handTrackingObjectsParent  = nullptr; 
+        UnityEngine::GameObject* handTrackingObjectsParent  = nullptr;
 
         GlobalNamespace::OVRHand*     rightOVRHand = nullptr;
         GlobalNamespace::OVRHand*     leftOVRHand  = nullptr;
         GlobalNamespace::OVRSkeleton* rightOVRSkeleton = nullptr;
         GlobalNamespace::OVRSkeleton* leftOVRSkeleton  = nullptr;
-         
+
         UnityEngine::Material * rightHandSkeletonMat = nullptr; // Createdd win new_ctor
         UnityEngine::Material * leftHandSkeletonMat  = nullptr; // Createdd win new_ctor
-        
+
         UnityEngine::Transform* r_saber_TF = nullptr;
         UnityEngine::Transform* l_saber_TF = nullptr;
-
 
         UnityEngine::Quaternion menu_l_quaternion = UnityEngine::Quaternion(0, 0, 0);
         UnityEngine::Quaternion menu_r_quaternion = UnityEngine::Quaternion(0, 0, 0);
         UnityEngine::Vector3 menu_l_vector3 = UnityEngine::Vector3(0, 0, 0);
         UnityEngine::Vector3 menu_r_vector3 = UnityEngine::Vector3(0, 0, 0);
-        
+
+
+        // In multiplayer, there are many sabers. These help detect
+        // local player sabers.
+        GlobalNamespace::Saber* local_player_saber_l = nullptr;
+        GlobalNamespace::Saber* local_player_saber_r = nullptr;
+        // Also needed for multiplayer. When player dies, must enable
+        // the menu saber movement again.
+        bool multiplayerGameFailed = false;
+        GlobalNamespace::MultiplayerSpectatorController* mp_spectatorController = nullptr;
 
     private:
         bool _rHandClickRequested = false;
@@ -85,18 +96,15 @@ class FingerSaber{
 
         // Hook Install Calls
         void _Hook_SceneManager_SetActiveScene();
-        //void _Hook_OculusVRHelper_VRControllersInputManager();
-        void _Hook_Saber_ManualUpdate();
+        void _Hook_MultiplayerSpectatorController_SwitchToSpectatingSpot();
         void _Hook_SaberModelController_Init();
         void _Hook_GamePause_Pause();
         void _Hook_GamePause_WillResume();
-
+        void _Hook_MultiplayerLocalActivePlayerGameplayManager_PerformPlayerFail();
         void _Hook_BoneVisualization_Update();
 
-        void _Hook_SOME_HOOK_METHOD();
+        void _Hook_menu_saber_functionality();
 
-       
-        
 };
 
 extern FingerSaber modManager;

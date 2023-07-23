@@ -27,8 +27,8 @@
 #include <string>
 
 MAKE_HOOK_MATCH(
-    SceneManager_SetActiveScene, 
-    &UnityEngine::SceneManagement::SceneManager::SetActiveScene, 
+    SceneManager_SetActiveScene,
+    &UnityEngine::SceneManagement::SceneManager::SetActiveScene,
     bool,
     UnityEngine::SceneManagement::Scene scene
 ) {
@@ -50,7 +50,11 @@ MAKE_HOOK_MATCH(
 
     // Re-set at SabeModelController_Init (when game starts).
     modManager.pauseController = nullptr;
-    
+    modManager.local_player_saber_l = nullptr;
+    modManager.local_player_saber_r = nullptr;
+    modManager.multiplayerGameFailed = false;
+    modManager.mp_spectatorController = nullptr;
+
     if(ret == true){
         getLogger().info("New scene name: %s", sceneName.c_str());
 
@@ -71,6 +75,6 @@ MAKE_HOOK_MATCH(
 }
 
 void FingerSaber::_Hook_SceneManager_SetActiveScene(){
-    
+
     INSTALL_HOOK(getLogger(), SceneManager_SetActiveScene);
 }
