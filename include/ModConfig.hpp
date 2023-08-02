@@ -12,6 +12,7 @@ DECLARE_CONFIG(ModConfig,
     CONFIG_VALUE(OtherHandClicks, bool, "OtherHandClicks", false);
     CONFIG_VALUE(ModEnabled, bool, "ModEnabled", true);
     CONFIG_VALUE(HandMode, bool, "HandMode", false);
+    CONFIG_VALUE(SmoothedMenuHands, bool, "SmoothedMenuHands", true);
     CONFIG_VALUE(LeftHandTargetIdx,  int, "LeftHandTargetIdx",  1);
     CONFIG_VALUE(RightHandTargetIdx, int, "RightHandTargetIdx", 1);
 )

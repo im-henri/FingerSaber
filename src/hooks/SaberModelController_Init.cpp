@@ -53,11 +53,11 @@ MAKE_HOOK_MATCH(
 
         bool rightsaber_bool = true;
         if (saber->get_saberType() == GlobalNamespace::SaberType::SaberA) rightsaber_bool = false;
-        if (rightsaber_bool) modManager.r_saber_TF = saber->get_transform();
-        else                 modManager.l_saber_TF = saber->get_transform();
+        if (rightsaber_bool) modManager.r_saber_TF = saber->get_transform()->get_parent();
+        else                 modManager.l_saber_TF = saber->get_transform()->get_parent();
 
-        if (getModConfig().ModEnabled.GetValue() == true) {
-
+        if (getModConfig().ModEnabled.GetValue() == true)
+        {
             if(getModConfig().HandMode.GetValue() == false){
                 float sScale = 1.0f/6.5f;
                 saber->get_transform()->set_localScale(UnityEngine::Vector3{sScale,sScale,sScale});

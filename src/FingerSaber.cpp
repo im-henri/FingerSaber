@@ -103,6 +103,8 @@ bool FingerSaber::_Destroy_OculusHands(){
 void FingerSaber::_InitializeOculusHands(){
     getLogger().info("Oculus Hand MENU Initialization ..");
 
+    createNewSkeletonMaterials();
+
     this->_Destroy_OculusHands();
 
     handTrackingObjectsParent = UnityEngine::GameObject::New_ctor(("HandTracking_container"));
@@ -124,13 +126,13 @@ void FingerSaber::_InitializeOculusHands(){
     rightOVRSkeleton->updateRootPose = true;
     rightOVRSkeleton->Initialize();
 
-    GlobalNamespace::OVRSkeletonRenderer* rightOVRSkeletonRenderer = rightHandTrackingGo->AddComponent<GlobalNamespace::OVRSkeletonRenderer*>();
+    this->rightOVRSkeletonRenderer = rightHandTrackingGo->AddComponent<GlobalNamespace::OVRSkeletonRenderer*>();
     rightHandSkeletonMat->SetColor("_Color", defaultRightColor);
     rightOVRSkeletonRenderer->skeletonMaterial=rightHandSkeletonMat;
     rightOVRSkeletonRenderer->systemGestureMaterial=rightHandSkeletonMat;
     rightOVRSkeletonRenderer->Initialize();
 
-    getLogger().info("rightHandTracking MENU Stuff Created");
+    getLogger().info("Right Handtracking stuff initialized");
 
     // ---
 
@@ -148,14 +150,13 @@ void FingerSaber::_InitializeOculusHands(){
     leftOVRSkeleton->updateRootPose = true;
     leftOVRSkeleton->Initialize();
 
-    GlobalNamespace::OVRSkeletonRenderer* leftOVRSkeletonRenderer = leftHandTrackingGo->AddComponent<GlobalNamespace::OVRSkeletonRenderer*>();
+    this->leftOVRSkeletonRenderer = leftHandTrackingGo->AddComponent<GlobalNamespace::OVRSkeletonRenderer*>();
     leftHandSkeletonMat->SetColor(("_Color"), defaultLeftColor);
     leftOVRSkeletonRenderer->skeletonMaterial=leftHandSkeletonMat;
     leftOVRSkeletonRenderer->systemGestureMaterial=leftHandSkeletonMat;
     leftOVRSkeletonRenderer->Initialize();
 
-
-    getLogger().info("leftHandTracking MENU Stuff Created");
+    getLogger().info("Left Handtracking stuff initialized");
 
 }
 

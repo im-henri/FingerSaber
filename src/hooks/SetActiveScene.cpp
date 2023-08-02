@@ -48,27 +48,22 @@ MAKE_HOOK_MATCH(
     bool ret = SceneManager_SetActiveScene(scene);
     // Actual function call
 
-    // Re-set at SabeModelController_Init (when game starts).
+    // Re-set things at scene change
     modManager.pauseController = nullptr;
+    modManager.is_GamePaused = false;
     modManager.local_player_saber_l = nullptr;
     modManager.local_player_saber_r = nullptr;
     modManager.multiplayerGameFailed = false;
     modManager.mp_spectatorController = nullptr;
-
+    modManager.vrcontroller_r = nullptr;
+    modManager.vrcontroller_l = nullptr;
     if(ret == true){
         getLogger().info("New scene name: %s", sceneName.c_str());
 
-        if(is_MainMenu == true || is_HealthWarning == true){
-            if(modManager.leftHandSkeletonMat == nullptr){
-                modManager.createNewSkeletonMaterials();
-            }
-        }
-
-        if( (is_ShaderWarmup == false) && (is_EmptyTransition == false)){
+        if((is_ShaderWarmup == false) && (is_EmptyTransition == false)){
             modManager._InitializeOculusHands();
         }
         modManager.is_scene_GameCore = is_GameCore;
-
     }
 
     return ret;

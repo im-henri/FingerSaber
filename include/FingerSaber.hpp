@@ -19,6 +19,7 @@
 
 #include "GlobalNamespace/SaberManager.hpp"
 #include "GlobalNamespace/MultiplayerSpectatorController.hpp"
+#include "GlobalNamespace/VRController.hpp"
 
 class FingerSaber{
     public:
@@ -48,7 +49,6 @@ class FingerSaber{
         void update_LRTargetBone();
 
         // Public variables
-        bool oculusHandsExist = false;
         bool is_scene_GameCore = false;
         bool is_GamePaused = false;
 
@@ -66,6 +66,9 @@ class FingerSaber{
         GlobalNamespace::OVRSkeleton* rightOVRSkeleton = nullptr;
         GlobalNamespace::OVRSkeleton* leftOVRSkeleton  = nullptr;
 
+        GlobalNamespace::OVRSkeletonRenderer* rightOVRSkeletonRenderer = nullptr;
+        GlobalNamespace::OVRSkeletonRenderer* leftOVRSkeletonRenderer  = nullptr;
+
         UnityEngine::Material * rightHandSkeletonMat = nullptr; // Createdd win new_ctor
         UnityEngine::Material * leftHandSkeletonMat  = nullptr; // Createdd win new_ctor
 
@@ -77,6 +80,8 @@ class FingerSaber{
         UnityEngine::Vector3 menu_l_vector3 = UnityEngine::Vector3(0, 0, 0);
         UnityEngine::Vector3 menu_r_vector3 = UnityEngine::Vector3(0, 0, 0);
 
+        GlobalNamespace::VRController* vrcontroller_r = nullptr;
+        GlobalNamespace::VRController* vrcontroller_l = nullptr;
 
         // In multiplayer, there are many sabers. These help detect
         // local player sabers.
