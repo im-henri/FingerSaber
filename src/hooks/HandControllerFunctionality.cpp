@@ -32,7 +32,7 @@ MAKE_HOOK_MATCH(
 ) {
 
     // Only call original function when hands are not tracked and mod is not enabled
-    if ((getModConfig().ModEnabled.GetValue() == false) && (modManager.getEitherHandIsTracked() == false)){
+    if (modManager.getEitherHandIsTracked() == false){
         VRController_Update(self);
     }
 
