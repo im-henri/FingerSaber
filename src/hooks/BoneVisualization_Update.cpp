@@ -1,15 +1,15 @@
 #include "FingerSaber.hpp"
 #include "main.hpp"
+#include "logging.hpp"
 
 #include "GlobalNamespace/OVRSkeleton.hpp"
 #include "GlobalNamespace/OVRSkeletonRenderer.hpp"
-#include "GlobalNamespace/OVRSkeletonRenderer_BoneVisualization.hpp"
 #include "GlobalNamespace/VRControllerTransformOffset.hpp"
 
 #include "UnityEngine/Time.hpp"
 
 #include "ModConfig.hpp"
-
+#include "math.hpp"
 MAKE_HOOK_MATCH(
     BoneVisualization_Update,
     &GlobalNamespace::OVRSkeletonRenderer::BoneVisualization::Update,
@@ -51,6 +51,7 @@ MAKE_HOOK_MATCH(
     void,
     GlobalNamespace::OVRSkeletonRenderer* self
 ) {
+    DEBUG("OVRSkeletonRenderer_Update");
 
     OVRSkeletonRenderer_Update(self);
 
@@ -83,21 +84,22 @@ MAKE_HOOK_MATCH(
 
     // Left hand / controller
     if (modManager.leftOVRSkeletonRenderer == self){
+        DEBUG("Left hand found");
         vrcntrl = modManager.vrcontroller_l;
         if( (getModConfig().HandMode.GetValue() == true) ) {
-            targBone  = modManager.leftOVRSkeleton->bones->get_Item(GlobalNamespace::OVRSkeleton::BoneId::Hand_WristRoot);
+            targBone  = modManager.leftOVRSkeleton->_bones->get_Item((int) GlobalNamespace::OVRSkeleton::BoneId::Hand_WristRoot);
             targetPos = targBone->get_Transform()->get_position() + modManager.l_saber_TF->get_forward()*0.15;
             rotOffset = UnityEngine::Quaternion::Euler(0, -90, 180);
         }
         else{
             if(modManager.leftHand_isTargetHandRight == false){
-                targBone = modManager.leftOVRSkeleton->bones->get_Item(modManager.leftTargetBone);
+                targBone = modManager.leftOVRSkeleton->_bones->get_Item((int)modManager.leftTargetBone);
                 rotOffset = UnityEngine::Quaternion::Euler(0, -90, 180);
             } else{
-                targBone = modManager.rightOVRSkeleton->bones->get_Item(modManager.leftTargetBone);
+                targBone = modManager.rightOVRSkeleton->_bones->get_Item((int)modManager.leftTargetBone);
                 rotOffset = UnityEngine::Quaternion::Euler(0, 90, 0);
             }
-            targetPos = targBone->get_Transform()->get_position() - modManager.l_saber_TF->get_forward()*0.15;
+            targetPos = targBone->get_Transform()->get_position() - modManager.l_saber_TF->get_forward() * 0.15f;
         }
         targetRot = targBone->get_Transform()->get_rotation() * rotOffset;
         vrcntrl->get_transform()->set_rotation(targetRot);
@@ -106,21 +108,22 @@ MAKE_HOOK_MATCH(
 
     // Right hand / controller
     if (modManager.rightOVRSkeletonRenderer == self){
+        DEBUG("Right hand found");
         vrcntrl = modManager.vrcontroller_r;
         if( (getModConfig().HandMode.GetValue() == true) ) {
-            targBone = modManager.rightOVRSkeleton->bones->get_Item(GlobalNamespace::OVRSkeleton::BoneId::Hand_WristRoot);
-            targetPos = targBone->get_Transform()->get_position() + modManager.r_saber_TF->get_forward()*0.15;
+            targBone = modManager.rightOVRSkeleton->_bones->get_Item((int) GlobalNamespace::OVRSkeleton::BoneId::Hand_WristRoot);
+            targetPos = targBone->get_Transform()->get_position() + modManager.r_saber_TF->get_forward()*0.15f;
             rotOffset = UnityEngine::Quaternion::Euler(0, 90, 0);
         }
         else{
             if(modManager.rightHand_isTargetHandLeft == false){
-                targBone = modManager.rightOVRSkeleton->bones->get_Item(modManager.rightTargetBone);
+                targBone = modManager.rightOVRSkeleton->_bones->get_Item((int)modManager.rightTargetBone);
                 rotOffset = UnityEngine::Quaternion::Euler(0, 90, 0);
             } else{
-                targBone = modManager.leftOVRSkeleton->bones->get_Item(modManager.rightTargetBone);
+                targBone = modManager.leftOVRSkeleton->_bones->get_Item((int)modManager.rightTargetBone);
                 rotOffset = UnityEngine::Quaternion::Euler(0, -90, 180);
             }
-            targetPos = targBone->get_Transform()->get_position() - modManager.r_saber_TF->get_forward()*0.15;
+            targetPos = targBone->get_Transform()->get_position() - modManager.r_saber_TF->get_forward()*0.15f;
         }
         targetRot = targBone->get_Transform()->get_rotation() * rotOffset;
         vrcntrl->get_transform()->set_rotation(targetRot);
@@ -130,6 +133,6 @@ MAKE_HOOK_MATCH(
 }
 
 void FingerSaber::_Hook_BoneVisualization_Update(){
-    INSTALL_HOOK(getLogger(), BoneVisualization_Update);
-    INSTALL_HOOK(getLogger(), OVRSkeletonRenderer_Update);
+    INSTALL_HOOK(Logger, BoneVisualization_Update);
+    INSTALL_HOOK(Logger, OVRSkeletonRenderer_Update);
 }

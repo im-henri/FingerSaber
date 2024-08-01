@@ -10,10 +10,10 @@
 
 #include "UnityEngine/Component.hpp"
 
-template <typename T>
-void Log_GetComponents(UnityEngine::GameObject* gameobj, Logger& logger);
-template <typename T>
-void Log_GetComponentsInChildren(UnityEngine::GameObject* gameobj, Logger& logger);
-
-void Write_To_Log(std::stringstream& logStream, std::string logName, Logger& logger);
-void Write_To_Log_AllGameObjectsInScene(std::string logName, Logger& logger);
+//template <typename T>
+//void Log_GetComponents(UnityEngine::GameObject* gameobj);
+//template <typename T>
+//void Log_GetComponentsInChildren(UnityEngine::GameObject* gameobj);
+//
+//void Write_To_Log(std::stringstream& logStream, std::string logName);
+//void Write_To_Log_AllGameObjectsInScene(std::string logName);

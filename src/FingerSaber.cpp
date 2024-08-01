@@ -3,7 +3,6 @@
 #include "ModConfig.hpp"
 
 #include "GlobalNamespace/OVRInput.hpp"
-#include "GlobalNamespace/OVRInput_Button.hpp"
 #include "GlobalNamespace/OVRManager.hpp"
 
 
@@ -16,7 +15,6 @@
 #include "UnityEngine/HideFlags.hpp"
 #include "UnityEngine/Resources.hpp"
 
-#include "beatsaber-hook/shared/utils/logging.hpp"
 #include "GlobalNamespace/ColorScheme.hpp"
 #include "GlobalNamespace/ColorManager.hpp"
 #include "GlobalNamespace/ColorManagerInstaller.hpp"
@@ -25,13 +23,12 @@
 
 #include "GlobalNamespace/SaberType.hpp"
 #include "GlobalNamespace/ColorSchemesSettings.hpp"
-#include "codegen/include/System/Collections/Generic/Dictionary_2.hpp"
+#include "System/Collections/Generic/Dictionary_2.hpp"
 
 #include <sstream>
 #include <string>
 
 #include "GlobalNamespace/OVRPlugin.hpp"
-#include "GlobalNamespace/OVRPlugin_HandFinger.hpp"
 #include "GlobalNamespace/OVRHand.hpp"
 
 #include "GlobalNamespace/FirstPersonFlyingController.hpp"
@@ -42,10 +39,7 @@
 
 #include "GlobalNamespace/OVRSkeleton.hpp"
 #include "GlobalNamespace/OVRSkeletonRenderer.hpp"
-#include "GlobalNamespace/OVRSkeletonRenderer_BoneVisualization.hpp"
-#include "GlobalNamespace/OVRSkeleton_SkeletonPoseData.hpp"
 #include "GlobalNamespace/OVRBone.hpp"
-#include "GlobalNamespace/OVRPlugin_Skeleton2.hpp"
 
 #include "UnityEngine/EventSystems/PointerInputModule.hpp"
 #include "VRUIControls/VRInputModule.hpp"
@@ -65,7 +59,7 @@
 
 #include "ModUtils.hpp"
 #include "UnityEngine/Resources.hpp"
-
+#include "logging.hpp"
 
 FingerSaber modManager;
 
@@ -101,7 +95,7 @@ bool FingerSaber::_Destroy_OculusHands(){
 }
 
 void FingerSaber::_InitializeOculusHands(){
-    getLogger().info("Oculus Hand MENU Initialization ..");
+    INFO("Oculus Hand MENU Initialization ..");
 
     createNewSkeletonMaterials();
 
@@ -122,17 +116,17 @@ void FingerSaber::_InitializeOculusHands(){
     rightOVRHand->HandType = GlobalNamespace::OVRHand::Hand::HandRight;
 
     rightOVRSkeleton = rightHandTrackingGo->AddComponent<GlobalNamespace::OVRSkeleton*>();
-    rightOVRSkeleton->skeletonType = GlobalNamespace::OVRSkeleton::SkeletonType::HandRight;
-    rightOVRSkeleton->updateRootPose = true;
+    rightOVRSkeleton->_skeletonType = GlobalNamespace::OVRSkeleton::SkeletonType::HandRight;
+    rightOVRSkeleton->_updateRootPose = true;
     rightOVRSkeleton->Initialize();
 
     this->rightOVRSkeletonRenderer = rightHandTrackingGo->AddComponent<GlobalNamespace::OVRSkeletonRenderer*>();
     rightHandSkeletonMat->SetColor("_Color", defaultRightColor);
-    rightOVRSkeletonRenderer->skeletonMaterial=rightHandSkeletonMat;
-    rightOVRSkeletonRenderer->systemGestureMaterial=rightHandSkeletonMat;
+    rightOVRSkeletonRenderer->_skeletonMaterial=rightHandSkeletonMat;
+    rightOVRSkeletonRenderer->_systemGestureMaterial=rightHandSkeletonMat;
     rightOVRSkeletonRenderer->Initialize();
 
-    getLogger().info("Right Handtracking stuff initialized");
+    INFO("Right Handtracking stuff initialized");
 
     // ---
 
@@ -146,17 +140,17 @@ void FingerSaber::_InitializeOculusHands(){
     leftOVRHand->HandType = GlobalNamespace::OVRHand::Hand::HandLeft;
 
     leftOVRSkeleton = leftHandTrackingGo->AddComponent<GlobalNamespace::OVRSkeleton*>();
-    leftOVRSkeleton->skeletonType = GlobalNamespace::OVRSkeleton::SkeletonType::HandLeft;
-    leftOVRSkeleton->updateRootPose = true;
+    leftOVRSkeleton->_skeletonType = GlobalNamespace::OVRSkeleton::SkeletonType::HandLeft;
+    leftOVRSkeleton->_updateRootPose = true;
     leftOVRSkeleton->Initialize();
 
     this->leftOVRSkeletonRenderer = leftHandTrackingGo->AddComponent<GlobalNamespace::OVRSkeletonRenderer*>();
     leftHandSkeletonMat->SetColor(("_Color"), defaultLeftColor);
-    leftOVRSkeletonRenderer->skeletonMaterial=leftHandSkeletonMat;
-    leftOVRSkeletonRenderer->systemGestureMaterial=leftHandSkeletonMat;
+    leftOVRSkeletonRenderer->_skeletonMaterial=leftHandSkeletonMat;
+    leftOVRSkeletonRenderer->_systemGestureMaterial=leftHandSkeletonMat;
     leftOVRSkeletonRenderer->Initialize();
 
-    getLogger().info("Left Handtracking stuff initialized");
+    INFO("Left Handtracking stuff initialized");
 
 }
 
@@ -164,8 +158,14 @@ void FingerSaber::_InitializeOculusHands(){
 #include "UnityEngine/Shader.hpp"
 
 void FingerSaber::createNewSkeletonMaterials(){
-    leftHandSkeletonMat  = UnityEngine::Material::New_ctor(UnityEngine::Shader::Find(("Custom/SimpleLit")));
-    rightHandSkeletonMat = UnityEngine::Material::New_ctor(UnityEngine::Shader::Find(("Custom/SimpleLit")));
+    std::optional<UnityEngine::Shader*> simpleLit =
+      UnityEngine::Resources::FindObjectsOfTypeAll<UnityEngine::Shader*>().front([&](auto const& e) { return e->get_name() == "Custom/SimpleLit"; });
+    if (!simpleLit.has_value()) {
+        INFO("SimpleLit shader not found");
+        return;
+    }
+    leftHandSkeletonMat  = UnityEngine::Material::New_ctor(simpleLit.value());
+    rightHandSkeletonMat = UnityEngine::Material::New_ctor(simpleLit.value());
 }
 
 void FingerSaber::ChangeRightSkeletonRendererColor(UnityEngine::Color col){
@@ -194,7 +194,7 @@ void FingerSaber::update_LRTargetBone(){
      * Hand_RingTip     = Hand_Start + Hand_MaxSkinnable + 3 // tip of the ring finger
      * Hand_PinkyTip    = Hand_Start + Hand_MaxSkinnable + 4 // tip of the pinky
      * */
-    int tipStart = GlobalNamespace::OVRSkeleton::BoneId::Hand_Start + GlobalNamespace::OVRSkeleton::BoneId::Hand_MaxSkinnable;
+    int tipStart = (int)GlobalNamespace::OVRSkeleton::BoneId::Hand_Start + (int)GlobalNamespace::OVRSkeleton::BoneId::Hand_MaxSkinnable;
 
     this->leftTargetBone  = tipStart + (getModConfig().LeftHandTargetIdx.GetValue()  % 5);
     this->rightTargetBone = tipStart + (getModConfig().RightHandTargetIdx.GetValue() % 5);

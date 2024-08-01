@@ -1,6 +1,6 @@
 #include "FingerSaber.hpp"
 #include "main.hpp"
-
+#include "logging.hpp"
 #include "ModConfig.hpp"
 
 #include "GlobalNamespace/MultiplayerSpectatorController.hpp"
@@ -29,5 +29,5 @@ MAKE_HOOK_MATCH(
 }
 
 void FingerSaber::_Hook_MultiplayerSpectatorController_SwitchToSpectatingSpot(){
-    INSTALL_HOOK(getLogger(), MultiplayerSpectatorController_SwitchToSpectatingSpot);
+    INSTALL_HOOK(Logger, MultiplayerSpectatorController_SwitchToSpectatingSpot);
 }

@@ -2,12 +2,8 @@
 #include "main.hpp"
 
 #include "ModConfig.hpp"
-
+#include "logging.hpp"
 #include "GlobalNamespace/OVRInput.hpp"
-#include "GlobalNamespace/OVRInput_Button.hpp"
-#include "GlobalNamespace/OVRInput_Axis1D.hpp"
-#include "GlobalNamespace/OVRInput_RawButton.hpp"
-
 #include "GlobalNamespace/IVRPlatformHelper.hpp"
 
 #include "UnityEngine/XR/XRNode.hpp"
@@ -23,6 +19,7 @@
 #include "GlobalNamespace/VRControllerTransformOffset.hpp"
 #include "UnityEngine/Time.hpp"
 #include "ModUtils.hpp"
+#include "math.hpp"
 
 MAKE_HOOK_MATCH(
     VRController_Update,
@@ -30,7 +27,8 @@ MAKE_HOOK_MATCH(
     void,
     GlobalNamespace::VRController* self
 ) {
-
+    // VRController_Update does not seem to run at all
+    DEBUG("VRController_Update");
     // Only call original function when hands are not tracked and mod is not enabled
     if (modManager.getEitherHandIsTracked() == false){
         VRController_Update(self);
@@ -38,14 +36,20 @@ MAKE_HOOK_MATCH(
 
     // Assigning vrcontrollers here so that they can be moved inside BoneVisualization Update
     // That way we can be sure that the controller positions are updated more efficiently.
-    if (!modManager.vrcontroller_r && (self->node.value == UnityEngine::XR::XRNode::RightHand))
+    if (!modManager.vrcontroller_r && (self->node.value__ == (int)UnityEngine::XR::XRNode::RightHand)){
+        DEBUG("Right hand found");
         modManager.vrcontroller_r = self;
-    else if (!modManager.vrcontroller_l && (self->node.value == UnityEngine::XR::XRNode::LeftHand))
+    }
+       
+    else if (!modManager.vrcontroller_l && (self->node.value__ == (int)UnityEngine::XR::XRNode::LeftHand)) {
+        DEBUG("Left hand found");
         modManager.vrcontroller_l = self;
+    }
 
 
     // Exit when hands are not currently visible
     if (modManager.getEitherHandIsTracked() == false){
+        DEBUG("Hands not tracked");
         return;
     }
 
@@ -58,7 +62,7 @@ MAKE_HOOK_MATCH(
         (modManager.is_GamePaused == true)      ||
         (modManager.multiplayerGameFailed == true)
     ) {
-        UnityEngine::Vector3 rotOffset = self->transformOffset->get_rotationOffset();
+        UnityEngine::Vector3 rotOffset = self->_transformOffset->get_rotationOffset();
         UnityEngine::Transform* hand_bone_tranform;
         UnityEngine::Quaternion* oldRot;
         UnityEngine::Vector3*    oldPos;
@@ -66,15 +70,15 @@ MAKE_HOOK_MATCH(
         const float xRot = 60;
         const float yRot = 0;
         const float zRot = 180;
-        if(self->node.value == UnityEngine::XR::XRNode::LeftHand){
+        if(self->node == UnityEngine::XR::XRNode::LeftHand){
             rotOffset = rotOffset + UnityEngine::Vector3( {90+180+xRot, -90+yRot, 0+zRot} );
-            hand_bone_tranform = modManager.leftOVRSkeleton->bones->get_Item(GlobalNamespace::OVRSkeleton::BoneId::Hand_WristRoot)->get_Transform();
+            hand_bone_tranform = modManager.leftOVRSkeleton->_bones->get_Item((int) GlobalNamespace::OVRSkeleton::BoneId::Hand_WristRoot)->get_Transform();
             oldRot = &modManager.menu_l_quaternion;
             oldPos = &modManager.menu_l_vector3;
         }
         else{
             rotOffset = rotOffset + UnityEngine::Vector3( {90+xRot,-90+yRot, 0+zRot} );
-            hand_bone_tranform = modManager.rightOVRSkeleton->bones->get_Item(GlobalNamespace::OVRSkeleton::BoneId::Hand_WristRoot)->get_Transform();
+            hand_bone_tranform = modManager.rightOVRSkeleton->_bones->get_Item((int) GlobalNamespace::OVRSkeleton::BoneId::Hand_WristRoot)->get_Transform();
             oldRot = &modManager.menu_r_quaternion;
             oldPos = &modManager.menu_r_vector3;
         }
@@ -164,7 +168,7 @@ MAKE_HOOK_MATCH(
 }
 
 void FingerSaber::_Hook_menu_saber_functionality(){
-    INSTALL_HOOK(getLogger(), OVRInput_Get_Axis1D);
-    INSTALL_HOOK(getLogger(), VRController_Update);
-    INSTALL_HOOK(getLogger(), OVRInput_Update);
+    INSTALL_HOOK(Logger, OVRInput_Get_Axis1D);
+    INSTALL_HOOK(Logger, VRController_Update);
+    INSTALL_HOOK(Logger, OVRInput_Update);
 }

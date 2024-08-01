@@ -5,9 +5,8 @@
 #include "GlobalNamespace/OculusVRHelper.hpp"
 
 #include "GlobalNamespace/OVRSkeleton.hpp"
-#include "GlobalNamespace/OVRSkeleton_SkeletonPoseData.hpp"
 #include "GlobalNamespace/OVRBone.hpp"
-#include "GlobalNamespace/OVRPlugin_Skeleton2.hpp"
+#include "GlobalNamespace/OVRPlugin.hpp"
 #include "GlobalNamespace/OVRHand.hpp"
 #include "GlobalNamespace/Saber.hpp"
 
@@ -75,10 +74,11 @@ class FingerSaber{
         UnityEngine::Transform* r_saber_TF = nullptr;
         UnityEngine::Transform* l_saber_TF = nullptr;
 
-        UnityEngine::Quaternion menu_l_quaternion = UnityEngine::Quaternion(0, 0, 0);
-        UnityEngine::Quaternion menu_r_quaternion = UnityEngine::Quaternion(0, 0, 0);
-        UnityEngine::Vector3 menu_l_vector3 = UnityEngine::Vector3(0, 0, 0);
-        UnityEngine::Vector3 menu_r_vector3 = UnityEngine::Vector3(0, 0, 0);
+        // Hopefully the original just needed an additional zero quaternion
+        UnityEngine::Quaternion menu_l_quaternion = UnityEngine::Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
+        UnityEngine::Quaternion menu_r_quaternion = UnityEngine::Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
+        UnityEngine::Vector3 menu_l_vector3 = UnityEngine::Vector3(0.0f, 0.0f, 0.0f);
+        UnityEngine::Vector3 menu_r_vector3 = UnityEngine::Vector3(0.0f, 0.0f, 0.0f);
 
         GlobalNamespace::VRController* vrcontroller_r = nullptr;
         GlobalNamespace::VRController* vrcontroller_l = nullptr;
