@@ -1,6 +1,6 @@
 #include "FingerSaber.hpp"
 #include "main.hpp"
-
+#include "logging.hpp"
 #include "ModConfig.hpp"
 
 #include "GlobalNamespace/SaberModelController.hpp"
@@ -18,7 +18,7 @@
 #include "GlobalNamespace/ColorManager.hpp"
 
 #include "ModUtils.hpp"
-
+#include "math.hpp"
 static int handInitCount = 0; // Hands always initialized as pair i.e. twice(even when playing one handed mode)
 
 MAKE_HOOK_MATCH(
@@ -30,7 +30,7 @@ MAKE_HOOK_MATCH(
     GlobalNamespace::Saber* saber
 ) {
 
-    getLogger().info("SaberModelController::Init()");
+    INFO("SaberModelController::Init()");
 
     SaberModelController_Init(self, parent, saber);
 
@@ -43,11 +43,11 @@ MAKE_HOOK_MATCH(
 
         // Still color the hands even if mod is not enabled.
         if(saber->get_saberType() == GlobalNamespace::SaberType::SaberB){
-            modManager.ChangeRightSkeletonRendererColor(self->colorManager->ColorForSaberType(GlobalNamespace::SaberType::SaberB));
+            modManager.ChangeRightSkeletonRendererColor(self->_colorManager->ColorForSaberType(GlobalNamespace::SaberType::SaberB));
             modManager.local_player_saber_r = saber;
         }
         if(saber->get_saberType() == GlobalNamespace::SaberType::SaberA){
-            modManager.ChangeLeftSkeletonRendererColor(self->colorManager->ColorForSaberType(GlobalNamespace::SaberType::SaberA));
+            modManager.ChangeLeftSkeletonRendererColor(self->_colorManager->ColorForSaberType(GlobalNamespace::SaberType::SaberA));
             modManager.local_player_saber_l = saber;
         }
 
@@ -70,6 +70,11 @@ MAKE_HOOK_MATCH(
             // (I assume its not always left or right saber that gets initialized last.)
             if (handInitCount%2 == 0){
                 auto VRGameCore = UnityEngine::GameObject::Find(("Origin/VRGameCore"));
+
+                if (!VRGameCore) {
+                    INFO("VRGameCore not found");
+                    return;
+                }
 
                 if(VRGameCore){
                     modManager.handTrackingObjectsParent->get_transform()->set_position(VRGameCore->get_transform()->get_position());
@@ -108,5 +113,5 @@ MAKE_HOOK_MATCH(
 
 void FingerSaber::_Hook_SaberModelController_Init(){
 
-    INSTALL_HOOK(getLogger(), SaberModelController_Init);
+    INSTALL_HOOK(Logger, SaberModelController_Init);
 }

@@ -26,11 +26,12 @@ set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # compile options used
-add_compile_options(-frtti -fexceptions)
-add_compile_options(-O3)
+add_compile_options(-frtti -fexceptions -fPIE -fPIC -fvisibility=hidden)
+add_compile_options(-O0)
 # compile definitions used
 add_compile_definitions(VERSION=\"${MOD_VERSION}\")
 add_compile_definitions(MOD_ID=\"${MOD_ID}\")
+add_compile_definitions(VERSION_LONG=0)
 
 # recursively get all src files
 RECURSE_FILES(cpp_file_list ${SOURCE_DIR}/*.cpp)

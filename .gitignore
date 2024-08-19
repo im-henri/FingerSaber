@@ -65,3 +65,6 @@ extern.cmake
 
 # QMOD Schema
 mod.json.schema
+
+# Ndk path
+ndkpath.txt

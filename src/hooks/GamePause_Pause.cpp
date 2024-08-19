@@ -1,6 +1,6 @@
 #include "FingerSaber.hpp"
 #include "main.hpp"
-
+#include "logging.hpp"
 #include "GlobalNamespace/GamePause.hpp"
 
 MAKE_HOOK_MATCH(
@@ -15,5 +15,5 @@ MAKE_HOOK_MATCH(
 }
 
 void FingerSaber::_Hook_GamePause_Pause(){
-    INSTALL_HOOK(getLogger(), GamePause_Pause);
+    INSTALL_HOOK(Logger, GamePause_Pause);
 }

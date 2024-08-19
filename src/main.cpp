@@ -1,47 +1,40 @@
 #include "main.hpp"
-
+#include "logging.hpp"
 #include "FingerSaber.hpp"
 #include "ModConfig.hpp"
 
 #include "ModSettingsViewController.hpp"
 #include "ModGameplaySetupMenu.hpp"
+#include "bsml/shared/Helpers/delegates.hpp"
+#include "bsml/shared/BSML.hpp"
 
-#include "questui/shared/QuestUI.hpp"
-
-static ModInfo modInfo; // Stores the ID and version of our mod, and is sent to the modloader upon startup
-
-
-// Returns a logger, useful for printing debug messages
-Logger& getLogger() {
-    static Logger* logger = new Logger(modInfo);
-    return *logger;
-}
+inline modloader::ModInfo modInfo = {MOD_ID, VERSION, 0};  // Stores the ID and version of our mod, and is sent to the modloader upon startup
 
 // Called at the early stages of game loading
-extern "C" void setup(ModInfo& info) {
+extern "C" __attribute__((visibility("default"))) void setup(CModInfo& info) {
     info.id = MOD_ID;
     info.version = VERSION;
-    modInfo = info;
+    modInfo.assign(info);
 	
     getModConfig().Init(modInfo);
-    getLogger().info("Completed setup!");
+    INFO("Completed setup!");
 }
 
 
 // Called later on in the game loading - a good time to install function hooks
-extern "C" void load() {
+extern "C" __attribute__((visibility("default"))) void load() {
     
     il2cpp_functions::Init();
-    QuestUI::Init();
+    BSML::Init();
 
-    getLogger().info("Installing hooks...");
+    INFO("Installing hooks...");
     modManager.InstallHooks();
-    getLogger().info("Installed all hooks!");
+    INFO("Installed all hooks!");
 
     custom_types::Register::AutoRegister();
-    QuestUI::Register::RegisterModSettingsViewController<FingerSaberSettings::ModSettingsViewController*>(modInfo);
-    QuestUI::Register::RegisterGameplaySetupMenu<FingerSaberSettings::ModGameplaySetupMenu*>(modInfo);
-    
+//    BSML::Register::RegisterMainMenu<FingerSaberSettings::ModSettingsViewController*>("FingerSaber");
+     BSML::Register::RegisterGameplaySetupTab<FingerSaberSettings::ModGameplaySetupMenu*>("FingerSaber");
+     BSML::Register::RegisterSettingsMenu<FingerSaberSettings::ModSettingsViewController*>("FingerSaber");
     modManager.update_LRTargetBone();
 
 }

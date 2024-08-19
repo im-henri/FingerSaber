@@ -2,7 +2,7 @@
 #include "main.hpp"
 
 #include "ModConfig.hpp"
-
+#include "logging.hpp"
 #include "GlobalNamespace/MultiplayerLocalActivePlayerGameplayManager.hpp"
 
 #include "GlobalNamespace/IMultiplayerSpectatingSpot.hpp"
@@ -30,5 +30,5 @@ MAKE_HOOK_MATCH(
 }
 
 void FingerSaber::_Hook_MultiplayerLocalActivePlayerGameplayManager_PerformPlayerFail(){
-    INSTALL_HOOK(getLogger(), MultiplayerLocalActivePlayerGameplayManager_PerformPlayerFail);
+    INSTALL_HOOK(Logger, MultiplayerLocalActivePlayerGameplayManager_PerformPlayerFail);
 }

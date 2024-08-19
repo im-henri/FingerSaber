@@ -1,4 +1,5 @@
 #include "main.hpp"
+#include "logging.hpp"
 #include "FingerSaber.hpp"
 
 #include "UnityEngine/SceneManagement/SceneManager.hpp"
@@ -13,7 +14,6 @@
 #include "UnityEngine/HideFlags.hpp"
 #include "UnityEngine/Resources.hpp"
 
-#include "beatsaber-hook/shared/utils/logging.hpp"
 #include "GlobalNamespace/ColorScheme.hpp"
 #include "GlobalNamespace/ColorManager.hpp"
 #include "GlobalNamespace/ColorManagerInstaller.hpp"
@@ -22,8 +22,7 @@
 
 #include "GlobalNamespace/SaberType.hpp"
 #include "GlobalNamespace/ColorSchemesSettings.hpp"
-#include "codegen/include/System/Collections/Generic/Dictionary_2.hpp"
-
+#include "System/Collections/Generic/Dictionary_2.hpp"
 #include <string>
 
 MAKE_HOOK_MATCH(
@@ -33,16 +32,18 @@ MAKE_HOOK_MATCH(
     UnityEngine::SceneManagement::Scene scene
 ) {
 
-    getLogger().info("SetActiveScene Hook()");
+    INFO("SetActiveScene Hook()");
 
     auto sceneName_il2str = scene.get_name();
-    auto sceneName = to_utf8(csstrtostr( sceneName_il2str ));
+    auto sceneName = sceneName_il2str;
 
-    bool is_MainMenu        = sceneName.compare("MainMenu") == 0;
-    bool is_ShaderWarmup    = sceneName.compare("ShaderWarmup") == 0;
-    bool is_HealthWarning   = sceneName.compare("HealthWarning") == 0;
-    bool is_GameCore        = sceneName.compare("GameCore") == 0;
-    bool is_EmptyTransition = sceneName.compare("EmptyTransition") == 0;
+    std::string sceneName_str = std::string(sceneName);
+
+    bool is_MainMenu        = sceneName_str == "MainMenu";
+    bool is_ShaderWarmup    = sceneName_str == "ShaderWarmup";
+    bool is_HealthWarning   = sceneName_str == "HealthWarning";
+    bool is_GameCore        = sceneName_str == "GameCore";
+    bool is_EmptyTransition = sceneName_str == "EmptyTransition";
 
     // Actual function call
     bool ret = SceneManager_SetActiveScene(scene);
@@ -58,7 +59,7 @@ MAKE_HOOK_MATCH(
     modManager.vrcontroller_r = nullptr;
     modManager.vrcontroller_l = nullptr;
     if(ret == true){
-        getLogger().info("New scene name: %s", sceneName.c_str());
+        INFO("New scene name: {}", sceneName_str);
 
         if((is_ShaderWarmup == false) && (is_EmptyTransition == false)){
             modManager._InitializeOculusHands();
@@ -71,5 +72,5 @@ MAKE_HOOK_MATCH(
 
 void FingerSaber::_Hook_SceneManager_SetActiveScene(){
 
-    INSTALL_HOOK(getLogger(), SceneManager_SetActiveScene);
+    INSTALL_HOOK(Logger, SceneManager_SetActiveScene);
 }
