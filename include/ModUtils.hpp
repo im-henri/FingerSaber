@@ -15,5 +15,5 @@
 //template <typename T>
 //void Log_GetComponentsInChildren(UnityEngine::GameObject* gameobj);
 //
-//void Write_To_Log(std::stringstream& logStream, std::string logName);
-//void Write_To_Log_AllGameObjectsInScene(std::string logName);
+void Write_To_Log(std::stringstream& logStream, std::string logName);
+void Log_AllGameObjectsInScene();

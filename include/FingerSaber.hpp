@@ -20,96 +20,91 @@
 #include "GlobalNamespace/MultiplayerSpectatorController.hpp"
 #include "GlobalNamespace/VRController.hpp"
 
-class FingerSaber{
-    public:
+class FingerSaber
+{
+public:
+    void InstallHooks();
 
-        void InstallHooks();
+    // --- Public Methods ---
 
-        // --- Public Methods ---
+    // Creates new oculus hand things
+    void _InitializeOculusHands();
+    // Tries to destory oculus hand things if they are found. Returns true if destroy call was initiated
+    bool _Destroy_OculusHands();
 
-        // Creates new oculus hand things
-        void _InitializeOculusHands();
-        // Tries to destory oculus hand things if they are found. Returns true if destroy call was initiated
-        bool _Destroy_OculusHands();
+    void ChangeRightSkeletonRendererColor(UnityEngine::Color col);
+    void ChangeLeftSkeletonRendererColor(UnityEngine::Color col);
 
-        void ChangeRightSkeletonRendererColor(UnityEngine::Color col);
-        void ChangeLeftSkeletonRendererColor(UnityEngine::Color col);
+    void createNewSkeletonMaterials();
 
-        void createNewSkeletonMaterials();
+    bool getRHandClickRequested() { return _rHandClickRequested; }
+    bool getLHandClickRequested() { return _lHandClickRequested; }
 
-        bool getRHandClickRequested() { return _rHandClickRequested; }
-        bool getLHandClickRequested() { return _lHandClickRequested; }
+    bool getEitherHandIsTracked() { return _oculusLHandIsTracked || _oculusRHandIsTracked; }
 
-        bool getEitherHandIsTracked() { return _oculusLHandIsTracked || _oculusRHandIsTracked; }
+    void update_LRHandIsTracked();
+    void update_LRHandClickRequested();
 
-        void update_LRHandIsTracked();
-        void update_LRHandClickRequested();
+    void update_LRTargetBone();
 
-        void update_LRTargetBone();
+    // Public variables
+    bool is_scene_GameCore = false;
+    bool is_GamePaused = false;
 
-        // Public variables
-        bool is_scene_GameCore = false;
-        bool is_GamePaused = false;
+    GlobalNamespace::OVRSkeleton::BoneId rightTargetBone = 0;
+    GlobalNamespace::OVRSkeleton::BoneId leftTargetBone = 0;
+    bool leftHand_isTargetHandRight = false;
+    bool rightHand_isTargetHandLeft = false;
 
-        GlobalNamespace::OVRSkeleton::BoneId rightTargetBone = 0;
-        GlobalNamespace::OVRSkeleton::BoneId  leftTargetBone = 0;
-        bool leftHand_isTargetHandRight = false;
-        bool rightHand_isTargetHandLeft = false;
+    GlobalNamespace::PauseController *pauseController = nullptr;
 
-        GlobalNamespace::PauseController* pauseController = nullptr;
+    UnityEngine::GameObject *handTrackingObjectsParent = nullptr;
 
-        UnityEngine::GameObject* handTrackingObjectsParent  = nullptr;
+    GlobalNamespace::OVRHand *rightOVRHand = nullptr;
+    GlobalNamespace::OVRHand *leftOVRHand = nullptr;
+    GlobalNamespace::OVRSkeleton *rightOVRSkeleton = nullptr;
+    GlobalNamespace::OVRSkeleton *leftOVRSkeleton = nullptr;
 
-        GlobalNamespace::OVRHand*     rightOVRHand = nullptr;
-        GlobalNamespace::OVRHand*     leftOVRHand  = nullptr;
-        GlobalNamespace::OVRSkeleton* rightOVRSkeleton = nullptr;
-        GlobalNamespace::OVRSkeleton* leftOVRSkeleton  = nullptr;
+    GlobalNamespace::OVRSkeletonRenderer *rightOVRSkeletonRenderer = nullptr;
+    GlobalNamespace::OVRSkeletonRenderer *leftOVRSkeletonRenderer = nullptr;
 
-        GlobalNamespace::OVRSkeletonRenderer* rightOVRSkeletonRenderer = nullptr;
-        GlobalNamespace::OVRSkeletonRenderer* leftOVRSkeletonRenderer  = nullptr;
+    UnityEngine::Material *rightHandSkeletonMat = nullptr; // Created using new_ctor
+    UnityEngine::Material *leftHandSkeletonMat = nullptr;  // Created using new_ctor
 
-        UnityEngine::Material * rightHandSkeletonMat = nullptr; // Createdd win new_ctor
-        UnityEngine::Material * leftHandSkeletonMat  = nullptr; // Createdd win new_ctor
+    UnityEngine::Quaternion menu_l_quaternion = UnityEngine::Quaternion(0.0f, 0.0f, 0.0f, 1.0f);
+    UnityEngine::Quaternion menu_r_quaternion = UnityEngine::Quaternion(0.0f, 0.0f, 0.0f, 1.0f);
+    UnityEngine::Vector3 menu_l_vector3 = UnityEngine::Vector3(0.0f, 0.0f, 0.0f);
+    UnityEngine::Vector3 menu_r_vector3 = UnityEngine::Vector3(0.0f, 0.0f, 0.0f);
 
-        UnityEngine::Transform* r_saber_TF = nullptr;
-        UnityEngine::Transform* l_saber_TF = nullptr;
+    GlobalNamespace::VRController *vrcontroller_r = nullptr;
+    GlobalNamespace::VRController *vrcontroller_l = nullptr;
 
-        // Hopefully the original just needed an additional zero quaternion
-        UnityEngine::Quaternion menu_l_quaternion = UnityEngine::Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
-        UnityEngine::Quaternion menu_r_quaternion = UnityEngine::Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
-        UnityEngine::Vector3 menu_l_vector3 = UnityEngine::Vector3(0.0f, 0.0f, 0.0f);
-        UnityEngine::Vector3 menu_r_vector3 = UnityEngine::Vector3(0.0f, 0.0f, 0.0f);
+    // In multiplayer, there are many sabers. These help detect
+    // local player sabers.
+    GlobalNamespace::Saber *local_player_saber_l = nullptr;
+    GlobalNamespace::Saber *local_player_saber_r = nullptr;
+    // Also needed for multiplayer. When player dies, must enable
+    // the menu saber movement again.
+    bool multiplayerGameFailed = false;
+    GlobalNamespace::MultiplayerSpectatorController *mp_spectatorController = nullptr;
 
-        GlobalNamespace::VRController* vrcontroller_r = nullptr;
-        GlobalNamespace::VRController* vrcontroller_l = nullptr;
+private:
+    bool _rHandClickRequested = false;
+    bool _lHandClickRequested = false;
 
-        // In multiplayer, there are many sabers. These help detect
-        // local player sabers.
-        GlobalNamespace::Saber* local_player_saber_l = nullptr;
-        GlobalNamespace::Saber* local_player_saber_r = nullptr;
-        // Also needed for multiplayer. When player dies, must enable
-        // the menu saber movement again.
-        bool multiplayerGameFailed = false;
-        GlobalNamespace::MultiplayerSpectatorController* mp_spectatorController = nullptr;
+    bool _oculusRHandIsTracked = false;
+    bool _oculusLHandIsTracked = false;
 
-    private:
-        bool _rHandClickRequested = false;
-        bool _lHandClickRequested = false;
+    // Hook Install Calls
+    void _Hook_SceneManager_SetActiveScene();
+    void _Hook_MultiplayerSpectatorController_SwitchToSpectatingSpot();
+    void _Hook_SaberModelController_Init();
+    void _Hook_GamePause_Pause();
+    void _Hook_GamePause_WillResume();
+    void _Hook_MultiplayerLocalActivePlayerGameplayManager_PerformPlayerFail();
+    void _Hook_BoneVisualization_Update();
 
-        bool _oculusRHandIsTracked = false;
-        bool _oculusLHandIsTracked = false;
-
-        // Hook Install Calls
-        void _Hook_SceneManager_SetActiveScene();
-        void _Hook_MultiplayerSpectatorController_SwitchToSpectatingSpot();
-        void _Hook_SaberModelController_Init();
-        void _Hook_GamePause_Pause();
-        void _Hook_GamePause_WillResume();
-        void _Hook_MultiplayerLocalActivePlayerGameplayManager_PerformPlayerFail();
-        void _Hook_BoneVisualization_Update();
-
-        void _Hook_menu_saber_functionality();
-
+    void _Hook_menu_saber_functionality();
 };
 
 extern FingerSaber modManager;

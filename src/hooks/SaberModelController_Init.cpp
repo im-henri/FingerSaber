@@ -51,11 +51,6 @@ MAKE_HOOK_MATCH(
             modManager.local_player_saber_l = saber;
         }
 
-        bool rightsaber_bool = true;
-        if (saber->get_saberType() == GlobalNamespace::SaberType::SaberA) rightsaber_bool = false;
-        if (rightsaber_bool) modManager.r_saber_TF = saber->get_transform()->get_parent();
-        else                 modManager.l_saber_TF = saber->get_transform()->get_parent();
-
         if (getModConfig().ModEnabled.GetValue() == true)
         {
             if(getModConfig().HandMode.GetValue() == false){
