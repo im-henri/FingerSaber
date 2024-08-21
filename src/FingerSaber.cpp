@@ -57,7 +57,6 @@
 
 #include "UnityEngine/Resources.hpp"
 
-#include "ModUtils.hpp"
 #include "UnityEngine/Resources.hpp"
 #include "logging.hpp"
 

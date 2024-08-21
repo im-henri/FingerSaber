@@ -23,7 +23,7 @@ void FingerSaberSettings::ModGameplaySetupMenu::DidActivate(bool firstActivation
         modEnabledToggle = BSML::Lite::CreateToggle(horizontal->get_transform(), "Mod Enabled", getModConfig().ModEnabled.GetValue(), [](bool value) {
             getModConfig().ModEnabled.SetValue(value, true);
         });
-        BSML::Lite::AddHoverHint(modEnabledToggle->get_gameObject(),  "Disables the mod. (Disable from BMBF to completely disable the mod)");
+        BSML::Lite::AddHoverHint(modEnabledToggle->get_gameObject(),  "Disables the mod.");
 
 
         handsOnlyToggle = BSML::Lite::CreateToggle(horizontal->get_transform(), "Hand Mode", getModConfig().HandMode.GetValue(), [](bool value) {

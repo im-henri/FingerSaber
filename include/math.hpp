@@ -5,7 +5,6 @@
 
 static inline UnityEngine::Quaternion operator*(UnityEngine::Quaternion lhs, UnityEngine::Quaternion rhs)
 {
-    // return UnityEngine::Quaternion::op_Multiply(a, b);
     return UnityEngine::Quaternion(
         lhs.w * rhs.x + lhs.x * rhs.w + lhs.y * rhs.z - lhs.z * rhs.y,
         lhs.w * rhs.y + lhs.y * rhs.w + lhs.z * rhs.x - lhs.x * rhs.z,
@@ -15,25 +14,21 @@ static inline UnityEngine::Quaternion operator*(UnityEngine::Quaternion lhs, Uni
 
 static inline UnityEngine::Vector3 operator-(UnityEngine::Vector3 a, UnityEngine::Vector3 b)
 {
-    // return UnityEngine::Vector3::op_Subtraction(a, b);
     return UnityEngine::Vector3(a.x - b.x, a.y - b.y, a.z - b.z);
 }
 
 static inline UnityEngine::Vector3 operator+(UnityEngine::Vector3 a, UnityEngine::Vector3 b)
 {
-    // return UnityEngine::Vector3::op_Addition(a, b);
     return UnityEngine::Vector3(a.x + b.x, a.y + b.y, a.z + b.z);
 }
 
 static inline UnityEngine::Vector3 operator*(UnityEngine::Vector3 a, float_t d)
 {
-    // return UnityEngine::Vector3::op_Multiply(a, b);
     return UnityEngine::Vector3(a.x * d, a.y * d, a.z * d);
 }
 
 static inline UnityEngine::Vector3 operator*(float_t d, UnityEngine::Vector3 a)
 {
-    // return UnityEngine::Vector3::op_Multiply(a, b);
     return UnityEngine::Vector3(a.x * d, a.y * d, a.z * d);
 }
 

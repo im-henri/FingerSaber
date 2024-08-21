@@ -18,7 +18,6 @@
 #include "GlobalNamespace/IGamePause.hpp"
 #include "GlobalNamespace/VRControllerTransformOffset.hpp"
 #include "UnityEngine/Time.hpp"
-#include "ModUtils.hpp"
 #include "math.hpp"
 
 MAKE_HOOK_MATCH(

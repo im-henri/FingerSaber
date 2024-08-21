@@ -17,7 +17,6 @@
 #include "UnityEngine/Material.hpp"
 #include "GlobalNamespace/ColorManager.hpp"
 
-#include "ModUtils.hpp"
 #include "math.hpp"
 static int handInitCount = 0; // Hands always initialized as pair i.e. twice(even when playing one handed mode)
 
