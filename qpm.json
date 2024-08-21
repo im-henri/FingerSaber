@@ -4,7 +4,7 @@
   "info": {
     "name": "FingerSaber",
     "id": "fingersaber",
-    "version": "0.1.5",
+    "version": "0.1.8",
     "url": null,
     "additionalData": {
       "overrideSoName": "libfingersaber.so",
