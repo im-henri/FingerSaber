@@ -30,7 +30,7 @@ public:
     // Creates new oculus hand things
     void _InitializeOculusHands();
     // Tries to destory oculus hand things if they are found. Returns true if destroy call was initiated
-    bool _Destroy_OculusHands();
+    void _Destroy_OculusHands();
 
     void ChangeRightSkeletonRendererColor(UnityEngine::Color col);
     void ChangeLeftSkeletonRendererColor(UnityEngine::Color col);
@@ -68,8 +68,8 @@ public:
     GlobalNamespace::OVRSkeletonRenderer *rightOVRSkeletonRenderer = nullptr;
     GlobalNamespace::OVRSkeletonRenderer *leftOVRSkeletonRenderer = nullptr;
 
-    UnityEngine::Material *rightHandSkeletonMat = nullptr; // Created using new_ctor
-    UnityEngine::Material *leftHandSkeletonMat = nullptr;  // Created using new_ctor
+    UnityEngine::Material *rightHandSkeletonMat = nullptr;
+    UnityEngine::Material *leftHandSkeletonMat = nullptr;
 
     UnityEngine::Quaternion menu_l_quaternion = UnityEngine::Quaternion(0.0f, 0.0f, 0.0f, 1.0f);
     UnityEngine::Quaternion menu_r_quaternion = UnityEngine::Quaternion(0.0f, 0.0f, 0.0f, 1.0f);

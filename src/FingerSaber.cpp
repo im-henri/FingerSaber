@@ -57,7 +57,9 @@
 
 #include "UnityEngine/Resources.hpp"
 
-#include "UnityEngine/Resources.hpp"
+#include "UnityEngine/RenderSettings.hpp"
+#include "UnityEngine/Shader.hpp"
+
 #include "logging.hpp"
 
 FingerSaber modManager;
@@ -78,29 +80,28 @@ void FingerSaber::InstallHooks()
 const UnityEngine::Color defaultRightColor{0.156863, 0.556863, 0.823529, 1.000000};
 const UnityEngine::Color defaultLeftColor{0.784314, 0.078431, 0.078431, 1.000000};
 
-bool FingerSaber::_Destroy_OculusHands()
+void FingerSaber::_Destroy_OculusHands()
 {
-    bool destroyCalled = false;
-
     auto old_HandTracking_container = UnityEngine::GameObject::Find("HandTracking_container");
     if (old_HandTracking_container)
     {
         UnityEngine::GameObject::Destroy(old_HandTracking_container);
-        destroyCalled = true;
     }
 
     // Regardless if destroy was initiated or not, we can assure that the handTrackingObject is nullptr,
     // as HandTracking_container is created with DontDestroyOnLoad option -> If they exists they must either exists in scene.
     handTrackingObjectsParent = nullptr;
-
-    return destroyCalled;
 }
 
 void FingerSaber::_InitializeOculusHands()
 {
     INFO("Oculus Hand MENU Initialization ..");
 
-    createNewSkeletonMaterials();
+    // Only create the material if it did not exist yet
+    if (leftHandSkeletonMat == nullptr || rightHandSkeletonMat == nullptr)
+    {
+        createNewSkeletonMaterials();
+    }
 
     this->_Destroy_OculusHands();
 
@@ -157,9 +158,6 @@ void FingerSaber::_InitializeOculusHands()
 
     INFO("Left Handtracking stuff initialized");
 }
-
-#include "UnityEngine/RenderSettings.hpp"
-#include "UnityEngine/Shader.hpp"
 
 void FingerSaber::createNewSkeletonMaterials()
 {
