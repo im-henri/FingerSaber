@@ -7,6 +7,8 @@
 #include "bsml/shared/BSML-Lite/Creation/Settings.hpp"
 #include "bsml/shared/BSML-Lite/Creation/Text.hpp"
 
+#include "FingerSaber.hpp"
+
 DEFINE_TYPE(FingerSaberSettings, ModGameplaySetupMenu);
 
 void FingerSaberSettings::ModGameplaySetupMenu::DidActivate(bool firstActivation){
@@ -22,6 +24,7 @@ void FingerSaberSettings::ModGameplaySetupMenu::DidActivate(bool firstActivation
 
         modEnabledToggle = BSML::Lite::CreateToggle(horizontal->get_transform(), "Mod Enabled", getModConfig().ModEnabled.GetValue(), [](bool value) {
             getModConfig().ModEnabled.SetValue(value, true);
+            modManager.update_scoreSubmission();
         });
         BSML::Lite::AddHoverHint(modEnabledToggle->get_gameObject(),  "Disables the mod.");
 

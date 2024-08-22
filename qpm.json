@@ -1,15 +1,45 @@
 {
+  "version": "0.1.0",
   "sharedDir": "shared",
   "dependenciesDir": "extern",
   "info": {
     "name": "FingerSaber",
     "id": "fingersaber",
-    "version": "0.1.8",
+    "version": "0.1.9",
     "url": null,
     "additionalData": {
       "overrideSoName": "libfingersaber.so",
       "cmake": true
     }
+  },
+  "workspace": {
+    "scripts": {
+      "build": [
+        "pwsh ./scripts/build.ps1"
+      ],
+      "copy": [
+        "pwsh ./scripts/copy.ps1"
+      ],
+      "logcat": [
+        "pwsh ./scripts/start-logging.ps1"
+      ],
+      "qmod": [
+        "pwsh ./scripts/build.ps1",
+        "pwsh ./scripts/createqmod.ps1"
+      ],
+      "restart": [
+        "pwsh ./scripts/restart-game.ps1"
+      ],
+      "stack": [
+        "pwsh ./scripts/ndk-stack.ps1"
+      ],
+      "tomb": [
+        "pwsh ./scripts/pull-tombstone.ps1"
+      ]
+    },
+    "qmodIncludeDirs": [],
+    "qmodIncludeFiles": [],
+    "qmodOutput": null
   },
   "dependencies": [
     {
@@ -51,32 +81,11 @@
       "additionalData": {
         "private": true
       }
+    },
+    {
+      "id": "bs-utils",
+      "versionRange": "^0.8.4",
+      "additionalData": {}
     }
-  ],
-  "workspace": {
-    "scripts": {
-      "logcat": [
-        "pwsh ./scripts/start-logging.ps1"
-      ],
-      "build": [
-        "pwsh ./scripts/build.ps1"
-      ],
-      "copy": [
-        "pwsh ./scripts/copy.ps1"
-      ],
-      "stack": [
-        "pwsh ./scripts/ndk-stack.ps1"
-      ],
-      "qmod": [
-        "pwsh ./scripts/build.ps1",
-        "pwsh ./scripts/createqmod.ps1"
-      ],
-      "tomb": [
-        "pwsh ./scripts/pull-tombstone.ps1"
-      ],
-      "restart": [
-        "pwsh ./scripts/restart-game.ps1"
-      ]
-    }
-  },"additionalData": {}
+  ]
 }

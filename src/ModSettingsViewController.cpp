@@ -68,6 +68,7 @@ void FingerSaberSettings::ModSettingsViewController::DidActivate(bool firstActiv
         // Mod enabled Toggle
        this->modEnabledToggle = BSML::Lite::CreateToggle(container->get_transform(), "Mod Enabled", getModConfig().ModEnabled.GetValue(), [](bool value) {
            getModConfig().ModEnabled.SetValue(value, true);
+           modManager.update_scoreSubmission();
        });
        BSML::Lite::AddHoverHint(this->modEnabledToggle->get_gameObject(),  "Disables the mod. (Disable from BMBF to completely disable the mod)");
 

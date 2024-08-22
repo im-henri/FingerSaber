@@ -32,9 +32,9 @@ extern "C" __attribute__((visibility("default"))) void load() {
     INFO("Installed all hooks!");
 
     custom_types::Register::AutoRegister();
-//    BSML::Register::RegisterMainMenu<FingerSaberSettings::ModSettingsViewController*>("FingerSaber");
-     BSML::Register::RegisterGameplaySetupTab<FingerSaberSettings::ModGameplaySetupMenu*>("FingerSaber");
-     BSML::Register::RegisterSettingsMenu<FingerSaberSettings::ModSettingsViewController*>("FingerSaber");
-    modManager.update_LRTargetBone();
+    BSML::Register::RegisterGameplaySetupTab<FingerSaberSettings::ModGameplaySetupMenu*>("FingerSaber");
+    BSML::Register::RegisterSettingsMenu<FingerSaberSettings::ModSettingsViewController*>("FingerSaber");
 
+    modManager.update_LRTargetBone();
+    modManager.update_scoreSubmission();
 }

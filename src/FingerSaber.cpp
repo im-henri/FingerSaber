@@ -62,7 +62,10 @@
 
 #include "logging.hpp"
 
+#include "bs-utils/shared/utils.hpp"
+
 FingerSaber modManager;
+extern modloader::ModInfo modInfo;
 
 void FingerSaber::InstallHooks()
 {
@@ -79,6 +82,14 @@ void FingerSaber::InstallHooks()
 
 const UnityEngine::Color defaultRightColor{0.156863, 0.556863, 0.823529, 1.000000};
 const UnityEngine::Color defaultLeftColor{0.784314, 0.078431, 0.078431, 1.000000};
+
+void FingerSaber::update_scoreSubmission()
+{
+    if (getModConfig().ModEnabled.GetValue() == true)
+        bs_utils::Submission::disable(modInfo);
+    else
+        bs_utils::Submission::enable(modInfo);
+}
 
 void FingerSaber::_Destroy_OculusHands()
 {

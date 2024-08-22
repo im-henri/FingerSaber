@@ -47,6 +47,8 @@ public:
 
     void update_LRTargetBone();
 
+    void update_scoreSubmission();
+
     // Public variables
     bool is_scene_GameCore = false;
     bool is_GamePaused = false;
