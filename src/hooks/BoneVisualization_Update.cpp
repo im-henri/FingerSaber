@@ -55,7 +55,7 @@ MAKE_HOOK_MATCH(
 
     OVRSkeletonRenderer_Update(self);
 
-    // Dont move hands in game when mod disabled
+    // Dont move controllers in game when mod disabled
     if (getModConfig().ModEnabled.GetValue() == false)
         return;
 

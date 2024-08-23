@@ -36,7 +36,7 @@ MAKE_HOOK_MATCH(
         modManager.should_RefreshControllersReference = false;
     }
 
-    // Only call original function when hands are not tracked and mod is not enabled
+    // Only call original function when hands are not tracked
     if (isEitherHandTracked == false)
     {
         VRController_Update(self);
@@ -123,6 +123,20 @@ MAKE_HOOK_MATCH(
 
     bool isEitherHandTracked = modManager.getEitherHandIsTracked();
 
+    // Autopause on lost hands
+    if ((modManager.pauseController != nullptr) &&
+        // Hands not found
+        (isEitherHandTracked == false) &&
+        // Not yet paused
+        (modManager.is_GamePaused == false) &&
+        // In-game
+        (modManager.is_scene_GameCore == true) &&
+        // Autopause enabled
+        (getModConfig().AutoPause.GetValue() == true))
+    {
+        modManager.pauseController->Pause();
+    }
+
     // Refresh controller reference when going from hands to controllers.
     // Detect only falling edge
     if (modManager.handPreviouslyTracked == true && isEitherHandTracked == false)
@@ -147,16 +161,6 @@ MAKE_HOOK_MATCH(
                 else
                     modManager.pauseController->Pause();
             }
-        }
-    }
-
-    if (modManager.rightOVRHand)
-    {
-        if ((modManager.is_scene_GameCore == true) && (modManager.is_GamePaused == false) &&
-            (modManager.pauseController != nullptr) && (modManager.getEitherHandIsTracked() == false) &&
-            (getModConfig().AutoPause.GetValue() == true))
-        {
-            modManager.pauseController->Pause();
         }
     }
 }

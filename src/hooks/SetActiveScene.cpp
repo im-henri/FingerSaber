@@ -61,9 +61,9 @@ MAKE_HOOK_MATCH(
     if(ret == true){
         INFO("New scene name: {}", sceneName_str);
 
-        if((is_ShaderWarmup == false) && (is_EmptyTransition == false)){
-            modManager._InitializeOculusHands();
-        }
+        // Initialize things on every scene change
+        modManager._InitializeOculusHands();
+
         modManager.is_scene_GameCore = is_GameCore;
     }
 
