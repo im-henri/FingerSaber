@@ -53,6 +53,9 @@ public:
     bool is_scene_GameCore = false;
     bool is_GamePaused = false;
 
+    bool handPreviouslyTracked = false;
+    bool should_RefreshControllersReference = false;
+
     GlobalNamespace::OVRSkeleton::BoneId rightTargetBone = 0;
     GlobalNamespace::OVRSkeleton::BoneId leftTargetBone = 0;
     bool leftHand_isTargetHandRight = false;

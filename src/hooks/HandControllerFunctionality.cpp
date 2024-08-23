@@ -15,6 +15,8 @@
 #include "GlobalNamespace/IVRPlatformHelper.hpp"
 #include "GlobalNamespace/VRControllerTransformOffset.hpp"
 
+#include "GlobalNamespace/IVRPlatformHelper.hpp"
+#include "GlobalNamespace/OculusVRHelper.hpp"
 #include "GlobalNamespace/IGamePause.hpp"
 #include "GlobalNamespace/VRControllerTransformOffset.hpp"
 #include "UnityEngine/Time.hpp"
@@ -27,6 +29,12 @@ MAKE_HOOK_MATCH(
     GlobalNamespace::VRController *self)
 {
     bool isEitherHandTracked = modManager.getEitherHandIsTracked();
+
+    if (modManager.should_RefreshControllersReference)
+    {
+        self->_vrPlatformHelper->RefreshControllersReference();
+        modManager.should_RefreshControllersReference = false;
+    }
 
     // Only call original function when hands are not tracked and mod is not enabled
     if (isEitherHandTracked == false)
@@ -113,9 +121,18 @@ MAKE_HOOK_MATCH(
         modManager.update_LRHandClickRequested();
     }
 
-    // Checking any of the hand is tracked. Simply checking if mod is makes it impossible to quit the game
-    // without controllers.
-    if (modManager.getEitherHandIsTracked() == false)
+    bool isEitherHandTracked = modManager.getEitherHandIsTracked();
+
+    // Refresh controller reference when going from hands to controllers.
+    // Detect only falling edge
+    if (modManager.handPreviouslyTracked == true && isEitherHandTracked == false)
+        modManager.should_RefreshControllersReference = true;
+
+    // Update previously tracked
+    modManager.handPreviouslyTracked = isEitherHandTracked;
+
+    // Checking any of the hand is tracked.
+    if (isEitherHandTracked == false)
         return;
 
     if (modManager.is_scene_GameCore == true)
