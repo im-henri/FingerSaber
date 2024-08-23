@@ -24,7 +24,10 @@ MAKE_HOOK_MATCH(
 {
 
     float scale_in;
-    if (modManager.is_scene_GameCore == true && modManager.multiplayerGameFailed == false && getModConfig().HandMode.GetValue() == false)
+    if (modManager.is_scene_GameCore == true &&
+        modManager.multiplayerGameFailed == false &&
+        getModConfig().HandMode.GetValue() == false &&
+        getModConfig().ModEnabled.GetValue() == true)
     {
         scale_in = 7.5f;
     }
