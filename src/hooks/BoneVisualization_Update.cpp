@@ -46,14 +46,14 @@ MAKE_HOOK_MATCH(
 }
 
 MAKE_HOOK_MATCH(
-    OVRSkeletonRenderer_Update,
-    &GlobalNamespace::OVRSkeletonRenderer::Update,
+    OVRSkeleton_UpdateSkeleton,
+    &GlobalNamespace::OVRSkeleton::UpdateSkeleton,
     void,
-    GlobalNamespace::OVRSkeletonRenderer *self)
+    GlobalNamespace::OVRSkeleton *self)
 {
-    DEBUG("OVRSkeletonRenderer_Update");
+    DEBUG("OVRSkeleton_UpdateSkeleton");
 
-    OVRSkeletonRenderer_Update(self);
+    OVRSkeleton_UpdateSkeleton(self);
 
     // Dont move controllers in game when mod disabled
     if (getModConfig().ModEnabled.GetValue() == false)
@@ -83,7 +83,7 @@ MAKE_HOOK_MATCH(
     // Find position & rotation
     UnityEngine::Transform *targ_bone_tranform;
     bool flip_saber = false;
-    if (modManager.rightOVRSkeletonRenderer == self)
+    if (modManager.rightOVRSkeleton == self)
     {
         vrcntrl = modManager.vrcontroller_r;
         if ((getModConfig().HandMode.GetValue() == true))
@@ -134,5 +134,5 @@ MAKE_HOOK_MATCH(
 void FingerSaber::_Hook_BoneVisualization_Update()
 {
     INSTALL_HOOK(Logger, BoneVisualization_Update);
-    INSTALL_HOOK(Logger, OVRSkeletonRenderer_Update);
+    INSTALL_HOOK(Logger, OVRSkeleton_UpdateSkeleton);
 }
