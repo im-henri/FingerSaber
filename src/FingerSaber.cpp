@@ -210,6 +210,18 @@ void FingerSaber::update_LRHandClickRequested()
                                : false;
 }
 
+void FingerSaber::disable_skeletonRender_lines(GlobalNamespace::OVRSkeletonRenderer *skeletonRenderer)
+{
+    if (skeletonRenderer == nullptr)
+        return;
+
+    for (int i = 0; i < skeletonRenderer->_boneVisualizations->Count; i++)
+    {
+        auto line = skeletonRenderer->_boneVisualizations->get_Item(i)->Line;
+        line->enabled = false;
+    }
+}
+
 void FingerSaber::update_LRTargetBone()
 {
     /** -----  https://developer.oculus.com/documentation/unity/unity-handtracking/  -----

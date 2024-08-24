@@ -9,6 +9,7 @@ DECLARE_CONFIG(ModConfig,
 
     CONFIG_VALUE(AutoPause, bool, "AutoPause", true);
 
+    CONFIG_VALUE(handRendering, bool, "handRendering", true);
     CONFIG_VALUE(OtherHandClicks, bool, "OtherHandClicks", false);
     CONFIG_VALUE(ModEnabled, bool, "ModEnabled", true);
     CONFIG_VALUE(HandMode, bool, "HandMode", false);

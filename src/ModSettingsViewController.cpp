@@ -84,6 +84,18 @@ void FingerSaberSettings::ModSettingsViewController::DidActivate(bool firstActiv
         });
         BSML::Lite::AddHoverHint(AutoPauseToggle->get_gameObject(), "Pause automatically when hands are lost.");
 
+        // handRendering
+        this->handRenderingToggle = BSML::Lite::CreateToggle(container->get_transform(), "Hand-Lines Rendering", getModConfig().handRendering.GetValue(), [](bool value) {
+            getModConfig().handRendering.SetValue(value, true);
+            // If we went from ON->OFF then must manually disable lines
+            if(value == false)
+            {
+                modManager.disable_skeletonRender_lines(modManager.rightOVRSkeletonRenderer);
+                modManager.disable_skeletonRender_lines(modManager.leftOVRSkeletonRenderer);
+            }
+        });
+        BSML::Lite::AddHoverHint(handRenderingToggle->get_gameObject(), "Toggle the hand-lines rendering");
+
         // Hands only mode Toggle
         auto handModeToggle = BSML::Lite::CreateToggle(container->get_transform(), "Hands-Only mode", getModConfig().HandMode.GetValue(), [](bool value) {
             getModConfig().HandMode.SetValue(value, true);

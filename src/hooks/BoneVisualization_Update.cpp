@@ -46,6 +46,22 @@ MAKE_HOOK_MATCH(
 }
 
 MAKE_HOOK_MATCH(
+    OVRSkeletonRenderer_Update,
+    &GlobalNamespace::OVRSkeletonRenderer::Update,
+    void,
+    GlobalNamespace::OVRSkeletonRenderer *self)
+
+{
+    DEBUG("OVRSkeletonRenderer_Update");
+
+    // Exit early if not rendering fingers
+    if (getModConfig().handRendering.GetValue() == false)
+        return;
+
+    OVRSkeletonRenderer_Update(self);
+}
+
+MAKE_HOOK_MATCH(
     OVRSkeleton_UpdateSkeleton,
     &GlobalNamespace::OVRSkeleton::UpdateSkeleton,
     void,
@@ -135,4 +151,5 @@ void FingerSaber::_Hook_BoneVisualization_Update()
 {
     INSTALL_HOOK(Logger, BoneVisualization_Update);
     INSTALL_HOOK(Logger, OVRSkeleton_UpdateSkeleton);
+    INSTALL_HOOK(Logger, OVRSkeletonRenderer_Update);
 }

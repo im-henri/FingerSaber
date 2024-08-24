@@ -49,6 +49,8 @@ public:
 
     void update_scoreSubmission();
 
+    void disable_skeletonRender_lines(GlobalNamespace::OVRSkeletonRenderer *skeletonRenderer);
+
     // Public variables
     bool is_scene_GameCore = false;
     bool is_GamePaused = false;
