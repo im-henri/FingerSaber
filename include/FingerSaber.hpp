@@ -37,10 +37,10 @@ public:
 
     void createNewSkeletonMaterials();
 
-    bool getRHandClickRequested() { return _rHandClickRequested; }
-    bool getLHandClickRequested() { return _lHandClickRequested; }
+    inline bool getRHandClickRequested() { return _rHandClickRequested; }
+    inline bool getLHandClickRequested() { return _lHandClickRequested; }
 
-    bool getEitherHandIsTracked() { return _oculusLHandIsTracked || _oculusRHandIsTracked; }
+    inline bool getEitherHandIsTracked() { return _oculusLHandIsTracked || _oculusRHandIsTracked; }
 
     void update_LRHandIsTracked();
     void update_LRHandClickRequested();
