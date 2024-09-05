@@ -1,5 +1,5 @@
 ## FingerSaber
-Recommend chaning to 120Hz refersh rate for smoother gameplay.
+Recommend changing to 120Hz refresh rate for smoother gameplay.
 
 __IMPORTANT__
 
