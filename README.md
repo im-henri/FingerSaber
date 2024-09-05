@@ -1,7 +1,27 @@
-# FingerSaber
+## FingerSaber
+Recommend chaning to 120Hz refersh rate for smoother gameplay.
 
-A mod that enables Oculus Quest handtracking on Beat Saber. It transforms you into a giant and allows you to use your fingers as sabers! 
+__IMPORTANT__
 
+Will Not work without Hand-tracking permissions! Patch the game with hand-tracking permissions enabled.  
+This can be done e.g. using MBF: tools tab -> change permissions -> "Hand tracking" -> repatch game
+
+__Description__
+
+Miniature Beat Saber! A mod that uses Quest hand tracking on Beat Saber. Imagine yourself as a giant using your fingers as sabers! You can assign sabers to any finger, even on the same hand - customize this in the mod settings.
+For a more classic experience, you can toggle the "Hands-Only Mode" to play with just your hands instead of fingers.
+Should work with most mods, including Noodle Extension and Multiplayer.
+
+__Note__
+
+Disabled score submission (temporarily) when mod is enabled.
+
+__Trailer/Gameplay__
+- <https://www.youtube.com/watch?v=248STEHsC04>
+- <https://www.youtube.com/watch?v=WoNJz0v4tvc&t=72s>
+- <https://youtu.be/jcrPr5kpQXA?t=4>
+
+Feel free to DM me on Discord @drumtool with problems, suggestions, etc.
 ## Credits
 * Cover image by https://github.com/Austin-540
 * Contribute [piskndar](https://github.com/piskndar)
