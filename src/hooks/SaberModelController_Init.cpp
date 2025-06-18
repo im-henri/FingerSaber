@@ -26,12 +26,13 @@ MAKE_HOOK_MATCH(
     void,
     GlobalNamespace::SaberModelController* self,
     UnityEngine::Transform* parent,
-    GlobalNamespace::Saber* saber
+    GlobalNamespace::Saber* saber,
+    ::UnityEngine::Color trailTintColor
 ) {
 
     INFO("SaberModelController::Init()");
 
-    SaberModelController_Init(self, parent, saber);
+    SaberModelController_Init(self, parent, saber, trailTintColor);
 
     // Exiting early if sabers are not players. Needed for multiplayer.
     if (parent->get_parent()->get_parent()->get_name() != "VRGameCore")

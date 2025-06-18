@@ -1,0 +1,95 @@
+name: Publish release artifacts
+
+env:
+  module_id: fingersaber
+  qmodName: FingerSaber 
+  cache-name: FS_release_cache
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Get Mod version from tag name
+      id: modversion
+      run: |
+        echo "VERSION_TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
+        TEMP=$(echo "$GITHUB_REF_NAME" | grep -Po "(?<=v)\d+.\d+.\d+")
+        echo "VERSION=$TEMP" >> $GITHUB_ENV
+
+    - uses: actions/checkout@v4
+      name: Checkout
+      with:
+        submodules: true
+        lfs: true
+
+    - uses: seanmiddleditch/gha-setup-ninja@v5
+
+    - name: Get QPM
+      uses: Fernthedev/qpm-action@v1
+      with:
+        resolve_ndk: true
+        #required
+        workflow_token: ${{secrets.GITHUB_TOKEN}}
+        restore: true # will run restore on download
+        cache: true #will cache dependencies
+    
+    - name: QPM Edit Version
+      run: |
+        qpm package edit --version "${{ env.VERSION }}"
+    
+    - name: Build
+      run: |
+        cd ${GITHUB_WORKSPACE}
+        pwsh -Command ./scripts/build.ps1
+        qpm qmod build
+
+    - name: Create Qmod
+      run: |
+        pwsh -Command ./scripts/createqmod.ps1 ${{env.qmodName}}
+
+    - name: Get Library Name and Build ID
+      id: libname
+      run: |
+        cd ./build/
+        pattern="lib${module_id}*.so"
+        files=( $pattern )
+        echo "LIBNAME=${files[0]}" >> $GITHUB_ENV
+        echo "BUILD_ID=$(readelf -n ${files[0]} | grep -Po "(?<=Build ID: )[0-9a-f]+")" >> $GITHUB_ENV
+
+    - name: Rename debug file
+      run: mv "./build/debug/${{ env.LIBNAME }}" "./build/debug/debug_${{ env.LIBNAME }}"
+        
+    - name: Calculate SHA-256 of the qmod file
+      id: qmodsha
+      run: |
+        echo "QMOD_SHA=$(sha256sum ./${{ env.qmodName }}.qmod | grep -Po "^[0-9a-f]+")" >> $GITHUB_ENV
+
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        tag_name: ${{ env.VERSION_TAG }}
+        name: FingerSaber ${{ env.VERSION }}
+        generate_release_notes: true
+        body: |
+          ---
+
+          ### Build info
+          
+          SHA-256: ${{ env.QMOD_SHA }}
+          Build ID: ${{ env.BUILD_ID }}
+        files: |
+          ./${{ env.qmodName }}.qmod
+          ./build/${{ env.LIBNAME }}
+          ./build/debug/debug_${{ env.LIBNAME }}
+        draft: true
+        prerelease: false

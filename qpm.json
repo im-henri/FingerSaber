@@ -1,4 +1,5 @@
 {
+  "$schema": "https://raw.githubusercontent.com/QuestPackageManager/QPM.Package/refs/heads/main/qpm.schema.json",
   "version": "0.1.0",
   "sharedDir": "shared",
   "dependenciesDir": "extern",
@@ -37,6 +38,7 @@
         "pwsh ./scripts/pull-tombstone.ps1"
       ]
     },
+    "ndk": "^27.2.12479018",
     "qmodIncludeDirs": [],
     "qmodIncludeFiles": [],
     "qmodOutput": null
@@ -44,12 +46,12 @@
   "dependencies": [
     {
       "id": "beatsaber-hook",
-      "versionRange": "^5.1.9",
+      "versionRange": "^6.4.2",
       "additionalData": {}
     },
     {
       "id": "scotland2",
-      "versionRange": "^0.1.3",
+      "versionRange": "^0.1.6",
       "additionalData": {
         "includeQmod": false,
         "private": true
@@ -57,34 +59,32 @@
     },
     {
       "id": "bsml",
-      "versionRange": "^0.4.43",
+      "versionRange": "^0.4.53",
       "additionalData": {}
     },
     {
       "id": "bs-cordl",
-      "versionRange": "^3700.0.0",
+      "versionRange": "4006.*",
       "additionalData": {}
     },
     {
       "id": "config-utils",
-      "versionRange": "^1.4.0",
+      "versionRange": "^2.0.3",
       "additionalData": {}
     },
     {
       "id": "custom-types",
-      "versionRange": "^0.17.6",
+      "versionRange": "^0.18.3",
       "additionalData": {}
     },
     {
-      "id": "paper",
-      "versionRange": "^3.6.3",
-      "additionalData": {
-        "private": true
-      }
+      "id": "paper2_scotland2",
+      "versionRange": "^4.6.4",
+      "additionalData": {}
     },
     {
-      "id": "bs-utils",
-      "versionRange": "^0.8.4",
+      "id": "metacore",
+      "versionRange": "^1.0.0",
       "additionalData": {}
     }
   ]

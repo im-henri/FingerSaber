@@ -68,3 +68,4 @@ mod.json.schema
 
 # Ndk path
 ndkpath.txt
+.cache

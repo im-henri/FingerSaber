@@ -1,0 +1,76 @@
+name: NDK build
+
+env:
+  module_id: fingersaber
+  qmodName: FingerSaber 
+  cache-name: FS_cache
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      name: Checkout
+      with:
+        submodules: true
+        lfs: true
+
+    - uses: seanmiddleditch/gha-setup-ninja@v5
+
+   
+
+    - name: Get QPM
+      uses: Fernthedev/qpm-action@v1
+      with:
+        resolve_ndk: true
+        #required
+        workflow_token: ${{secrets.GITHUB_TOKEN}}
+        restore: true # will run restore on download
+        cache: true #will cache dependencies
+        
+    - name: Build
+      run: |
+        cd ${GITHUB_WORKSPACE}
+        pwsh -Command ./scripts/build.ps1
+        qpm qmod build
+
+    - name: Create Qmod
+      run: |
+        pwsh -Command ./scripts/createqmod.ps1 ${{env.qmodName}}
+
+    - name: Get Library Name
+      id: libname
+      run: |
+        cd ./build/
+        pattern="lib${module_id}*.so"
+        files=( $pattern )
+        echo ::set-output name=NAME::"${files[0]}"
+
+    - name: Upload non-debug artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ steps.libname.outputs.NAME }}
+        path: ./build/${{ steps.libname.outputs.NAME }}
+        if-no-files-found: error
+
+    - name: Upload qmod artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{env.qmodName}}.qmod
+        path: ./${{ env.qmodName }}.qmod
+        if-no-files-found: error
+
+    - name: Upload debug artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: debug_${{ steps.libname.outputs.NAME }}
+        path: ./build/debug/${{ steps.libname.outputs.NAME }}
+        if-no-files-found: error

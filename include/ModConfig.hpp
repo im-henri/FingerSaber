@@ -2,8 +2,7 @@
 
 #include "config-utils/shared/config-utils.hpp"
 
-DECLARE_CONFIG(ModConfig,
-
+DECLARE_CONFIG(ModConfig) {
     CONFIG_VALUE(PlatformHeightOffsetMeters,   float, "platformHeightOffsetMeters",   -0.34);
     CONFIG_VALUE(PlatformDistanceOffsetMeters, float, "platformDistanceOffsetMeters", -0.25);
 
@@ -16,4 +15,4 @@ DECLARE_CONFIG(ModConfig,
     CONFIG_VALUE(SmoothedMenuHands, bool, "SmoothedMenuHands", true);
     CONFIG_VALUE(LeftHandTargetIdx,  int, "LeftHandTargetIdx",  1);
     CONFIG_VALUE(RightHandTargetIdx, int, "RightHandTargetIdx", 1);
-)
+};
